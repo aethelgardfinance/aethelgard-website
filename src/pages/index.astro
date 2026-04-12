@@ -1,0 +1,458 @@
+---
+import '../styles/global.css';
+
+// Paddle checkout URLs — replace with live IDs once production Paddle is configured.
+// Sandbox URLs are safe to use here for initial deployment / testing.
+const CHECKOUT = {
+  basic_annual:     'https://buy.paddle.com/product/BASIC_ANNUAL_ID',
+  standard_annual:  'https://buy.paddle.com/product/STANDARD_ANNUAL_ID',
+  advanced_annual:  'https://buy.paddle.com/product/ADVANCED_ANNUAL_ID',
+  basic_lifetime:   'https://buy.paddle.com/product/BASIC_LIFETIME_ID',
+  standard_lifetime:'https://buy.paddle.com/product/STANDARD_LIFETIME_ID',
+  advanced_lifetime:'https://buy.paddle.com/product/ADVANCED_LIFETIME_ID',
+};
+
+// GitHub releases — update to point at latest release once published.
+const DOWNLOAD_WIN = 'https://github.com/aethelgard/aethelgard/releases/latest';
+const DOWNLOAD_MAC = null; // Set once Mac build is ready
+
+const features = [
+  {
+    icon: '🗺',
+    title: 'The Family Succession Map',
+    body: 'Give your family absolute clarity. Aethelgard creates a definitive, secure record of "what we own, where it is, and how much it\'s worth" — so your trusted successors have the exact information they need, right when they need it.',
+  },
+  {
+    icon: '🏛',
+    title: 'Track Everything You Own',
+    body: 'Go beyond traditional bank accounts. Track your global real estate, private equity, digital assets, and physical wealth — the assets standard software ignores — all in one complete picture.',
+  },
+  {
+    icon: '🔗',
+    title: 'The Complete Wealth Ledger',
+    body: 'Consolidate your entire financial footprint. Manage funds across multiple companies, personal accounts, charitable foundations, and distinct cost centres — all without friction or fragmentation.',
+  },
+  {
+    icon: '🔒',
+    title: 'Local-First Privacy',
+    body: 'Your financial map is no one else\'s business. Aethelgard runs purely on your own device with zero telemetry or cloud requirements. Your data is locked behind AES-256 encryption and remains solely under your control.',
+  },
+];
+
+const comparison = [
+  { feature: 'Core Focus',       aethelgard: 'HNW Sovereign Wealth & Legacy', spreadsheet: 'Basic tracking', saas: 'SME Business Accounting', institutional: 'Institutional Management' },
+  { feature: 'Asset Breadth',    aethelgard: 'Unrestricted — Property, Crypto, LLCs', spreadsheet: 'Highly manual', saas: 'Bank accounts & fiat only', institutional: 'High-friction setup' },
+  { feature: 'Family Clarity',   aethelgard: 'Unified "What, Where, How Much"', spreadsheet: 'Fragmented', saas: 'None', institutional: 'Complex reporting' },
+  { feature: 'Privacy Model',    aethelgard: 'Purely local — fully on your device', spreadsheet: 'Cloud or local', saas: '100% cloud / SaaS', institutional: '100% cloud / SaaS' },
+  { feature: 'Pricing',          aethelgard: 'Annual from $99 · Lifetime from $249', spreadsheet: 'Ongoing subscriptions', saas: 'Ongoing subscriptions', institutional: 'Enterprise fees' },
+];
+
+const faqs = [
+  {
+    q: 'What is the Windows SmartScreen warning?',
+    a: 'When you first install Aethelgard on Windows, you may see a warning from Windows SmartScreen saying "Windows protected your PC." This is a standard notice for new independent software — it does not mean anything is wrong. Click More info, then Run anyway to proceed. The warning fades as Aethelgard builds reputation with Microsoft over time.',
+  },
+  {
+    q: 'How private is my data?',
+    a: 'Extremely private. Aethelgard is a local-first application — there are no mandatory cloud accounts, no telemetry, and no background sync unless you configure it. Your financial history lives only on your machine, protected by AES-256 encryption.',
+  },
+  {
+    q: 'Where is my information stored?',
+    a: 'Your ledger is kept securely on your personal device. For peace of mind you can create encrypted backup vaults that sync to your own private cloud storage — you remain completely in control of where your backups go.',
+  },
+  {
+    q: 'What is the difference between Annual and Lifetime?',
+    a: 'Annual access gives you the full product for 12 months and renews each year. A Lifetime license is a one-time purchase — you own it permanently with no further payments. Both options include the same features. You can upgrade from Annual to Lifetime at any time and we\'ll credit the difference.',
+  },
+  {
+    q: 'What is your refund policy?',
+    a: 'We offer a 14-day, no-questions-asked refund. If Aethelgard does not give you the financial clarity you need, contact us and we will process a full refund immediately.',
+  },
+  {
+    q: 'Does Aethelgard work on Mac?',
+    a: 'A Mac version is in active development and will be released soon. Windows users can download the current release today. Join the mailing list to be notified the moment the Mac build is available.',
+  },
+];
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="One complete picture of your wealth — companies, property, investments, and assets — private on your own device." />
+  <title>Aethelgard — Private Wealth Ledger</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Aethelgard — Private Wealth Ledger" />
+  <meta property="og:description" content="One complete picture of your wealth — private on your own device." />
+  <meta property="og:url" content="https://aethelgard.finance" />
+  <meta property="og:type" content="website" />
+</head>
+
+<body class="bg-white text-neutral-900 antialiased">
+
+  <!-- ── Navigation ──────────────────────────────────────────────────────── -->
+  <nav class="fixed top-0 inset-x-0 z-50 bg-navy-900/95 backdrop-blur-sm border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="h-7 w-7 bg-brand-500 rounded-lg flex items-center justify-center text-navy-900 font-black text-sm shadow-lg">A</div>
+        <span class="font-black text-white tracking-tighter uppercase italic text-lg">Aethelgard</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-white/60">
+        <a href="#features" class="hover:text-white transition-colors">Features</a>
+        <a href="#pricing"  class="hover:text-white transition-colors">Pricing</a>
+        <a href="#faq"      class="hover:text-white transition-colors">FAQ</a>
+      </div>
+      <a href={DOWNLOAD_WIN} class="btn-primary text-sm py-2 px-4">
+        Download
+        <span class="text-white/60 font-normal text-xs">Windows</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ──────────────────────────────────────────────────────────────── -->
+  <section class="relative bg-navy-900 pt-32 pb-28 px-6 overflow-hidden">
+    <!-- Subtle grid background -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px); background-size: 60px 60px;"></div>
+    <!-- Amber glow -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-500/10 blur-3xl rounded-full pointer-events-none"></div>
+
+    <div class="relative max-w-4xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 text-brand-400 text-xs font-bold uppercase tracking-widest mb-8">
+        Version 1.0 — Windows · Mac coming soon
+      </div>
+
+      <h1 class="text-5xl md:text-6xl font-black text-white leading-[1.05] tracking-tighter mb-6">
+        One complete picture<br class="hidden md:block" />
+        of your wealth.
+      </h1>
+
+      <p class="text-xl text-white/60 font-medium leading-relaxed max-w-2xl mx-auto mb-10">
+        Companies, property, investments, and assets — tracked in double-entry precision,
+        private on your own device. No cloud. No subscription trap. No compromise.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+        <a href={DOWNLOAD_WIN} class="btn-primary text-base px-8 py-3.5">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+          Download for Windows
+        </a>
+        {DOWNLOAD_MAC ? (
+          <a href={DOWNLOAD_MAC} class="btn-ghost text-base px-8 py-3.5">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+            Download for Mac
+          </a>
+        ) : (
+          <span class="inline-flex items-center gap-2 px-8 py-3.5 border border-white/10 text-white/40 font-semibold rounded-xl text-base cursor-default">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+            Mac — coming soon
+          </span>
+        )}
+      </div>
+
+      <p class="text-xs text-white/30 font-medium tracking-wide">
+        30-day free trial · No account required · Your data never leaves your device
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Features ──────────────────────────────────────────────────────────── -->
+  <section id="features" class="py-24 px-6 bg-neutral-50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="section-label mb-3">Why Aethelgard</p>
+        <h2 class="text-4xl font-black tracking-tighter text-neutral-900">Built for complexity. <br class="hidden md:block"/>Designed for clarity.</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        {features.map((f, i) => (
+          <div class={`bg-white rounded-2xl p-8 border shadow-sm hover:shadow-md transition-shadow ${i === 0 ? 'border-brand-200 bg-brand-50/30' : 'border-neutral-200'}`}>
+            <div class="text-4xl mb-5">{f.icon}</div>
+            <h3 class="text-xl font-black tracking-tight text-neutral-900 mb-3">{f.title}</h3>
+            <p class="text-neutral-600 leading-relaxed">{f.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Who it's for ───────────────────────────────────────────────────── -->
+  <section class="py-24 px-6 bg-white">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="section-label mb-3">Who it's for</p>
+      <h2 class="text-3xl font-black tracking-tighter text-neutral-900 mb-6">
+        For those who've outgrown everything else
+      </h2>
+      <p class="text-lg text-neutral-600 leading-relaxed">
+        Aethelgard is crafted for High-Net-Worth individuals, private family offices, and
+        sophisticated investors who manage a complex web of businesses, real estate, charitable
+        trusts, and modern digital assets. If you need more than bookkeeping — if you need a
+        single, crystal-clear picture of your true wealth that your family can rely on — this
+        is what you've been looking for. Your most private information stays exactly where it
+        belongs: in your hands.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Comparison ────────────────────────────────────────────────────────── -->
+  <section class="py-24 px-6 bg-neutral-50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="section-label mb-3">How we compare</p>
+        <h2 class="text-4xl font-black tracking-tighter text-neutral-900">The honest comparison</h2>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-neutral-200 shadow-sm">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-neutral-200">
+              <th class="bg-white text-left px-6 py-5 font-black text-neutral-500 text-xs uppercase tracking-widest w-40"></th>
+              <th class="bg-navy-900 text-left px-6 py-5 font-black text-brand-400 text-xs uppercase tracking-widest">Aethelgard</th>
+              <th class="bg-white text-left px-6 py-5 font-semibold text-neutral-400 text-xs uppercase tracking-widest">Spreadsheets</th>
+              <th class="bg-white text-left px-6 py-5 font-semibold text-neutral-400 text-xs uppercase tracking-widest">Xero / QBO</th>
+              <th class="bg-white text-left px-6 py-5 font-semibold text-neutral-400 text-xs uppercase tracking-widest">Addepar</th>
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.map((row, i) => (
+              <tr class={`border-b border-neutral-100 ${i % 2 === 0 ? '' : 'bg-neutral-50/50'}`}>
+                <td class="bg-white px-6 py-4 font-bold text-neutral-700 text-xs uppercase tracking-wide">{row.feature}</td>
+                <td class="bg-navy-900/[0.03] px-6 py-4 font-semibold text-neutral-900">{row.aethelgard}</td>
+                <td class="px-6 py-4 text-neutral-500">{row.spreadsheet}</td>
+                <td class="px-6 py-4 text-neutral-500">{row.saas}</td>
+                <td class="px-6 py-4 text-neutral-500">{row.institutional}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Pricing ───────────────────────────────────────────────────────────── -->
+  <section id="pricing" class="py-24 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-10">
+        <p class="section-label mb-3">Pricing</p>
+        <h2 class="text-4xl font-black tracking-tighter text-neutral-900 mb-4">Own it outright. Or start annual.</h2>
+        <p class="text-neutral-500 max-w-lg mx-auto">All plans include a 30-day free trial. No credit card required to try.</p>
+      </div>
+
+      <!-- Toggle -->
+      <div class="flex justify-center mb-12">
+        <div class="inline-flex items-center bg-neutral-100 rounded-xl p-1 gap-1" id="pricing-toggle">
+          <button
+            id="btn-lifetime"
+            onclick="setPricingMode('lifetime')"
+            class="px-5 py-2 rounded-lg text-sm font-bold transition-all bg-navy-900 text-white shadow"
+          >
+            Lifetime
+          </button>
+          <button
+            id="btn-annual"
+            onclick="setPricingMode('annual')"
+            class="px-5 py-2 rounded-lg text-sm font-semibold text-neutral-500 transition-all hover:text-neutral-900"
+          >
+            Annual
+          </button>
+        </div>
+      </div>
+
+      <!-- Pricing cards -->
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- Basic -->
+        <div class="rounded-2xl border border-neutral-200 p-8 flex flex-col">
+          <div class="mb-6">
+            <p class="text-xs font-black uppercase tracking-widest text-neutral-400 mb-1">Basic</p>
+            <div id="price-basic-lifetime" class="flex items-end gap-1">
+              <span class="text-4xl font-black text-neutral-900">$249</span>
+              <span class="text-neutral-400 mb-1 font-medium">one-time</span>
+            </div>
+            <div id="price-basic-annual" class="hidden flex items-end gap-1">
+              <span class="text-4xl font-black text-neutral-900">$99</span>
+              <span class="text-neutral-400 mb-1 font-medium">/ year</span>
+            </div>
+            <p class="text-sm text-neutral-500 mt-2">Core ledger for personal finances</p>
+          </div>
+          <ul class="space-y-3 text-sm text-neutral-600 mb-8 flex-1">
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Transaction tracking</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> P&amp;L and Balance Sheet</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Budgeting &amp; goals</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Recurring payments</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Encrypted vault backup</li>
+          </ul>
+          <a id="cta-basic-lifetime" href={CHECKOUT.basic_lifetime} class="block text-center py-3 rounded-xl border-2 border-neutral-200 font-bold text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 transition-colors text-sm">
+            Buy Basic
+          </a>
+          <a id="cta-basic-annual" href={CHECKOUT.basic_annual} class="hidden block text-center py-3 rounded-xl border-2 border-neutral-200 font-bold text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 transition-colors text-sm">
+            Start Annual
+          </a>
+        </div>
+
+        <!-- Standard — highlighted -->
+        <div class="rounded-2xl border-2 border-brand-400 bg-brand-50/30 p-8 flex flex-col relative shadow-lg shadow-brand-500/10">
+          <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
+            <span class="bg-brand-500 text-white text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full">Most Popular</span>
+          </div>
+          <div class="mb-6">
+            <p class="text-xs font-black uppercase tracking-widest text-brand-600 mb-1">Standard</p>
+            <div id="price-standard-lifetime" class="flex items-end gap-1">
+              <span class="text-4xl font-black text-neutral-900">$499</span>
+              <span class="text-neutral-400 mb-1 font-medium">one-time</span>
+            </div>
+            <div id="price-standard-annual" class="hidden flex items-end gap-1">
+              <span class="text-4xl font-black text-neutral-900">$199</span>
+              <span class="text-neutral-400 mb-1 font-medium">/ year</span>
+            </div>
+            <p class="text-sm text-neutral-500 mt-2">Adds investments alongside your ledger</p>
+          </div>
+          <ul class="space-y-3 text-sm text-neutral-600 mb-8 flex-1">
+            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Everything in Basic</li>
+            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Portfolio &amp; analytics</li>
+            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> FX rates &amp; revaluation</li>
+            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Tax tools (VAT, CGT)</li>
+            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Multi-currency</li>
+          </ul>
+          <a id="cta-standard-lifetime" href={CHECKOUT.standard_lifetime} class="block text-center py-3 rounded-xl bg-brand-500 hover:bg-brand-600 font-bold text-white transition-colors text-sm shadow-md">
+            Buy Standard
+          </a>
+          <a id="cta-standard-annual" href={CHECKOUT.standard_annual} class="hidden block text-center py-3 rounded-xl bg-brand-500 hover:bg-brand-600 font-bold text-white transition-colors text-sm shadow-md">
+            Start Annual
+          </a>
+        </div>
+
+        <!-- Advanced -->
+        <div class="rounded-2xl border border-neutral-200 p-8 flex flex-col bg-navy-900">
+          <div class="mb-6">
+            <p class="text-xs font-black uppercase tracking-widest text-white/40 mb-1">Advanced</p>
+            <div id="price-advanced-lifetime" class="flex items-end gap-1">
+              <span class="text-4xl font-black text-white">$999</span>
+              <span class="text-white/40 mb-1 font-medium">one-time</span>
+            </div>
+            <div id="price-advanced-annual" class="hidden flex items-end gap-1">
+              <span class="text-4xl font-black text-white">$399</span>
+              <span class="text-white/40 mb-1 font-medium">/ year</span>
+            </div>
+            <p class="text-sm text-white/40 mt-2">Full corporate-grade accounting</p>
+          </div>
+          <ul class="space-y-3 text-sm text-white/70 mb-8 flex-1">
+            <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Everything in Standard</li>
+            <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Fixed assets &amp; depreciation</li>
+            <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Accruals &amp; hedge accounting</li>
+            <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Deferred tax workings</li>
+            <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Period locks &amp; reconciliation</li>
+            <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Group consolidation (IFRS)</li>
+          </ul>
+          <a id="cta-advanced-lifetime" href={CHECKOUT.advanced_lifetime} class="block text-center py-3 rounded-xl bg-white hover:bg-neutral-100 font-bold text-navy-900 transition-colors text-sm">
+            Buy Advanced
+          </a>
+          <a id="cta-advanced-annual" href={CHECKOUT.advanced_annual} class="hidden block text-center py-3 rounded-xl bg-white hover:bg-neutral-100 font-bold text-navy-900 transition-colors text-sm">
+            Start Annual
+          </a>
+        </div>
+
+      </div>
+
+      <p class="text-center text-xs text-neutral-400 mt-8">
+        All prices in USD · Paddle handles currency conversion at checkout · 14-day refund policy · Upgrade from Annual to Lifetime any time
+      </p>
+    </div>
+  </section>
+
+  <!-- ── FAQ ──────────────────────────────────────────────────────────────── -->
+  <section id="faq" class="py-24 px-6 bg-neutral-50">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="section-label mb-3">FAQ</p>
+        <h2 class="text-4xl font-black tracking-tighter text-neutral-900">Common questions</h2>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map(faq => (
+          <details class="group bg-white border border-neutral-200 rounded-2xl overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 px-7 py-5 cursor-pointer font-bold text-neutral-900 hover:bg-neutral-50 transition-colors list-none">
+              {faq.q}
+              <span class="shrink-0 text-neutral-400 group-open:rotate-45 transition-transform duration-200 text-2xl leading-none">+</span>
+            </summary>
+            <div class="px-7 pb-6 text-neutral-600 leading-relaxed text-sm border-t border-neutral-100 pt-4">
+              {faq.a}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Final CTA ─────────────────────────────────────────────────────────── -->
+  <section class="py-24 px-6 bg-navy-900">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-4xl font-black tracking-tighter text-white mb-4">
+        Your wealth. Your device.<br />Your terms.
+      </h2>
+      <p class="text-white/50 text-lg mb-10">
+        Start your 30-day trial today — no account, no credit card, no cloud.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href={DOWNLOAD_WIN} class="btn-primary text-base px-8 py-3.5">
+          Download for Windows
+        </a>
+        <a href="#pricing" class="btn-ghost text-base px-8 py-3.5">
+          View pricing
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────────────────── -->
+  <footer class="bg-navy-900 border-t border-white/5 px-6 py-10">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="h-6 w-6 bg-brand-500 rounded-md flex items-center justify-center text-navy-900 font-black text-xs">A</div>
+        <span class="font-black text-white/80 tracking-tighter uppercase italic">Aethelgard</span>
+      </div>
+      <p class="text-white/30 text-xs">
+        © {new Date().getFullYear()} Aethelgard · Built for those who value privacy and precision ·
+        <a href="mailto:hello@aethelgard.finance" class="hover:text-white/60 transition-colors ml-1">hello@aethelgard.finance</a>
+      </p>
+      <div class="flex items-center gap-6 text-xs text-white/30 font-medium">
+        <a href={DOWNLOAD_WIN} class="hover:text-white/60 transition-colors">Download</a>
+        <a href="#pricing"     class="hover:text-white/60 transition-colors">Pricing</a>
+        <a href="#faq"         class="hover:text-white/60 transition-colors">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+<!-- Pricing toggle script -->
+<script is:inline>
+  function setPricingMode(mode) {
+    const isLifetime = mode === 'lifetime';
+
+    // Toggle button styles
+    const btnLifetime = document.getElementById('btn-lifetime');
+    const btnAnnual   = document.getElementById('btn-annual');
+    btnLifetime.className = isLifetime
+      ? 'px-5 py-2 rounded-lg text-sm font-bold transition-all bg-navy-900 text-white shadow'
+      : 'px-5 py-2 rounded-lg text-sm font-semibold text-neutral-500 transition-all hover:text-neutral-900';
+    btnAnnual.className = !isLifetime
+      ? 'px-5 py-2 rounded-lg text-sm font-bold transition-all bg-navy-900 text-white shadow'
+      : 'px-5 py-2 rounded-lg text-sm font-semibold text-neutral-500 transition-all hover:text-neutral-900';
+
+    // Toggle prices and CTAs for each tier
+    ['basic', 'standard', 'advanced'].forEach(tier => {
+      const lifetimePrice = document.getElementById(`price-${tier}-lifetime`);
+      const annualPrice   = document.getElementById(`price-${tier}-annual`);
+      const lifetimeCta   = document.getElementById(`cta-${tier}-lifetime`);
+      const annualCta     = document.getElementById(`cta-${tier}-annual`);
+      lifetimePrice.classList.toggle('hidden', !isLifetime);
+      annualPrice.classList.toggle('hidden',   isLifetime);
+      lifetimeCta.classList.toggle('hidden',   !isLifetime);
+      annualCta.classList.toggle('hidden',     isLifetime);
+    });
+  }
+</script>
+
+</html>
