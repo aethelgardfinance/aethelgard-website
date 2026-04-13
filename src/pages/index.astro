@@ -12,7 +12,7 @@ const PRICES = {
 };
 
 // GitHub releases — update to point at latest release once published.
-const DOWNLOAD_WIN = 'https://github.com/aethelgard/aethelgard/releases/latest';
+const DOWNLOAD_WIN = 'https://github.com/CherieCAF/aethelgard/releases';
 const DOWNLOAD_MAC = null; // Set once Mac build is ready
 
 const features = [
@@ -426,8 +426,8 @@ const faqs = [
 </body>
 
 <script is:inline define:vars={{ PRICES }}>
-  // Initialise Paddle Billing
-  Paddle.Setup({ seller: 315227 });
+  // Initialise Paddle Billing v2
+  Paddle.Initialize({ token: 'live_e7f24b9ae86b393f8e32017ffb8' });
 
   // Track current pricing mode so checkout knows which price ID to use
   let currentMode = 'lifetime';
