@@ -4,12 +4,12 @@ import '../styles/global.css';
 // Paddle checkout URLs — replace with live IDs once production Paddle is configured.
 // Sandbox URLs are safe to use here for initial deployment / testing.
 const CHECKOUT = {
-  basic_annual:     'https://buy.paddle.com/product/BASIC_ANNUAL_ID',
-  standard_annual:  'https://buy.paddle.com/product/STANDARD_ANNUAL_ID',
-  advanced_annual:  'https://buy.paddle.com/product/ADVANCED_ANNUAL_ID',
-  basic_lifetime:   'https://buy.paddle.com/product/BASIC_LIFETIME_ID',
-  standard_lifetime:'https://buy.paddle.com/product/STANDARD_LIFETIME_ID',
-  advanced_lifetime:'https://buy.paddle.com/product/ADVANCED_LIFETIME_ID',
+  basic_annual:     'https://buy.paddle.com/product/pri_01kp3v73e48jfzv934q04x9dzr',
+  standard_annual:  'https://buy.paddle.com/product/pri_01kp3vagrpers8t1h2n5ea0kfm',
+  advanced_annual:  'https://buy.paddle.com/product/pri_01kp3vdkfgxfvxym73vvkpkw05',
+  basic_lifetime:   'https://buy.paddle.com/product/pri_01kp3vz3h9nnyg5erqm01m3tsg',
+  standard_lifetime:'https://buy.paddle.com/product/pri_01kp3w7wk0t5bd9dgyhky2cea4',
+  advanced_lifetime:'https://buy.paddle.com/product/pri_01kp3wa2e1ym23f039fjhg0m72',
 };
 
 // GitHub releases — update to point at latest release once published.
@@ -289,6 +289,7 @@ const faqs = [
           <a id="cta-basic-annual" href={CHECKOUT.basic_annual} class="hidden block text-center py-3 rounded-xl border-2 border-neutral-200 font-bold text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 transition-colors text-sm">
             Start Annual
           </a>
+          <p class="text-center text-xs text-neutral-400 mt-3">30-day free trial · No credit card</p>
         </div>
 
         <!-- Standard — highlighted -->
@@ -321,6 +322,7 @@ const faqs = [
           <a id="cta-standard-annual" href={CHECKOUT.standard_annual} class="hidden block text-center py-3 rounded-xl bg-brand-500 hover:bg-brand-600 font-bold text-white transition-colors text-sm shadow-md">
             Start Annual
           </a>
+          <p class="text-center text-xs text-neutral-400 mt-3">30-day free trial · No credit card</p>
         </div>
 
         <!-- Advanced -->
@@ -351,6 +353,7 @@ const faqs = [
           <a id="cta-advanced-annual" href={CHECKOUT.advanced_annual} class="hidden block text-center py-3 rounded-xl bg-white hover:bg-neutral-100 font-bold text-navy-900 transition-colors text-sm">
             Start Annual
           </a>
+          <p class="text-center text-xs text-white/30 mt-3">30-day free trial · No credit card</p>
         </div>
 
       </div>
