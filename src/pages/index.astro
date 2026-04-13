@@ -1,15 +1,14 @@
 ---
 import '../styles/global.css';
 
-// Paddle checkout URLs — replace with live IDs once production Paddle is configured.
-// Sandbox URLs are safe to use here for initial deployment / testing.
-const CHECKOUT = {
-  basic_annual:     'https://buy.paddle.com/product/pri_01kp3v73e48jfzv934q04x9dzr',
-  standard_annual:  'https://buy.paddle.com/product/pri_01kp3vagrpers8t1h2n5ea0kfm',
-  advanced_annual:  'https://buy.paddle.com/product/pri_01kp3vdkfgxfvxym73vvkpkw05',
-  basic_lifetime:   'https://buy.paddle.com/product/pri_01kp3vz3h9nnyg5erqm01m3tsg',
-  standard_lifetime:'https://buy.paddle.com/product/pri_01kp3w7wk0t5bd9dgyhky2cea4',
-  advanced_lifetime:'https://buy.paddle.com/product/pri_01kp3wa2e1ym23f039fjhg0m72',
+// Paddle price IDs — one per tier × billing period.
+const PRICES = {
+  basic_annual:     'pri_01kp3v73e48jfzv934q04x9dzr',
+  standard_annual:  'pri_01kp3vagrpers8t1h2n5ea0kfm',
+  advanced_annual:  'pri_01kp3vdkfgxfvxym73vvkpkw05',
+  basic_lifetime:   'pri_01kp3vz3h9nnyg5erqm01m3tsg',
+  standard_lifetime:'pri_01kp3w7wk0t5bd9dgyhky2cea4',
+  advanced_lifetime:'pri_01kp3wa2e1ym23f039fjhg0m72',
 };
 
 // GitHub releases — update to point at latest release once published.
@@ -88,6 +87,7 @@ const faqs = [
   <meta property="og:description" content="One complete picture of your wealth — private on your own device." />
   <meta property="og:url" content="https://aethelgard.finance" />
   <meta property="og:type" content="website" />
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 </head>
 
 <body class="bg-white text-neutral-900 antialiased">
@@ -283,12 +283,9 @@ const faqs = [
             <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Recurring payments</li>
             <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Encrypted vault backup</li>
           </ul>
-          <a id="cta-basic-lifetime" href={CHECKOUT.basic_lifetime} class="block text-center py-3 rounded-xl border-2 border-neutral-200 font-bold text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 transition-colors text-sm">
+          <button onclick="openCheckout('basic')" class="w-full py-3 rounded-xl border-2 border-neutral-200 font-bold text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 transition-colors text-sm cursor-pointer">
             Buy Basic
-          </a>
-          <a id="cta-basic-annual" href={CHECKOUT.basic_annual} class="hidden block text-center py-3 rounded-xl border-2 border-neutral-200 font-bold text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 transition-colors text-sm">
-            Start Annual
-          </a>
+          </button>
           <p class="text-center text-xs text-neutral-400 mt-3">30-day free trial · No credit card</p>
         </div>
 
@@ -316,12 +313,9 @@ const faqs = [
             <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Tax tools (VAT, CGT)</li>
             <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Multi-currency</li>
           </ul>
-          <a id="cta-standard-lifetime" href={CHECKOUT.standard_lifetime} class="block text-center py-3 rounded-xl bg-brand-500 hover:bg-brand-600 font-bold text-white transition-colors text-sm shadow-md">
+          <button onclick="openCheckout('standard')" class="w-full py-3 rounded-xl bg-brand-500 hover:bg-brand-600 font-bold text-white transition-colors text-sm shadow-md cursor-pointer">
             Buy Standard
-          </a>
-          <a id="cta-standard-annual" href={CHECKOUT.standard_annual} class="hidden block text-center py-3 rounded-xl bg-brand-500 hover:bg-brand-600 font-bold text-white transition-colors text-sm shadow-md">
-            Start Annual
-          </a>
+          </button>
           <p class="text-center text-xs text-neutral-400 mt-3">30-day free trial · No credit card</p>
         </div>
 
@@ -347,12 +341,9 @@ const faqs = [
             <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Period locks &amp; reconciliation</li>
             <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Group consolidation (IFRS)</li>
           </ul>
-          <a id="cta-advanced-lifetime" href={CHECKOUT.advanced_lifetime} class="block text-center py-3 rounded-xl bg-white hover:bg-neutral-100 font-bold text-navy-900 transition-colors text-sm">
+          <button onclick="openCheckout('advanced')" class="w-full py-3 rounded-xl bg-white hover:bg-neutral-100 font-bold text-navy-900 transition-colors text-sm cursor-pointer">
             Buy Advanced
-          </a>
-          <a id="cta-advanced-annual" href={CHECKOUT.advanced_annual} class="hidden block text-center py-3 rounded-xl bg-white hover:bg-neutral-100 font-bold text-navy-900 transition-colors text-sm">
-            Start Annual
-          </a>
+          </button>
           <p class="text-center text-xs text-white/30 mt-3">30-day free trial · No credit card</p>
         </div>
 
@@ -434,9 +425,24 @@ const faqs = [
 
 </body>
 
-<!-- Pricing toggle script -->
-<script is:inline>
+<script is:inline define:vars={{ PRICES }}>
+  // Initialise Paddle Billing
+  Paddle.Setup({ seller: 315227 });
+
+  // Track current pricing mode so checkout knows which price ID to use
+  let currentMode = 'lifetime';
+
+  const priceIds = PRICES;
+
+  function openCheckout(tier) {
+    const key = `${tier}_${currentMode}`;
+    const priceId = priceIds[key];
+    if (!priceId) return;
+    Paddle.Checkout.open({ items: [{ priceId, quantity: 1 }] });
+  }
+
   function setPricingMode(mode) {
+    currentMode = mode;
     const isLifetime = mode === 'lifetime';
 
     // Toggle button styles
@@ -449,16 +455,10 @@ const faqs = [
       ? 'px-5 py-2 rounded-lg text-sm font-bold transition-all bg-navy-900 text-white shadow'
       : 'px-5 py-2 rounded-lg text-sm font-semibold text-neutral-500 transition-all hover:text-neutral-900';
 
-    // Toggle prices and CTAs for each tier
+    // Toggle prices for each tier
     ['basic', 'standard', 'advanced'].forEach(tier => {
-      const lifetimePrice = document.getElementById(`price-${tier}-lifetime`);
-      const annualPrice   = document.getElementById(`price-${tier}-annual`);
-      const lifetimeCta   = document.getElementById(`cta-${tier}-lifetime`);
-      const annualCta     = document.getElementById(`cta-${tier}-annual`);
-      lifetimePrice.classList.toggle('hidden', !isLifetime);
-      annualPrice.classList.toggle('hidden',   isLifetime);
-      lifetimeCta.classList.toggle('hidden',   !isLifetime);
-      annualCta.classList.toggle('hidden',     isLifetime);
+      document.getElementById(`price-${tier}-lifetime`).classList.toggle('hidden', !isLifetime);
+      document.getElementById(`price-${tier}-annual`).classList.toggle('hidden',   isLifetime);
     });
   }
 </script>
