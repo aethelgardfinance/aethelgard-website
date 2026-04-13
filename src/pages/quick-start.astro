@@ -1,0 +1,148 @@
+---
+import '../styles/global.css';
+
+const steps = [
+  {
+    number: '01',
+    title: 'First Vault Setup',
+    items: [
+      'Open the application to begin setting up your first vault.',
+      'Click <strong>Create New Vault</strong>.',
+      'Enter a secure PIN when prompted and confirm it. This PIN unlocks your vault on every launch — store it somewhere safe.',
+      'Once inside, navigate to the <strong>Entities</strong> section.',
+      'Click <strong>Add Entity</strong> and provide the basic details for your first business or personal entity.',
+      'Save the entity to complete your initial setup.',
+    ],
+  },
+  {
+    number: '02',
+    title: 'Recording a Transaction',
+    items: [
+      'Navigate to the <strong>Transactions</strong> or <strong>Ledger</strong> tab from the main menu.',
+      'Click <strong>New Transaction</strong> or the <strong>+</strong> button.',
+      'Select the date and enter a description.',
+      'Pick the appropriate debit and credit accounts from the dropdowns.',
+      'Enter the transaction amount.',
+      'Click <strong>Save</strong> to record the transaction.',
+    ],
+  },
+  {
+    number: '03',
+    title: 'Running a P&L and Balance Sheet',
+    items: [
+      'Go to the <strong>Reports</strong> section in the navigation panel.',
+      'Select the report you want: <strong>Profit & Loss</strong> or <strong>Balance Sheet</strong>.',
+      'Use the filter bar to select the <strong>Entity</strong> you want to report on.',
+      'Adjust the <strong>Period</strong> filter to set your date range (e.g. Year to Date, Last Quarter).',
+      'The report generates automatically based on your selection.',
+    ],
+  },
+  {
+    number: '04',
+    title: 'WebDAV Backup Setup',
+    items: [
+      'Go to <strong>Settings</strong> from the main navigation.',
+      'Find the <strong>Backup</strong> or <strong>Sync & Backup</strong> tab.',
+      'Select the option to configure a WebDAV connection.',
+      'Enter your WebDAV server URL, username, and password.',
+      'Save the connection details.',
+      'Click <strong>Backup Now</strong> to trigger a manual encrypted backup.',
+    ],
+  },
+  {
+    number: '05',
+    title: 'Activating a License Key',
+    items: [
+      'Navigate to <strong>Settings</strong>.',
+      'Go to the <strong>Vault</strong> tab and scroll to the <strong>License</strong> section.',
+      'Paste your license key into the field and click <strong>Activate</strong>.',
+      'The key is validated instantly on your device — no internet connection required.',
+      'A confirmation message appears and your tier features are unlocked immediately.',
+    ],
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quick Start Guide — Aethelgard</title>
+    <meta name="description" content="Get up and running with Aethelgard in five steps." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="bg-white text-neutral-900 font-sans antialiased">
+
+    <!-- Nav -->
+    <nav class="sticky top-0 z-50 bg-navy-900 border-b border-white/5">
+      <div class="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
+        <a href="/" class="text-white font-black tracking-tight text-lg">
+          Aethelgard
+        </a>
+        <a href="/#pricing" class="text-sm font-semibold text-white/60 hover:text-white transition-colors">
+          Pricing →
+        </a>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-navy-900 py-16 px-6">
+      <div class="max-w-4xl mx-auto">
+        <p class="section-label mb-3">Documentation</p>
+        <h1 class="text-4xl font-black tracking-tighter text-white mb-4">Quick Start Guide</h1>
+        <p class="text-white/50 text-lg max-w-xl">
+          Five workflows to get from first launch to a working ledger.
+        </p>
+      </div>
+    </header>
+
+    <!-- Steps -->
+    <main class="max-w-4xl mx-auto px-6 py-16">
+      <div class="space-y-16">
+        {steps.map(step => (
+          <section class="grid md:grid-cols-[80px_1fr] gap-6">
+            <div class="text-5xl font-black text-neutral-100 leading-none pt-1">
+              {step.number}
+            </div>
+            <div>
+              <h2 class="text-2xl font-black tracking-tight text-neutral-900 mb-6">
+                {step.title}
+              </h2>
+              <ol class="space-y-3">
+                {step.items.map((item, i) => (
+                  <li class="flex gap-4 text-neutral-600 leading-relaxed">
+                    <span class="shrink-0 w-6 h-6 rounded-full bg-neutral-100 text-neutral-400 text-xs font-bold flex items-center justify-center mt-0.5">
+                      {i + 1}
+                    </span>
+                    <span set:html={item} />
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <!-- Bottom CTA -->
+      <div class="mt-20 pt-12 border-t border-neutral-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div>
+          <p class="font-bold text-neutral-900 mb-1">Need your license key?</p>
+          <p class="text-sm text-neutral-500">Check the email you used at checkout. It was delivered automatically after purchase.</p>
+        </div>
+        <a href="/#pricing" class="btn-primary shrink-0">
+          View pricing
+        </a>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 py-8 px-6 mt-16">
+      <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-white/30 text-xs">
+        <span>© 2026 Aethelgard. All rights reserved.</span>
+        <a href="/" class="hover:text-white/60 transition-colors">← Back to home</a>
+      </div>
+    </footer>
+
+  </body>
+</html>
