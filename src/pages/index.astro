@@ -88,6 +88,26 @@ const faqs = [
   <meta property="og:url" content="https://aethelgard.finance" />
   <meta property="og:type" content="website" />
   <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Aethelgard",
+      "operatingSystem": "Windows, macOS",
+      "applicationCategory": "FinanceApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "99.00",
+        "priceCurrency": "USD"
+      },
+      "featureList": "Double-entry accounting, multi-entity support, private wealth management, local-first encryption",
+      "author": {
+        "@type": "Organization",
+        "name": "Aethelgard"
+      }
+    }
+  </script>
 </head>
 
 <body class="bg-white text-neutral-900 antialiased">
@@ -133,29 +153,40 @@ const faqs = [
         private on your own device. No cloud. No subscription trap. No compromise.
       </p>
 
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-        <a href={DOWNLOAD_WIN} class="btn-primary text-base px-8 py-3.5">
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-2">
+        <a href={DOWNLOAD_WIN} id="primary-cta" class="btn-primary text-base px-8 py-3.5">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
-          Download for Windows
+          <span id="cta-text">Download for Windows</span>
         </a>
-        {DOWNLOAD_MAC ? (
-          <a href={DOWNLOAD_MAC} class="btn-ghost text-base px-8 py-3.5">
+        <div id="mac-waitlist-trigger" class="hidden">
+           <a href="#mac-waitlist" class="btn-ghost text-base px-8 py-3.5">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
-            Download for Mac
+            Mac — Join Waitlist
           </a>
-        ) : (
-          <span class="inline-flex items-center gap-2 px-8 py-3.5 border border-white/10 text-white/40 font-semibold rounded-xl text-base cursor-default">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
-            Mac — coming soon
-          </span>
-        )}
+        </div>
       </div>
+      <p id="version-tag" class="text-[10px] text-white/20 font-bold mb-8 uppercase tracking-widest opacity-0 transition-opacity">
+        Latest Version: <span id="version-number">...</span>
+      </p>
 
-      <p class="text-xs text-white/30 font-medium tracking-wide">
+      <p class="text-xs text-white/30 font-medium tracking-wide mb-16">
         30-day free trial · No account required · Your data never leaves your device
       </p>
+
+      <!-- Dashboard Mockup -->
+      <div class="relative max-w-5xl mx-auto px-4 -mb-48 md:-mb-64">
+        <div class="relative group">
+          <div class="absolute -inset-1 bg-gradient-to-r from-brand-500/20 to-brand-600/20 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+          <div class="relative bg-navy-800 border border-white/10 rounded-2xl shadow-2xl overflow-hidden aspect-[16/10]">
+             <img src="/dashboard_mockup.png" alt="Aethelgard Dashboard Mockup" class="w-full h-full object-cover">
+          </div>
+        </div>
+      </div>
     </div>
   </section>
+
+  <!-- Spacer for the overlapping hero mockup -->
+  <div class="h-48 md:h-64 bg-neutral-50"></div>
 
   <!-- ── Features ──────────────────────────────────────────────────────────── -->
   <section id="features" class="py-24 px-6 bg-neutral-50">
@@ -383,7 +414,32 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ── Final CTA ─────────────────────────────────────────────────────────── -->
+  <!-- ── Mac Waitlist ────────────────────────────────────────────────────── -->
+  <section id="mac-waitlist" class="py-24 px-6 bg-white border-t border-neutral-100">
+    <div class="max-w-2xl mx-auto text-center">
+      <div class="h-12 w-12 bg-neutral-100 rounded-2xl flex items-center justify-center text-neutral-900 mx-auto mb-6">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>
+      </div>
+      <h2 class="text-3xl font-black tracking-tighter text-neutral-900 mb-4">Aethelgard for Mac</h2>
+      <p class="text-neutral-500 mb-10">
+        The Mac version is in active development. Join the waitlist to be notified 
+        the moment it's available for early access.
+      </p>
+      <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" action="#" method="POST" data-netlify="true">
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="your@email.com" 
+          required 
+          class="flex-1 px-5 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+        />
+        <button type="submit" class="btn-primary py-3 px-8 justify-center">
+          Join Waitlist
+        </button>
+      </form>
+      <p class="text-[10px] text-neutral-400 mt-4 uppercase tracking-widest font-bold">Privacy guaranteed · No spam ever</p>
+    </div>
+  </section>
   <section class="py-24 px-6 bg-navy-900">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="text-4xl font-black tracking-tighter text-white mb-4">
@@ -429,38 +485,51 @@ const faqs = [
   // Initialise Paddle Billing v2
   Paddle.Initialize({ token: 'live_e7f24b9ae86b393f8e32017ffb8' });
 
-  // Track current pricing mode so checkout knows which price ID to use
-  let currentMode = 'lifetime';
+  // ── Distribution Logic ──────────────────────────────────────────────────
+  const githubUser = 'CherieCAF';
+  const githubRepo = 'aethelgard';
+  const latestUrl = `https://github.com/${githubUser}/${githubRepo}/releases/latest/download/latest.json`;
 
-  const priceIds = PRICES;
+  async function initDistribution() {
+    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    const cta = document.getElementById('primary-cta');
+    const ctaText = document.getElementById('cta-text');
+    const macTrigger = document.getElementById('mac-waitlist-trigger');
 
-  function openCheckout(tier) {
-    const key = `${tier}_${currentMode}`;
-    const priceId = priceIds[key];
-    if (!priceId) return;
-    Paddle.Checkout.open({ items: [{ priceId, quantity: 1 }] });
+    // Default to Windows initially, but adapt if Mac detected
+    if (isMac) {
+      ctaText.innerText = 'Mac coming soon — Join Waitlist';
+      cta.classList.add('opacity-50', 'pointer-events-none');
+      macTrigger.classList.remove('hidden');
+    }
+
+    try {
+      const response = await fetch(latestUrl);
+      const data = await response.json();
+      const version = data.version;
+      
+      // Construct direct download link for Windows
+      const winDownloadUrl = `https://github.com/${githubUser}/${githubRepo}/releases/download/v${version}/Aethelgard_${version}_x64-setup.exe`;
+      
+      if (!isMac) {
+        cta.href = winDownloadUrl;
+      }
+
+      // Show version tag
+      const versionTag = document.getElementById('version-tag');
+      const versionNumber = document.getElementById('version-number');
+      if (versionTag && versionNumber) {
+        versionNumber.innerText = version;
+        versionTag.classList.remove('opacity-0');
+      }
+    } catch (err) {
+      console.warn('Failed to fetch latest version info', err);
+    }
   }
 
-  function setPricingMode(mode) {
-    currentMode = mode;
-    const isLifetime = mode === 'lifetime';
+  initDistribution();
 
-    // Toggle button styles
-    const btnLifetime = document.getElementById('btn-lifetime');
-    const btnAnnual   = document.getElementById('btn-annual');
-    btnLifetime.className = isLifetime
-      ? 'px-5 py-2 rounded-lg text-sm font-bold transition-all bg-navy-900 text-white shadow'
-      : 'px-5 py-2 rounded-lg text-sm font-semibold text-neutral-500 transition-all hover:text-neutral-900';
-    btnAnnual.className = !isLifetime
-      ? 'px-5 py-2 rounded-lg text-sm font-bold transition-all bg-navy-900 text-white shadow'
-      : 'px-5 py-2 rounded-lg text-sm font-semibold text-neutral-500 transition-all hover:text-neutral-900';
-
-    // Toggle prices for each tier
-    ['basic', 'standard', 'advanced'].forEach(tier => {
-      document.getElementById(`price-${tier}-lifetime`).classList.toggle('hidden', !isLifetime);
-      document.getElementById(`price-${tier}-annual`).classList.toggle('hidden',   isLifetime);
-    });
-  }
+  // ── Pricing Logic ───────────────────────────────────────────────────────
 </script>
 
 </html>
