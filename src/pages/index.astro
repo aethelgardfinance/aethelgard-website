@@ -425,7 +425,7 @@ const faqs = [
         The Mac version is in active development. Join the waitlist to be notified 
         the moment it's available for early access.
       </p>
-      <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" action="#" method="POST" data-netlify="true">
+      <form id="mac-waitlist-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
         <input 
           type="email" 
           name="email" 
@@ -530,6 +530,37 @@ const faqs = [
   initDistribution();
 
   // ── Pricing Logic ───────────────────────────────────────────────────────
+  let pricingMode = 'lifetime';
+
+  function setPricingMode(mode) {
+    pricingMode = mode;
+    const btnLifetime = document.getElementById('btn-lifetime');
+    const btnAnnual   = document.getElementById('btn-annual');
+    const activeClass = 'px-5 py-2 rounded-lg text-sm font-bold transition-all bg-navy-900 text-white shadow';
+    const inactiveClass = 'px-5 py-2 rounded-lg text-sm font-semibold text-neutral-500 transition-all hover:text-neutral-900';
+    btnLifetime.className = mode === 'lifetime' ? activeClass : inactiveClass;
+    btnAnnual.className   = mode === 'annual'   ? activeClass : inactiveClass;
+    ['basic', 'standard', 'advanced'].forEach(tier => {
+      document.getElementById('price-' + tier + '-lifetime').classList.toggle('hidden', mode !== 'lifetime');
+      document.getElementById('price-' + tier + '-annual').classList.toggle('hidden',   mode !== 'annual');
+    });
+  }
+
+  function openCheckout(tier) {
+    const priceId = PRICES[tier + '_' + pricingMode];
+    if (!priceId) { console.error('No price ID for', tier, pricingMode); return; }
+    Paddle.Checkout.open({ items: [{ priceId, quantity: 1 }] });
+  }
+
+  // ── Mac Waitlist ─────────────────────────────────────────────────────────
+  const waitlistForm = document.getElementById('mac-waitlist-form');
+  if (waitlistForm) {
+    waitlistForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      this.outerHTML = '<p class="text-brand-500 font-bold text-lg">You\'re on the list. We\'ll email ' + email + ' the moment Mac is ready.</p>';
+    });
+  }
 </script>
 
 </html>
