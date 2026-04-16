@@ -1,0 +1,86 @@
+---
+import '../styles/global.css';
+const lastUpdated = '16 April 2026';
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Refund Policy — Aethelgard</title>
+  <meta name="description" content="Aethelgard's refund policy. 14-day no-questions-asked refund." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body class="bg-white text-neutral-900 font-sans antialiased">
+
+  <nav class="sticky top-0 z-50 bg-navy-900 border-b border-white/5">
+    <div class="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="/" class="text-white font-black tracking-tight text-lg">Aethelgard</a>
+      <a href="/" class="text-sm font-semibold text-white/60 hover:text-white transition-colors">← Home</a>
+    </div>
+  </nav>
+
+  <header class="bg-navy-900 py-16 px-6">
+    <div class="max-w-4xl mx-auto">
+      <p class="section-label mb-3">Legal</p>
+      <h1 class="text-4xl font-black tracking-tighter text-white mb-4">Refund Policy</h1>
+      <p class="text-white/50 text-sm">Last updated: {lastUpdated}</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-16">
+    <div class="space-y-10 text-neutral-700 leading-relaxed">
+
+      <section>
+        <p class="text-lg font-medium text-neutral-900 bg-brand-50 border border-brand-200 rounded-2xl p-6">
+          We offer a <strong>14-day, no-questions-asked refund</strong> on all Aethelgard licenses — Annual and Lifetime. If the product doesn't work for you, email us and we'll process a full refund immediately.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-black tracking-tight text-neutral-900 mb-4">How to request a refund</h2>
+        <p>Email <a href="mailto:contact@aethelgard.finance" class="text-brand-600 hover:text-brand-700 font-medium">contact@aethelgard.finance</a> within 14 days of your purchase with:</p>
+        <ul class="list-disc pl-6 mt-3 space-y-2">
+          <li>The email address used at checkout</li>
+          <li>Your order reference (in your Paddle receipt)</li>
+        </ul>
+        <p class="mt-4">We will process the refund within 2 business days. Paddle typically returns funds to your original payment method within 5–10 business days depending on your bank.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-black tracking-tight text-neutral-900 mb-4">After a refund</h2>
+        <p>Upon refund, your license key is deactivated. The Software continues to function in Personal-tier (free) mode — you do not lose access to your data. Your financial records remain on your device and are yours to keep.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-black tracking-tight text-neutral-900 mb-4">Annual renewals</h2>
+        <p>Annual licenses do not auto-renew. When your license expires, the Software returns to Personal-tier functionality. You will not be charged automatically. If you choose to renew, you purchase a new license at the then-current price.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-black tracking-tight text-neutral-900 mb-4">Upgrading from Annual to Lifetime</h2>
+        <p>If you hold a current Annual license and wish to upgrade to Lifetime, contact us at <a href="mailto:contact@aethelgard.finance" class="text-brand-600 hover:text-brand-700 font-medium">contact@aethelgard.finance</a>. We will credit the unused portion of your Annual license against the Lifetime price.</p>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-black tracking-tight text-neutral-900 mb-4">Questions</h2>
+        <p>Any questions about billing or refunds: <a href="mailto:contact@aethelgard.finance" class="text-brand-600 hover:text-brand-700 font-medium">contact@aethelgard.finance</a></p>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="bg-navy-900 py-8 px-6 mt-16">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-white/30 text-xs">
+      <span>© {new Date().getFullYear()} Aethelgard. All rights reserved.</span>
+      <div class="flex gap-6">
+        <a href="/privacy" class="hover:text-white/60 transition-colors">Privacy</a>
+        <a href="/terms" class="hover:text-white/60 transition-colors">Terms</a>
+        <a href="/refunds" class="text-white/60">Refunds</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
