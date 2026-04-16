@@ -489,9 +489,7 @@ const faqs = [
   Paddle.Initialize({ token: 'live_e7f24b9ae86b393f8e32017ffb8' });
 
   // ── Distribution Logic ──────────────────────────────────────────────────
-  const githubUser = 'CherieCAF';
-  const githubRepo = 'aethelgard';
-  const latestUrl = `https://github.com/${githubUser}/${githubRepo}/releases/latest/download/latest.json`;
+  const LATEST_API = 'https://aethelgard-licensing.vercel.app/api/latest';
 
   async function initDistribution() {
     const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
@@ -499,7 +497,6 @@ const faqs = [
     const ctaText = document.getElementById('cta-text');
     const macTrigger = document.getElementById('mac-waitlist-trigger');
 
-    // Default to Windows initially, but adapt if Mac detected
     if (isMac) {
       ctaText.innerText = 'Mac coming soon — Join Waitlist';
       cta.classList.add('opacity-50', 'pointer-events-none');
@@ -507,26 +504,24 @@ const faqs = [
     }
 
     try {
-      const response = await fetch(latestUrl);
+      const response = await fetch(LATEST_API);
+      if (!response.ok) throw new Error('API error ' + response.status);
       const data = await response.json();
-      const version = data.version;
-      
-      // Construct direct download link for Windows
-      const winDownloadUrl = `https://github.com/${githubUser}/${githubRepo}/releases/download/v${version}/Aethelgard_${version}_x64-setup.exe`;
-      
+
       if (!isMac) {
-        cta.href = winDownloadUrl;
+        cta.href = data.download_url;
+        ctaText.innerText = 'Download for Windows';
       }
 
-      // Show version tag
       const versionTag = document.getElementById('version-tag');
       const versionNumber = document.getElementById('version-number');
       if (versionTag && versionNumber) {
-        versionNumber.innerText = version;
+        versionNumber.innerText = data.version;
         versionTag.classList.remove('opacity-0');
       }
     } catch (err) {
       console.warn('Failed to fetch latest version info', err);
+      // Button already points at DOWNLOAD_WIN fallback from server-rendered href
     }
   }
 
