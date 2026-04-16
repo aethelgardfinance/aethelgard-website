@@ -124,7 +124,7 @@ const faqs = [
         <a href="#pricing"  class="hover:text-white transition-colors">Pricing</a>
         <a href="#faq"      class="hover:text-white transition-colors">FAQ</a>
       </div>
-      <a href={DOWNLOAD_WIN} class="btn-primary text-sm py-2 px-4">
+      <a href={DOWNLOAD_WIN} class="btn-primary text-sm py-2 px-4 js-win-download">
         Download
         <span class="text-white/60 font-normal text-xs">Windows</span>
       </a>
@@ -449,7 +449,7 @@ const faqs = [
         Start your 30-day trial today — no account, no credit card, no cloud.
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href={DOWNLOAD_WIN} class="btn-primary text-base px-8 py-3.5">
+        <a href={DOWNLOAD_WIN} class="btn-primary text-base px-8 py-3.5 js-win-download">
           Download for Windows
         </a>
         <a href="#pricing" class="btn-ghost text-base px-8 py-3.5">
@@ -509,7 +509,10 @@ const faqs = [
       const data = await response.json();
 
       if (!isMac) {
-        cta.href = data.download_url;
+        // Update all Windows download buttons on the page
+        document.querySelectorAll('#primary-cta, .js-win-download').forEach(el => {
+          el.href = data.download_url;
+        });
         ctaText.innerText = 'Download for Windows';
       }
 
