@@ -528,7 +528,20 @@ const faqs = [
 
 <script is:inline define:vars={{ PRICES }}>
   // Initialise Paddle Billing v2
-  Paddle.Initialize({ token: 'live_e7f24b9ae86b393f8e32017ffb8' });
+  if (typeof Paddle === 'undefined') {
+    console.error('[Paddle] paddle.js did not load — checkout will not work.');
+  } else {
+    try {
+      Paddle.Initialize({
+        token: 'live_e7f24b9ae86b393f8e32017ffb8',
+        eventCallback: function(ev) {
+          if (ev.name === 'checkout.error') console.error('[Paddle] checkout.error', ev.data);
+        }
+      });
+    } catch (err) {
+      console.error('[Paddle] Initialize failed:', err);
+    }
+  }
 
   // ── Distribution Logic ──────────────────────────────────────────────────
   const LATEST_API = 'https://aethelgard-licensing.vercel.app/api/latest';
@@ -590,9 +603,22 @@ const faqs = [
   }
 
   function openCheckout(tier) {
+    if (typeof Paddle === 'undefined') {
+      alert('Checkout could not load. Please disable any ad blocker for this site and refresh the page.');
+      return;
+    }
     const priceId = PRICES[tier + '_' + pricingMode];
-    if (!priceId) { console.error('No price ID for', tier, pricingMode); return; }
-    Paddle.Checkout.open({ items: [{ priceId, quantity: 1 }] });
+    if (!priceId) {
+      console.error('[Paddle] No price ID for tier=' + tier + ' mode=' + pricingMode);
+      alert('Checkout configuration error — please contact hello@aethelgard.finance');
+      return;
+    }
+    try {
+      Paddle.Checkout.open({ items: [{ priceId, quantity: 1 }] });
+    } catch (err) {
+      console.error('[Paddle] Checkout.open failed:', err);
+      alert('Checkout failed: ' + err.message + '\n\nPlease try again or contact hello@aethelgard.finance');
+    }
   }
 
   // ── Mac Waitlist ─────────────────────────────────────────────────────────
