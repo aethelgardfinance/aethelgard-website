@@ -150,14 +150,14 @@ const faqs = [
       </h1>
 
       <p class="text-xl text-white/60 font-medium leading-relaxed max-w-2xl mx-auto mb-10">
-        Companies, property, investments, and assets — tracked in double-entry precision,
-        private on your own device. No cloud. No subscription trap. No compromise.
+        Private on your own device. Built for complex assets, family continuity, and absolute control.
+        No cloud. No telemetry. No account required.
       </p>
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-2">
         <a href={DOWNLOAD_WIN} id="primary-cta" class="btn-primary text-base px-8 py-3.5">
           <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
-          <span id="cta-text">Download for Windows</span>
+          <span id="cta-text">Start Free Trial — Windows</span>
         </a>
         <div id="mac-waitlist-trigger" class="hidden">
            <a href="#mac-waitlist" class="btn-ghost text-base px-8 py-3.5">
@@ -241,6 +241,29 @@ const faqs = [
     </div>
   </section>
 
+  <!-- ── Social proof placeholder ────────────────────────────────────────── -->
+  <section id="testimonials" class="py-20 px-6 bg-white border-t border-neutral-100">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="section-label mb-3">In use</p>
+        <h2 class="text-3xl font-black tracking-tighter text-neutral-900">Early access is open</h2>
+        <p class="text-neutral-500 mt-3 max-w-xl mx-auto">Aethelgard is in active beta with a small group of design partners — founders, family office operators, and sophisticated investors. Testimonials and screenshots coming shortly.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {[
+          { label: '30-day trial', desc: 'No credit card. No account. Full Corporate features from day one.' },
+          { label: 'Design partner access', desc: 'Direct access to the founder, input into the roadmap, founder pricing.' },
+          { label: 'Windows · Mac soon', desc: 'Windows installer available now. Mac build in active development.' },
+        ].map(item => (
+          <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6 text-center">
+            <p class="font-black text-neutral-900 mb-2">{item.label}</p>
+            <p class="text-sm text-neutral-500">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- ── Who it's for ───────────────────────────────────────────────────── -->
   <section class="py-24 px-6 bg-white">
     <div class="max-w-3xl mx-auto text-center">
@@ -282,6 +305,46 @@ const faqs = [
           <p class="text-neutral-500 text-sm leading-relaxed">Investments, property, pensions, digital assets — spread across accounts, brokers, and countries. You've outgrown spreadsheets but won't put sensitive net worth data in the cloud. Aethelgard gives you a complete ledger that stays on your own machine.</p>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ── For whom / not for whom ─────────────────────────────────────────── -->
+  <section class="py-16 px-6 bg-white border-t border-neutral-100">
+    <div class="max-w-4xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-10">
+        <div>
+          <p class="text-xs font-black uppercase tracking-widest text-emerald-600 mb-4">Aethelgard is for you if</p>
+          <ul class="space-y-3">
+            {[
+              'You manage wealth across multiple entities — companies, trusts, personal accounts',
+              'Your financial picture includes property, investments, pensions, and digital assets',
+              'You care that your records are complete, private, and would make sense to your family',
+              'You have outgrown spreadsheets but won\'t put sensitive wealth data in the cloud',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-neutral-700">
+                <span class="text-emerald-500 font-bold mt-0.5 shrink-0">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p class="text-xs font-black uppercase tracking-widest text-neutral-400 mb-4">Aethelgard is not for you if</p>
+          <ul class="space-y-3">
+            {[
+              'You want a budgeting app or expense tracker — try YNAB or Copilot',
+              'Your business needs invoicing, payroll, or multi-user team access',
+              'You want your accountant to log in and manage your records remotely',
+              'You\'re happy with Xero or QuickBooks for your current needs',
+            ].map(item => (
+              <li class="flex items-start gap-3 text-sm text-neutral-500">
+                <span class="text-neutral-300 font-bold mt-0.5 shrink-0">✗</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -655,7 +718,7 @@ const faqs = [
         document.querySelectorAll('#primary-cta, .js-win-download').forEach(el => {
           el.href = data.download_url;
         });
-        ctaText.innerText = 'Download for Windows';
+        ctaText.innerText = 'Start Free Trial — Windows';
       }
 
       const versionTag = document.getElementById('version-tag');
