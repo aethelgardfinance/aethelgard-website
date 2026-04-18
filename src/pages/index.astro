@@ -43,7 +43,7 @@ const comparison = [
   { feature: 'Asset Breadth',    aethelgard: 'Unrestricted — Property, Crypto, LLCs', spreadsheet: 'Highly manual', saas: 'Bank accounts & fiat only', institutional: 'High-friction setup' },
   { feature: 'Family Clarity',   aethelgard: 'Unified "What, Where, How Much"', spreadsheet: 'Fragmented', saas: 'None', institutional: 'Complex reporting' },
   { feature: 'Privacy Model',    aethelgard: 'Purely local — fully on your device', spreadsheet: 'Cloud or local', saas: '100% cloud / SaaS', institutional: '100% cloud / SaaS' },
-  { feature: 'Pricing',          aethelgard: 'Annual from $99 · Lifetime from $249', spreadsheet: 'Ongoing subscriptions', saas: 'Ongoing subscriptions', institutional: 'Enterprise fees' },
+  { feature: 'Pricing',          aethelgard: 'Annual from £99 · Lifetime from £249', spreadsheet: 'Ongoing subscriptions', saas: 'Ongoing subscriptions', institutional: 'Enterprise fees' },
 ];
 
 const faqs = [
@@ -120,10 +120,10 @@ const faqs = [
         <span class="font-black text-white tracking-tighter uppercase italic text-lg">Aethelgard</span>
       </div>
       <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-white/60">
-        <a href="#features" class="hover:text-white transition-colors">Features</a>
-        <a href="#the-name" class="hover:text-white transition-colors">The Name</a>
-        <a href="#pricing"  class="hover:text-white transition-colors">Pricing</a>
-        <a href="#faq"      class="hover:text-white transition-colors">FAQ</a>
+        <a href="#features"     class="hover:text-white transition-colors">Features</a>
+        <a href="#pricing"      class="hover:text-white transition-colors">Pricing</a>
+        <a href="#early-access" class="hover:text-white transition-colors text-brand-400">Early Access</a>
+        <a href="#faq"          class="hover:text-white transition-colors">FAQ</a>
       </div>
       <a href={DOWNLOAD_WIN} class="btn-primary text-sm py-2 px-4 js-win-download">
         Download
@@ -141,7 +141,7 @@ const faqs = [
 
     <div class="relative max-w-4xl mx-auto text-center">
       <div class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 text-brand-400 text-xs font-bold uppercase tracking-widest mb-8">
-        Version 1.0 — Windows · Mac coming soon
+        Windows · Mac coming soon
       </div>
 
       <h1 class="text-5xl md:text-6xl font-black text-white leading-[1.05] tracking-tighter mb-6">
@@ -209,6 +209,38 @@ const faqs = [
     </div>
   </section>
 
+  <!-- ── How local-first works ───────────────────────────────────────────── -->
+  <section class="py-20 px-6 bg-navy-900">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="section-label mb-3 text-brand-400">How the privacy model works</p>
+        <h2 class="text-3xl font-black tracking-tighter text-white">Your data never leaves your device</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div class="text-brand-400 text-2xl mb-4">🔐</div>
+          <h3 class="font-black text-white text-sm uppercase tracking-wide mb-2">Encrypted at rest</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Your vault is an AES-256 encrypted SQLite file on your machine. No one else can read it — including us.</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div class="text-brand-400 text-2xl mb-4">📡</div>
+          <h3 class="font-black text-white text-sm uppercase tracking-wide mb-2">Zero telemetry</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Aethelgard makes no background network calls. No usage analytics. No crash reporting. No phone-home.</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div class="text-brand-400 text-2xl mb-4">☁️</div>
+          <h3 class="font-black text-white text-sm uppercase tracking-wide mb-2">Your backup, your cloud</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Optionally sync encrypted backups to your own WebDAV endpoint — Nextcloud, your NAS, or any self-hosted storage.</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div class="text-brand-400 text-2xl mb-4">🔗</div>
+          <h3 class="font-black text-white text-sm uppercase tracking-wide mb-2">Tamper-evident chain</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Every journal entry is SHA-256 hash-chained. Any alteration to historical records is immediately detectable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Who it's for ───────────────────────────────────────────────────── -->
   <section class="py-24 px-6 bg-white">
     <div class="max-w-3xl mx-auto text-center">
@@ -224,6 +256,33 @@ const faqs = [
         is what you've been looking for. Your most private information stays exactly where it
         belongs: in your hands.
       </p>
+    </div>
+  </section>
+
+  <!-- ── Buyer personas ──────────────────────────────────────────────────── -->
+  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <div class="bg-white border border-neutral-200 rounded-2xl p-7 hover:shadow-md transition-shadow">
+          <div class="text-2xl mb-4">🏢</div>
+          <h3 class="font-black text-neutral-900 text-lg mb-2">The Founder-Director</h3>
+          <p class="text-neutral-500 text-sm leading-relaxed">You have a company, take dividends, and hold personal investments — all tracked in different places. Aethelgard consolidates your Ltd, your ISA, your property, and your personal accounts into one coherent picture, across entities, in double-entry precision.</p>
+        </div>
+
+        <div class="bg-white border border-brand-200 rounded-2xl p-7 hover:shadow-md transition-shadow">
+          <div class="text-2xl mb-4">🏛</div>
+          <h3 class="font-black text-neutral-900 text-lg mb-2">The Family Office</h3>
+          <p class="text-neutral-500 text-sm leading-relaxed">You manage trusts, holding companies, and generational assets. You need consolidated reporting across jurisdictions, IFRS-grade accounts, and a record your successors and advisors can rely on — without paying £50,000/year for enterprise software.</p>
+        </div>
+
+        <div class="bg-white border border-neutral-200 rounded-2xl p-7 hover:shadow-md transition-shadow">
+          <div class="text-2xl mb-4">📊</div>
+          <h3 class="font-black text-neutral-900 text-lg mb-2">The Sophisticated Investor</h3>
+          <p class="text-neutral-500 text-sm leading-relaxed">Investments, property, pensions, digital assets — spread across accounts, brokers, and countries. You've outgrown spreadsheets but won't put sensitive net worth data in the cloud. Aethelgard gives you a complete ledger that stays on your own machine.</p>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -340,11 +399,11 @@ const faqs = [
           <div class="mb-6">
             <p class="text-xs font-black uppercase tracking-widest text-neutral-400 mb-1">Basic</p>
             <div id="price-basic-lifetime" class="flex items-end gap-1">
-              <span class="text-4xl font-black text-neutral-900">$249</span>
+              <span class="text-4xl font-black text-neutral-900">£249</span>
               <span class="text-neutral-400 mb-1 font-medium">one-time</span>
             </div>
             <div id="price-basic-annual" class="hidden flex items-end gap-1">
-              <span class="text-4xl font-black text-neutral-900">$99</span>
+              <span class="text-4xl font-black text-neutral-900">£99</span>
               <span class="text-neutral-400 mb-1 font-medium">/ year</span>
             </div>
             <p class="text-sm text-neutral-500 mt-2">Core ledger for personal finances</p>
@@ -370,11 +429,11 @@ const faqs = [
           <div class="mb-6">
             <p class="text-xs font-black uppercase tracking-widest text-brand-600 mb-1">Standard</p>
             <div id="price-standard-lifetime" class="flex items-end gap-1">
-              <span class="text-4xl font-black text-neutral-900">$499</span>
+              <span class="text-4xl font-black text-neutral-900">£499</span>
               <span class="text-neutral-400 mb-1 font-medium">one-time</span>
             </div>
             <div id="price-standard-annual" class="hidden flex items-end gap-1">
-              <span class="text-4xl font-black text-neutral-900">$199</span>
+              <span class="text-4xl font-black text-neutral-900">£199</span>
               <span class="text-neutral-400 mb-1 font-medium">/ year</span>
             </div>
             <p class="text-sm text-neutral-500 mt-2">Adds investments alongside your ledger</p>
@@ -397,11 +456,11 @@ const faqs = [
           <div class="mb-6">
             <p class="text-xs font-black uppercase tracking-widest text-white/40 mb-1">Advanced</p>
             <div id="price-advanced-lifetime" class="flex items-end gap-1">
-              <span class="text-4xl font-black text-white">$999</span>
+              <span class="text-4xl font-black text-white">£999</span>
               <span class="text-white/40 mb-1 font-medium">one-time</span>
             </div>
             <div id="price-advanced-annual" class="hidden flex items-end gap-1">
-              <span class="text-4xl font-black text-white">$399</span>
+              <span class="text-4xl font-black text-white">£399</span>
               <span class="text-white/40 mb-1 font-medium">/ year</span>
             </div>
             <p class="text-sm text-white/40 mt-2">Full corporate-grade accounting</p>
@@ -423,8 +482,36 @@ const faqs = [
       </div>
 
       <p class="text-center text-xs text-neutral-400 mt-8">
-        All prices in USD · Paddle handles currency conversion at checkout · 14-day refund policy · Upgrade from Annual to Lifetime any time
+        All prices in GBP · Local taxes handled at checkout via Paddle · 14-day refund policy · Upgrade from Annual to Lifetime any time
       </p>
+    </div>
+  </section>
+
+  <!-- ── Design partners ──────────────────────────────────────────────────── -->
+  <section id="early-access" class="py-24 px-6 bg-neutral-50 border-t border-neutral-100">
+    <div class="max-w-2xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 text-brand-600 text-xs font-bold uppercase tracking-widest mb-6">
+        Design Partners — Limited Places
+      </div>
+      <h2 class="text-3xl font-black tracking-tighter text-neutral-900 mb-4">
+        Help shape Aethelgard
+      </h2>
+      <p class="text-neutral-500 mb-8 leading-relaxed">
+        We're inviting a small number of founders, family office operators, and sophisticated investors to join as design partners. You'll get direct access to the founder, input into the roadmap, and lifetime pricing — in exchange for honest feedback about whether this solves your real problem.
+      </p>
+      <form id="design-partner-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+        <input
+          type="email"
+          name="email"
+          placeholder="your@email.com"
+          required
+          class="flex-1 px-5 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
+        />
+        <button type="submit" class="btn-primary py-3 px-8 justify-center">
+          Request Access
+        </button>
+      </form>
+      <p class="text-[10px] text-neutral-400 mt-4 uppercase tracking-widest font-bold">No spam · No obligation · Windows available now · Mac coming soon</p>
     </div>
   </section>
 
@@ -628,6 +715,16 @@ const faqs = [
       e.preventDefault();
       const email = this.querySelector('input[type="email"]').value;
       this.outerHTML = '<p class="text-brand-500 font-bold text-lg">You\'re on the list. We\'ll email ' + email + ' the moment Mac is ready.</p>';
+    });
+  }
+
+  // ── Design Partner Form ──────────────────────────────────────────────────
+  const designPartnerForm = document.getElementById('design-partner-form');
+  if (designPartnerForm) {
+    designPartnerForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      this.outerHTML = '<p class="text-brand-500 font-bold text-lg">Thanks — we\'ll be in touch at ' + email + ' shortly.</p>';
     });
   }
 </script>
