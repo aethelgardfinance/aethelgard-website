@@ -562,14 +562,27 @@ const faqs = [
       <p class="text-neutral-500 mb-8 leading-relaxed">
         We're inviting a small number of founders, family office operators, and sophisticated investors to join as design partners. You'll get direct access to the founder, input into the roadmap, and lifetime pricing — in exchange for honest feedback about whether this solves your real problem.
       </p>
-      <form id="design-partner-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-        <input
-          type="email"
-          name="email"
-          placeholder="your@email.com"
-          required
-          class="flex-1 px-5 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500"
-        />
+      <form id="design-partner-form" class="flex flex-col gap-4 max-w-md mx-auto text-left">
+        <div class="flex flex-col gap-1">
+          <label class="text-xs font-bold text-neutral-600 uppercase tracking-wider" for="dp-name">Your name</label>
+          <input type="text" id="dp-name" name="name" placeholder="Jane Smith" required
+            class="px-5 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500" />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label class="text-xs font-bold text-neutral-600 uppercase tracking-wider" for="dp-email">Email address</label>
+          <input type="email" id="dp-email" name="email" placeholder="your@email.com" required
+            class="px-5 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500" />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label class="text-xs font-bold text-neutral-600 uppercase tracking-wider" for="dp-role">What do you do?</label>
+          <input type="text" id="dp-role" name="role" placeholder="e.g. Family office director, private investor, founder" required
+            class="px-5 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500" />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label class="text-xs font-bold text-neutral-600 uppercase tracking-wider" for="dp-background">Tell us about yourself</label>
+          <textarea id="dp-background" name="background" rows="3" placeholder="Brief background — who you are, what you manage, what brings you here" required
+            class="px-5 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 resize-none"></textarea>
+        </div>
         <button type="submit" class="btn-primary py-3 px-8 justify-center">
           Request Access
         </button>
@@ -805,9 +818,29 @@ const faqs = [
   // ── Design Partner Form ──────────────────────────────────────────────────
   const designPartnerForm = document.getElementById('design-partner-form');
   if (designPartnerForm) {
-    designPartnerForm.addEventListener('submit', function(e) {
+    designPartnerForm.addEventListener('submit', async function(e) {
       e.preventDefault();
-      submitWaitlist(this, 'design-partner', 'Thanks — we\'ll be in touch at {{email}} shortly.');
+      const name = this.querySelector('input[name="name"]').value.trim();
+      const email = this.querySelector('input[name="email"]').value.trim();
+      const role = this.querySelector('input[name="role"]').value.trim();
+      const background = this.querySelector('textarea[name="background"]').value.trim();
+      const btn = this.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      try {
+        const res = await fetch(WAITLIST_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, name, role, background, type: 'design-partner' }),
+        });
+        if (!res.ok) throw new Error('Server error');
+        const firstName = name.split(' ')[0];
+        this.outerHTML = '<p class="text-brand-500 font-bold text-lg">Thanks ' + firstName + ' — we\'ll review your application and be in touch at ' + email + ' shortly.</p>';
+      } catch {
+        btn.disabled = false;
+        btn.textContent = 'Request Access';
+        alert('Something went wrong. Please email contact@aethelgard.finance directly.');
+      }
     });
   }
 </script>
