@@ -760,7 +760,7 @@ const faqs = [
   // ── Pricing Logic ───────────────────────────────────────────────────────
   let pricingMode = 'lifetime';
 
-  function setPricingMode(mode) {
+  window.setPricingMode = function setPricingMode(mode) {
     pricingMode = mode;
     const btnLifetime = document.getElementById('btn-lifetime');
     const btnAnnual   = document.getElementById('btn-annual');
@@ -774,7 +774,7 @@ const faqs = [
     });
   }
 
-  function openCheckout(tier) {
+  window.openCheckout = function openCheckout(tier) {
     if (typeof Paddle === 'undefined') {
       alert('Checkout could not load. Please disable any ad blocker for this site and refresh the page.');
       return;
