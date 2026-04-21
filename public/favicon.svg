@@ -1,4 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
   <rect width="32" height="32" rx="7" fill="#0f0f1a"/>
-  <text x="16" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18" font-weight="900" fill="#f59e0b" text-anchor="middle">A</text>
+  <!-- Lotus — outer petals behind -->
+  <path d="M0 0 C-1.5 -2 -1.5 -5 0 -6.5 C1.5 -5 1.5 -2 0 0Z" fill="#f59e0b" opacity="0.55" transform="translate(16,12) rotate(-65)"/>
+  <path d="M0 0 C-1.5 -2 -1.5 -5 0 -6.5 C1.5 -5 1.5 -2 0 0Z" fill="#f59e0b" opacity="0.55" transform="translate(16,12) rotate(65)"/>
+  <!-- Lotus — mid petals -->
+  <path d="M0 0 C-1.5 -2 -1.5 -5 0 -6.5 C1.5 -5 1.5 -2 0 0Z" fill="#f59e0b" opacity="0.8" transform="translate(16,12) rotate(-38)"/>
+  <path d="M0 0 C-1.5 -2 -1.5 -5 0 -6.5 C1.5 -5 1.5 -2 0 0Z" fill="#f59e0b" opacity="0.8" transform="translate(16,12) rotate(38)"/>
+  <!-- Lotus — center petal (front) -->
+  <path d="M0 0 C-1.5 -2 -1.5 -5 0 -6.5 C1.5 -5 1.5 -2 0 0Z" fill="#f59e0b" transform="translate(16,12)"/>
+  <!-- A -->
+  <text x="16" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="15" font-weight="900" fill="#f59e0b" text-anchor="middle">A</text>
 </svg>
