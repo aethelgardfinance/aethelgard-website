@@ -324,7 +324,7 @@ const faqs = [
               'You have outgrown spreadsheets but won\'t put sensitive wealth data in the cloud',
             ].map(item => (
               <li class="flex items-start gap-3 text-sm text-neutral-700">
-                <span class="text-emerald-500 font-bold mt-0.5 shrink-0">âœ“</span>
+                <span class="text-emerald-500 font-bold mt-0.5 shrink-0">✓</span>
                 {item}
               </li>
             ))}
@@ -340,7 +340,7 @@ const faqs = [
               'You\'re happy with Xero or QuickBooks for your current needs',
             ].map(item => (
               <li class="flex items-start gap-3 text-sm text-neutral-500">
-                <span class="text-neutral-300 font-bold mt-0.5 shrink-0">âœ—</span>
+                <span class="text-neutral-300 font-bold mt-0.5 shrink-0">✗</span>
                 {item}
               </li>
             ))}
@@ -473,11 +473,11 @@ const faqs = [
             <p class="text-sm text-neutral-500 mt-2">Core ledger for personal finances</p>
           </div>
           <ul class="space-y-3 text-sm text-neutral-600 mb-8 flex-1">
-            <li class="flex gap-2"><span class="text-emerald-500 font-bold">âœ“</span> Transaction tracking</li>
-            <li class="flex gap-2"><span class="text-emerald-500 font-bold">âœ“</span> P&amp;L and Balance Sheet</li>
-            <li class="flex gap-2"><span class="text-emerald-500 font-bold">âœ“</span> Budgeting &amp; goals</li>
-            <li class="flex gap-2"><span class="text-emerald-500 font-bold">âœ“</span> Recurring payments</li>
-            <li class="flex gap-2"><span class="text-emerald-500 font-bold">âœ“</span> Encrypted vault backup</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Transaction tracking</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> P&amp;L and Balance Sheet</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Budgeting &amp; goals</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Recurring payments</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Encrypted vault backup</li>
           </ul>
           <button onclick="openCheckout('basic')" class="w-full py-3 rounded-xl border-2 border-neutral-200 font-bold text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 transition-colors text-sm cursor-pointer">
             Buy Basic
@@ -503,11 +503,11 @@ const faqs = [
             <p class="text-sm text-neutral-500 mt-2">Adds investments alongside your ledger</p>
           </div>
           <ul class="space-y-3 text-sm text-neutral-600 mb-8 flex-1">
-            <li class="flex gap-2"><span class="text-brand-500 font-bold">âœ“</span> Everything in Basic</li>
-            <li class="flex gap-2"><span class="text-brand-500 font-bold">âœ“</span> Portfolio &amp; analytics</li>
-            <li class="flex gap-2"><span class="text-brand-500 font-bold">âœ“</span> FX rates &amp; revaluation</li>
-            <li class="flex gap-2"><span class="text-brand-500 font-bold">âœ“</span> Tax tools (VAT, CGT)</li>
-            <li class="flex gap-2"><span class="text-brand-500 font-bold">âœ“</span> Multi-currency</li>
+            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Everything in Basic</li>
+            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Portfolio &amp; analytics</li>
+            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> FX rates &amp; revaluation</li>
+            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Tax tools (VAT, CGT)</li>
+            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Multi-currency</li>
           </ul>
           <button onclick="openCheckout('standard')" class="w-full py-3 rounded-xl bg-brand-500 hover:bg-brand-600 font-bold text-white transition-colors text-sm shadow-md cursor-pointer">
             Buy Standard
@@ -530,12 +530,12 @@ const faqs = [
             <p class="text-sm text-white/40 mt-2">Full corporate-grade accounting</p>
           </div>
           <ul class="space-y-3 text-sm text-white/70 mb-8 flex-1">
-            <li class="flex gap-2"><span class="text-brand-400 font-bold">âœ“</span> Everything in Standard</li>
-            <li class="flex gap-2"><span class="text-brand-400 font-bold">âœ“</span> Fixed assets &amp; depreciation</li>
-            <li class="flex gap-2"><span class="text-brand-400 font-bold">âœ“</span> Accruals &amp; hedge accounting</li>
-            <li class="flex gap-2"><span class="text-brand-400 font-bold">âœ“</span> Deferred tax workings</li>
-            <li class="flex gap-2"><span class="text-brand-400 font-bold">âœ“</span> Period locks &amp; reconciliation</li>
-            <li class="flex gap-2"><span class="text-brand-400 font-bold">âœ“</span> Group consolidation (IFRS)</li>
+            <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Everything in Standard</li>
+            <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Fixed assets &amp; depreciation</li>
+            <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Accruals &amp; hedge accounting</li>
+            <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Deferred tax workings</li>
+            <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Period locks &amp; reconciliation</li>
+            <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Group consolidation (IFRS)</li>
           </ul>
           <button onclick="openCheckout('advanced')" class="w-full py-3 rounded-xl bg-white hover:bg-neutral-100 font-bold text-navy-900 transition-colors text-sm cursor-pointer">
             Buy Advanced
