@@ -1,0 +1,149 @@
+---
+import '../styles/global.css';
+
+const DOWNLOAD_WIN = 'https://github.com/aethelgardfinance/aethelgard-releases/releases';
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Purchase Confirmed — Aethelgard</title>
+  <meta name="description" content="Your Aethelgard license has been confirmed. Download the app and check your email for your license key." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="robots" content="noindex" />
+</head>
+<body class="bg-white text-neutral-900 antialiased">
+
+  <nav class="sticky top-0 z-50 bg-navy-900 border-b border-white/5">
+    <div class="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="/" class="text-white font-black tracking-tight text-lg">Aethelgard</a>
+      <a href="/" class="text-sm font-semibold text-white/60 hover:text-white transition-colors">← Home</a>
+    </div>
+  </nav>
+
+  <!-- Hero confirmation -->
+  <header class="bg-navy-900 py-20 px-6 text-center">
+    <div class="max-w-2xl mx-auto">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-emerald-500/15 border border-emerald-500/30 rounded-2xl mb-6">
+        <svg class="w-8 h-8 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+        </svg>
+      </div>
+      <p class="section-label mb-3 text-brand-400">Purchase confirmed</p>
+      <h1 class="text-4xl font-black tracking-tighter text-white mb-4">
+        Welcome to Aethelgard.
+      </h1>
+      <p class="text-white/60 text-lg leading-relaxed">
+        Your license is confirmed. Check your email — your license key and receipt are on their way from Paddle.
+      </p>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-6 py-16 space-y-10">
+
+    <!-- Step 1: Check email -->
+    <div class="flex gap-5">
+      <div class="shrink-0 w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-600 font-black text-sm">1</div>
+      <div>
+        <h2 class="text-lg font-black text-neutral-900 mb-1">Check your email</h2>
+        <p class="text-neutral-600 leading-relaxed">
+          Paddle sends your receipt and license key to the email address you used at checkout. It typically arrives within a few minutes. If you don't see it, check your spam or junk folder — search for <strong>Paddle</strong> or <strong>Aethelgard</strong>.
+        </p>
+        <p class="text-sm text-neutral-400 mt-2">
+          Still nothing after 15 minutes? Email <a href="mailto:contact@aethelgard.finance" class="text-brand-500 hover:text-brand-600 font-semibold">contact@aethelgard.finance</a> with your order reference.
+        </p>
+      </div>
+    </div>
+
+    <hr class="border-neutral-100" />
+
+    <!-- Step 2: Download -->
+    <div class="flex gap-5">
+      <div class="shrink-0 w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-600 font-black text-sm">2</div>
+      <div class="w-full">
+        <h2 class="text-lg font-black text-neutral-900 mb-1">Download and install</h2>
+        <p class="text-neutral-600 leading-relaxed mb-4">
+          Download the Windows installer and run it. When Windows SmartScreen appears, click <strong>More info</strong> then <strong>Run anyway</strong> — this is standard for independent software and safe to proceed.
+        </p>
+        <a href={DOWNLOAD_WIN} id="download-btn" class="btn-primary text-sm py-2.5 px-5 inline-flex">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+          Download for Windows
+        </a>
+      </div>
+    </div>
+
+    <hr class="border-neutral-100" />
+
+    <!-- Step 3: Activate -->
+    <div class="flex gap-5">
+      <div class="shrink-0 w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-600 font-black text-sm">3</div>
+      <div>
+        <h2 class="text-lg font-black text-neutral-900 mb-1">Activate your license</h2>
+        <p class="text-neutral-600 leading-relaxed mb-3">
+          Open Aethelgard after installation. You'll be prompted to enter your license key on first launch.
+        </p>
+        <ol class="space-y-2 text-sm text-neutral-600">
+          <li class="flex gap-2"><span class="text-brand-500 font-bold shrink-0">→</span> Copy your license key from the Paddle email</li>
+          <li class="flex gap-2"><span class="text-brand-500 font-bold shrink-0">→</span> Paste it into the activation screen in the app</li>
+          <li class="flex gap-2"><span class="text-brand-500 font-bold shrink-0">→</span> Click Activate — your full tier unlocks immediately</li>
+        </ol>
+      </div>
+    </div>
+
+    <hr class="border-neutral-100" />
+
+    <!-- Quick Start CTA -->
+    <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
+      <div>
+        <p class="font-black text-neutral-900 mb-1">New to Aethelgard?</p>
+        <p class="text-sm text-neutral-500">The Quick Start guide walks you through creating your first vault and recording your first transaction — takes about ten minutes.</p>
+      </div>
+      <a href="/quick-start" class="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 border-2 border-neutral-200 rounded-xl font-bold text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 transition-colors text-sm whitespace-nowrap">
+        Quick Start →
+      </a>
+    </div>
+
+    <!-- Support note -->
+    <p class="text-center text-sm text-neutral-400">
+      Questions? <a href="mailto:contact@aethelgard.finance" class="text-brand-500 hover:text-brand-600 font-semibold">contact@aethelgard.finance</a>
+    </p>
+
+  </main>
+
+  <footer class="bg-navy-900 py-8 px-6 mt-8">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-white/30 text-xs">
+      <div class="space-y-1 text-center sm:text-left">
+        <span>© {new Date().getFullYear()} Aethelgard. All rights reserved.</span>
+        <p class="text-white/20">2B Connected Ltd · Registered in England &amp; Wales · Company No. 06427186</p>
+      </div>
+      <div class="flex gap-6">
+        <a href="/privacy" class="hover:text-white/60 transition-colors">Privacy</a>
+        <a href="/terms" class="hover:text-white/60 transition-colors">Terms</a>
+        <a href="/refunds" class="hover:text-white/60 transition-colors">Refunds</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+<script is:inline>
+  // Resolve the actual download URL from the latest-release API
+  const LATEST_API = 'https://aethelgard-licensing.vercel.app/api/latest';
+  const FALLBACK   = 'https://github.com/aethelgardfinance/aethelgard-releases/releases';
+
+  (async () => {
+    const btn = document.getElementById('download-btn');
+    try {
+      const res = await fetch(LATEST_API);
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data.download_url) btn.href = data.download_url;
+    } catch {
+      // silently fall back to the releases page
+    }
+  })();
+</script>
+
+</html>

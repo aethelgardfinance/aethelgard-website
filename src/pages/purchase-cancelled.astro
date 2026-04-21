@@ -1,0 +1,116 @@
+---
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout Cancelled — Aethelgard</title>
+  <meta name="description" content="Your checkout was cancelled. Your free trial is still available — no purchase required to try Aethelgard." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="robots" content="noindex" />
+</head>
+<body class="bg-white text-neutral-900 antialiased">
+
+  <nav class="sticky top-0 z-50 bg-navy-900 border-b border-white/5">
+    <div class="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
+      <a href="/" class="text-white font-black tracking-tight text-lg">Aethelgard</a>
+      <a href="/" class="text-sm font-semibold text-white/60 hover:text-white transition-colors">← Home</a>
+    </div>
+  </nav>
+
+  <header class="bg-navy-900 py-20 px-6 text-center">
+    <div class="max-w-2xl mx-auto">
+      <p class="section-label mb-3 text-brand-400">No charge made</p>
+      <h1 class="text-4xl font-black tracking-tighter text-white mb-4">
+        You left the checkout.
+      </h1>
+      <p class="text-white/60 text-lg leading-relaxed">
+        Nothing was charged. Your cart is gone — but the free trial is still there whenever you're ready.
+      </p>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-6 py-16 space-y-8">
+
+    <!-- Reassurance block -->
+    <div class="bg-brand-50 border border-brand-200 rounded-2xl p-6 space-y-3">
+      <p class="font-black text-neutral-900">No purchase needed to start</p>
+      <p class="text-neutral-600 text-sm leading-relaxed">
+        Aethelgard includes a 30-day free trial with no credit card required. Download the app and use it in full — you only need a license key when the trial ends.
+      </p>
+    </div>
+
+    <!-- Options -->
+    <div class="space-y-4">
+
+      <div class="border border-neutral-200 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
+        <div>
+          <p class="font-black text-neutral-900 mb-1">Try it first — free for 30 days</p>
+          <p class="text-sm text-neutral-500">Full Corporate-tier features during the trial. No account, no card, no obligation.</p>
+        </div>
+        <a id="download-btn" href="https://github.com/aethelgardfinance/aethelgard-releases/releases"
+           class="shrink-0 btn-primary text-sm py-2.5 px-5">
+          Download free trial
+        </a>
+      </div>
+
+      <div class="border border-neutral-200 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
+        <div>
+          <p class="font-black text-neutral-900 mb-1">Review pricing again</p>
+          <p class="text-sm text-neutral-500">Annual from £99 · Lifetime from £249 · 14-day refund if it's not right.</p>
+        </div>
+        <a href="/#pricing" class="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 border-2 border-neutral-200 rounded-xl font-bold text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 transition-colors text-sm whitespace-nowrap">
+          See pricing →
+        </a>
+      </div>
+
+      <div class="border border-neutral-200 rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
+        <div>
+          <p class="font-black text-neutral-900 mb-1">Have a question before you buy?</p>
+          <p class="text-sm text-neutral-500">Email directly — a real answer from the founder, not a bot.</p>
+        </div>
+        <a href="mailto:contact@aethelgard.finance" class="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 border-2 border-neutral-200 rounded-xl font-bold text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 transition-colors text-sm whitespace-nowrap">
+          Get in touch →
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="bg-navy-900 py-8 px-6 mt-8">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-white/30 text-xs">
+      <div class="space-y-1 text-center sm:text-left">
+        <span>© {new Date().getFullYear()} Aethelgard. All rights reserved.</span>
+        <p class="text-white/20">2B Connected Ltd · Registered in England &amp; Wales · Company No. 06427186</p>
+      </div>
+      <div class="flex gap-6">
+        <a href="/privacy" class="hover:text-white/60 transition-colors">Privacy</a>
+        <a href="/terms" class="hover:text-white/60 transition-colors">Terms</a>
+        <a href="/refunds" class="hover:text-white/60 transition-colors">Refunds</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+<script is:inline>
+  const LATEST_API = 'https://aethelgard-licensing.vercel.app/api/latest';
+
+  (async () => {
+    const btn = document.getElementById('download-btn');
+    try {
+      const res = await fetch(LATEST_API);
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data.download_url) btn.href = data.download_url;
+    } catch {
+      // silently fall back to the releases page
+    }
+  })();
+</script>
+
+</html>

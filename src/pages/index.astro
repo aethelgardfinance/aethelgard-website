@@ -704,10 +704,15 @@ const faqs = [
 </body>
 
 <script is:inline define:vars={{ PRICES }}>
-  // Initialise Paddle Billing v2
-  if (typeof Paddle === 'undefined') {
-    console.error('[Paddle] paddle.js did not load — checkout will not work.');
-  } else {
+  // ── Paddle initialisation ───────────────────────────────────────────────
+  // paddle.js is loaded as an external script and may not be ready when this
+  // inline script first runs. _initPaddle() is called eagerly here and again
+  // inside openCheckout() so the race condition cannot cause a missed init.
+  var _paddleReady = false;
+
+  function _initPaddle() {
+    if (_paddleReady) return true;
+    if (typeof Paddle === 'undefined') return false;
     try {
       Paddle.Initialize({
         token: 'live_e7f24b9ae86b393f8e32017ffb8',
@@ -715,10 +720,16 @@ const faqs = [
           if (ev.name === 'checkout.error') console.error('[Paddle] checkout.error', ev.data);
         }
       });
+      _paddleReady = true;
+      return true;
     } catch (err) {
       console.error('[Paddle] Initialize failed:', err);
+      return false;
     }
   }
+
+  // Attempt immediate init (succeeds if paddle.js loaded synchronously)
+  _initPaddle();
 
   // ── Distribution Logic ──────────────────────────────────────────────────
   const LATEST_API = 'https://aethelgard-licensing.vercel.app/api/latest';
@@ -780,7 +791,7 @@ const faqs = [
   }
 
   window.openCheckout = function openCheckout(tier) {
-    if (typeof Paddle === 'undefined') {
+    if (!_initPaddle()) {
       alert('Checkout could not load. Please disable any ad blocker for this site and refresh the page.');
       return;
     }
@@ -791,7 +802,12 @@ const faqs = [
       return;
     }
     try {
-      Paddle.Checkout.open({ items: [{ priceId, quantity: 1 }] });
+      Paddle.Checkout.open({
+        items: [{ priceId, quantity: 1 }],
+        settings: {
+          successUrl: 'https://aethelgard.finance/thank-you',
+        },
+      });
     } catch (err) {
       console.error('[Paddle] Checkout.open failed:', err);
       alert('Checkout failed: ' + err.message + '\n\nPlease try again or contact contact@aethelgard.finance');
