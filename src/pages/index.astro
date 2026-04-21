@@ -9,6 +9,7 @@ const PRICES = {
   basic_lifetime:   'pri_01kp3vz3h9nnyg5erqm01m3tsg',
   standard_lifetime:'pri_01kp3w7wk0t5bd9dgyhky2cea4',
   advanced_lifetime:'pri_01kp3wa2e1ym23f039fjhg0m72',
+  advisor_bundle:   'pri_01kprs255tq3nfemq9h5zn3ejt',
 };
 
 // GitHub releases â€” update to point at latest release once published.
@@ -551,6 +552,39 @@ const faqs = [
   </section>
 
   <!-- â”€â”€ Design partners â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
+  
+  <!-- ── Advisor bundle ───────────────────────────────────────────────────── -->
+  <section id="advisor-bundle" class="py-16 px-6 bg-navy-900 border-t border-white/5">
+    <div class="max-w-3xl mx-auto">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+        <div class="flex-1">
+          <div class="inline-flex items-center gap-2 bg-brand-500/20 border border-brand-500/30 rounded-full px-3 py-1 text-brand-400 text-xs font-bold uppercase tracking-widest mb-4">
+            For Accountants &amp; Advisors
+          </div>
+          <h2 class="text-2xl font-black tracking-tighter text-white mb-3">Set up your clients on Aethelgard</h2>
+          <p class="text-white/50 text-sm leading-relaxed mb-4">
+            The Advisor Bundle gives you three independent Advanced Lifetime licenses — one per client vault — delivered together in a single email.
+          </p>
+          <ul class="space-y-2 text-sm text-white/60">
+            <li class="flex items-center gap-2"><span class="text-brand-400 font-bold">&#10003;</span> 3 × Advanced Lifetime keys — each activates a separate client vault</li>
+            <li class="flex items-center gap-2"><span class="text-brand-400 font-bold">&#10003;</span> Full IFRS-grade accounting, consolidation, hedge accounting, deferred tax</li>
+            <li class="flex items-center gap-2"><span class="text-brand-400 font-bold">&#10003;</span> Your clients own their data — nothing leaves their device</li>
+          </ul>
+        </div>
+        <div class="shrink-0 text-center md:text-right">
+          <p class="text-3xl font-black text-white mb-1">£2,097</p>
+          <p class="text-white/40 text-xs mb-6">one-time · £699 per license</p>
+          <button
+            onclick="openAdvisorBundle()"
+            class="w-full md:w-auto px-8 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 font-bold text-white transition-colors text-sm cursor-pointer shadow-lg shadow-brand-500/20"
+          >
+            Buy Advisor Bundle
+          </button>
+          <p class="text-white/30 text-xs mt-3">All three keys delivered by email</p>
+        </div>
+      </div>
+    </div>
+  </section>
   <section id="early-access" class="py-24 px-6 bg-neutral-50 border-t border-neutral-100">
     <div class="max-w-2xl mx-auto text-center">
       <div class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 text-brand-600 text-xs font-bold uppercase tracking-widest mb-6">
@@ -788,6 +822,22 @@ const faqs = [
       document.getElementById('price-' + tier + '-lifetime').classList.toggle('hidden', mode !== 'lifetime');
       document.getElementById('price-' + tier + '-annual').classList.toggle('hidden',   mode !== 'annual');
     });
+  }
+
+  window.openAdvisorBundle = function openAdvisorBundle() {
+    if (!_initPaddle()) {
+      alert('Checkout could not load. Please disable any ad blocker for this site and refresh the page.');
+      return;
+    }
+    try {
+      Paddle.Checkout.open({
+        items: [{ priceId: PRICES.advisor_bundle, quantity: 1 }],
+        settings: { successUrl: 'https://aethelgard.finance/thank-you' },
+      });
+    } catch (err) {
+      console.error('[Paddle] Advisor bundle checkout failed:', err);
+      alert('Checkout failed: ' + err.message + '\n\nPlease contact contact@aethelgard.finance');
+    }
   }
 
   window.openCheckout = function openCheckout(tier) {
