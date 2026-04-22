@@ -8,6 +8,11 @@
       "source": "/quick-start",
       "destination": "https://amber-modem-9a3.notion.site/Aethelgard-Quick-Start-Guide-cb0d4057c81d4efab7b04347376750a5",
       "permanent": false
+    },
+    {
+      "source": "/quick-start/",
+      "destination": "https://amber-modem-9a3.notion.site/Aethelgard-Quick-Start-Guide-cb0d4057c81d4efab7b04347376750a5",
+      "permanent": false
     }
   ]
 }
