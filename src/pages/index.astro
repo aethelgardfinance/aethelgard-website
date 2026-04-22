@@ -218,19 +218,16 @@ const faqs = [
   </section>
 
   <!-- ── Demo Video ────────────────────────────────────────────────────────── -->
-  <section id=”demo” class=”py-24 px-6 bg-white border-t border-neutral-100”>
-    <div class=”max-w-5xl mx-auto”>
-      <div class=”text-center mb-12”>
+  <section id=”demo” class=”py-24 px-6 bg-neutral-50”>
+    <div class=”max-w-6xl mx-auto”>
+      <div class=”text-center mb-16”>
         <p class=”section-label mb-3”>See It In Action</p>
-        <h2 class=”text-3xl font-black tracking-tighter text-neutral-900”>Watch the demo</h2>
-        <p class=”text-neutral-500 mt-3 max-w-xl mx-auto text-sm”>
-          Multi-entity consolidation, illiquid asset revaluations, and tamper-evident records — in under three minutes.
-        </p>
+        <h2 class=”text-4xl font-black tracking-tighter text-neutral-900”>Three things most tools<br class=”hidden md:block” /> can't do. Aethelgard can.</h2>
       </div>
 
-      <!-- Video embed or placeholder. Set DEMO_VIDEO_URL at the top of this file to activate. -->
-      <div class=”relative rounded-2xl overflow-hidden shadow-xl border border-neutral-200 aspect-video bg-navy-900 flex items-center justify-center mb-10”>
-        {DEMO_VIDEO_URL ? (
+      <!-- Video embed (shown only when DEMO_VIDEO_URL is set) -->
+      {DEMO_VIDEO_URL && (
+        <div class=”relative rounded-2xl overflow-hidden shadow-2xl border border-neutral-200 aspect-video mb-16”>
           <iframe
             src={DEMO_VIDEO_URL}
             class=”absolute inset-0 w-full h-full”
@@ -238,42 +235,37 @@ const faqs = [
             allowfullscreen
             title=”Aethelgard product demo”
           />
-        ) : (
-          <div class=”text-center”>
-            <div class=”w-20 h-20 rounded-full bg-brand-500/15 border border-brand-500/25 flex items-center justify-center mx-auto mb-4”>
-              <svg class=”w-8 h-8 text-brand-400 ml-1.5” fill=”currentColor” viewBox=”0 0 24 24” aria-hidden=”true”>
-                <path d=”M8 5v14l11-7z”/>
-              </svg>
-            </div>
-            <p class=”text-white/40 text-sm font-medium”>Demo video coming soon</p>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
 
-      <!-- Three annotated features beneath the video -->
-      <div class=”grid md:grid-cols-3 gap-6”>
-        <div class=”bg-neutral-50 border border-neutral-200 rounded-2xl p-6”>
-          <div class=”w-10 h-10 rounded-xl bg-navy-900 flex items-center justify-center mb-4 text-brand-400”>
+      <!-- Three annotated feature cards -->
+      <div class=”grid md:grid-cols-3 gap-8”>
+        <div class=”bg-white rounded-2xl p-8 border border-neutral-200 shadow-sm hover:shadow-md transition-shadow”>
+          <div class=”w-11 h-11 rounded-xl bg-navy-900 flex items-center justify-center mb-6 text-brand-400”>
             <svg class=”w-5 h-5” fill=”none” stroke=”currentColor” stroke-width=”2” viewBox=”0 0 24 24”><path stroke-linecap=”round” stroke-linejoin=”round” d=”M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1”/></svg>
           </div>
-          <h3 class=”font-black text-neutral-900 text-sm uppercase tracking-wide mb-2”>Tamper-Evident Records</h3>
-          <p class=”text-sm text-neutral-500 leading-relaxed”>Every journal entry is SHA-256 hash-chained on your device. Any change to any historical record is immediately detectable — a permanent, verifiable audit trail.</p>
+          <h3 class=”font-black text-neutral-900 text-lg tracking-tight mb-3”>Tamper-Evident Records</h3>
+          <p class=”text-sm text-neutral-500 leading-relaxed”>Every journal entry is SHA-256 hash-chained on your device. Any change to any historical record is immediately detectable — creating a permanent, court-admissible audit trail without any extra steps.</p>
         </div>
-        <div class=”bg-neutral-50 border border-neutral-200 rounded-2xl p-6”>
-          <div class=”w-10 h-10 rounded-xl bg-navy-900 flex items-center justify-center mb-4 text-brand-400”>
+        <div class=”bg-white rounded-2xl p-8 border border-neutral-200 shadow-sm hover:shadow-md transition-shadow”>
+          <div class=”w-11 h-11 rounded-xl bg-navy-900 flex items-center justify-center mb-6 text-brand-400”>
             <svg class=”w-5 h-5” fill=”none” stroke=”currentColor” stroke-width=”2” viewBox=”0 0 24 24”><path stroke-linecap=”round” stroke-linejoin=”round” d=”M18.364 5.636a9 9 0 010 12.728M15.536 8.464a5 5 0 010 7.072M12 11a1 1 0 100 2 1 1 0 000-2zM3 3l18 18”/></svg>
           </div>
-          <h3 class=”font-black text-neutral-900 text-sm uppercase tracking-wide mb-2”>Fully Offline</h3>
-          <p class=”text-sm text-neutral-500 leading-relaxed”>No background network calls, ever. Your vault is an AES-256 encrypted file on your machine. WebDAV backups are opt-in and encrypted before leaving the device.</p>
+          <h3 class=”font-black text-neutral-900 text-lg tracking-tight mb-3”>Fully Offline</h3>
+          <p class=”text-sm text-neutral-500 leading-relaxed”>No background network calls — ever. Your vault is an AES-256 encrypted file on your machine. No telemetry, no analytics. WebDAV backups are opt-in and encrypted before leaving the device.</p>
         </div>
-        <div class=”bg-neutral-50 border border-neutral-200 rounded-2xl p-6”>
-          <div class=”w-10 h-10 rounded-xl bg-navy-900 flex items-center justify-center mb-4 text-brand-400”>
+        <div class=”bg-white rounded-2xl p-8 border border-neutral-200 shadow-sm hover:shadow-md transition-shadow”>
+          <div class=”w-11 h-11 rounded-xl bg-navy-900 flex items-center justify-center mb-6 text-brand-400”>
             <svg class=”w-5 h-5” fill=”none” stroke=”currentColor” stroke-width=”2” viewBox=”0 0 24 24”><path stroke-linecap=”round” stroke-linejoin=”round” d=”M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z”/></svg>
           </div>
-          <h3 class=”font-black text-neutral-900 text-sm uppercase tracking-wide mb-2”>Illiquid Asset Revaluations</h3>
-          <p class=”text-sm text-neutral-500 leading-relaxed”>Property, private equity, carried interest, and alternatives — revalue to fair value with the correct IFRS accounting applied automatically. Balance sheet and net worth update in real time.</p>
+          <h3 class=”font-black text-neutral-900 text-lg tracking-tight mb-3”>Illiquid Asset Revaluations</h3>
+          <p class=”text-sm text-neutral-500 leading-relaxed”>Property, private equity, carried interest, alternatives — revalue to fair value with IFRS accounting applied automatically. The correct journal entries are generated for you; balance sheet updates in real time.</p>
         </div>
       </div>
+
+      {!DEMO_VIDEO_URL && (
+        <p class=”text-center text-xs text-neutral-400 font-medium uppercase tracking-widest mt-10”>Demo video coming soon</p>
+      )}
     </div>
   </section>
 
@@ -286,22 +278,22 @@ const faqs = [
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <div class="text-brand-400 text-2xl mb-4">ðŸ”</div>
+          <div class="text-brand-400 mb-4"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div>
           <h3 class="font-black text-white text-sm uppercase tracking-wide mb-2">Encrypted at rest</h3>
           <p class="text-white/50 text-sm leading-relaxed">Your vault is an AES-256 encrypted SQLite file on your machine. No one else can read it — including us.</p>
         </div>
         <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <div class="text-brand-400 text-2xl mb-4">ðŸ“¡</div>
+          <div class="text-brand-400 mb-4"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728M15.536 8.464a5 5 0 010 7.072M12 11a1 1 0 100 2 1 1 0 000-2zM3 3l18 18"/></svg></div>
           <h3 class="font-black text-white text-sm uppercase tracking-wide mb-2">Zero telemetry</h3>
           <p class="text-white/50 text-sm leading-relaxed">Aethelgard makes no background network calls. No usage analytics. No crash reporting. No phone-home.</p>
         </div>
         <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <div class="text-brand-400 text-2xl mb-4">â˜ï¸</div>
+          <div class="text-brand-400 mb-4"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg></div>
           <h3 class="font-black text-white text-sm uppercase tracking-wide mb-2">Your backup, your cloud</h3>
           <p class="text-white/50 text-sm leading-relaxed">Optionally sync encrypted backups to your own WebDAV endpoint — Nextcloud, your NAS, or any self-hosted storage.</p>
         </div>
         <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
-          <div class="text-brand-400 text-2xl mb-4">ðŸ”—</div>
+          <div class="text-brand-400 mb-4"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg></div>
           <h3 class="font-black text-white text-sm uppercase tracking-wide mb-2">Tamper-evident chain</h3>
           <p class="text-white/50 text-sm leading-relaxed">Every journal entry is SHA-256 hash-chained. Any alteration to historical records is immediately detectable.</p>
         </div>
@@ -356,19 +348,19 @@ const faqs = [
       <div class="grid md:grid-cols-3 gap-6">
 
         <div class="bg-white border border-neutral-200 rounded-2xl p-7 hover:shadow-md transition-shadow">
-          <div class="text-2xl mb-4">ðŸ¢</div>
+          <div class="text-neutral-300 mb-4"><svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-2 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div>
           <h3 class="font-black text-neutral-900 text-lg mb-2">The Founder-Director</h3>
           <p class="text-neutral-500 text-sm leading-relaxed">You have a company, take dividends, and hold personal investments — all tracked in different places. Aethelgard consolidates your Ltd, your ISA, your property, and your personal accounts into one coherent picture, across entities, in double-entry precision.</p>
         </div>
 
         <div class="bg-white border border-brand-200 rounded-2xl p-7 hover:shadow-md transition-shadow">
-          <div class="text-2xl mb-4">ðŸ›</div>
+          <div class="text-neutral-300 mb-4"><svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"/></svg></div>
           <h3 class="font-black text-neutral-900 text-lg mb-2">The Family Office</h3>
           <p class="text-neutral-500 text-sm leading-relaxed">You manage trusts, holding companies, and generational assets. You need consolidated reporting across jurisdictions, IFRS-grade accounts, and a record your successors and advisors can rely on — without paying £50,000/year for enterprise software.</p>
         </div>
 
         <div class="bg-white border border-neutral-200 rounded-2xl p-7 hover:shadow-md transition-shadow">
-          <div class="text-2xl mb-4">ðŸ“Š</div>
+          <div class="text-neutral-300 mb-4"><svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
           <h3 class="font-black text-neutral-900 text-lg mb-2">The Sophisticated Investor</h3>
           <p class="text-neutral-500 text-sm leading-relaxed">Investments, property, pensions, digital assets — spread across accounts, brokers, and countries. You've outgrown spreadsheets but won't put sensitive net worth data in the cloud. Aethelgard gives you a complete ledger that stays on your own machine.</p>
         </div>
