@@ -187,7 +187,7 @@ const faqs = [
         <div class="relative group">
           <div class="absolute -inset-1 bg-gradient-to-r from-brand-500/20 to-brand-600/20 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
           <div class="relative bg-navy-800 border border-white/10 rounded-2xl shadow-2xl overflow-hidden aspect-[16/10]">
-             <img src="/dashboard_mockup.png" alt="Aethelgard Dashboard Mockup" class="w-full h-full object-cover">
+             <img src="/screenshots/wealth-summary.png" alt="Aethelgard — Consolidated Wealth Summary" class="w-full h-full object-cover">
           </div>
         </div>
       </div>
@@ -217,26 +217,82 @@ const faqs = [
     </div>
   </section>
 
-  <!-- ── Demo Video ────────────────────────────────────────────────────────── -->
+  <!-- ── Demo Slideshow ────────────────────────────────────────────────────── -->
   <section id=”demo” class=”py-24 px-6 bg-neutral-50”>
     <div class=”max-w-6xl mx-auto”>
       <div class=”text-center mb-16”>
         <p class=”section-label mb-3”>See It In Action</p>
-        <h2 class=”text-4xl font-black tracking-tighter text-neutral-900”>Three things most tools<br class=”hidden md:block” /> can't do. Aethelgard can.</h2>
+        <h2 class=”text-4xl font-black tracking-tighter text-neutral-900”>Built for complexity.<br class=”hidden md:block” /> Designed for clarity.</h2>
       </div>
 
-      <!-- Video embed (shown only when DEMO_VIDEO_URL is set) -->
-      {DEMO_VIDEO_URL && (
-        <div class=”relative rounded-2xl overflow-hidden shadow-2xl border border-neutral-200 aspect-video mb-16”>
-          <iframe
-            src={DEMO_VIDEO_URL}
-            class=”absolute inset-0 w-full h-full”
-            allow=”autoplay; fullscreen; picture-in-picture”
-            allowfullscreen
-            title=”Aethelgard product demo”
-          />
+      <!-- Screenshot slideshow -->
+      <div class=”relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 aspect-[16/10] mb-16 bg-navy-900” id=”demo-reel”>
+        <!-- Slides -->
+        <div class=”demo-slide absolute inset-0” data-slide=”0”>
+          <img src=”/screenshots/spreadsheet-chaos.png” alt=”Spreadsheet chaos” class=”w-full h-full object-cover” />
+          <div class=”absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent”></div>
+          <div class=”absolute bottom-0 left-0 right-0 p-8 md:p-10”>
+            <p class=”text-brand-400 text-xs font-black uppercase tracking-widest mb-2”>The problem</p>
+            <h3 class=”text-white font-black text-xl md:text-2xl tracking-tight leading-snug”>Most wealth maps are fragments.</h3>
+            <p class=”text-white/60 text-sm mt-2 max-w-lg”>Statements, spreadsheets, property deeds, advisor portals — each one a silo. No single source of truth.</p>
+          </div>
         </div>
-      )}
+        <div class=”demo-slide absolute inset-0 opacity-0” data-slide=”1”>
+          <img src=”/screenshots/entity-management.png” alt=”Entity management” class=”w-full h-full object-cover” />
+          <div class=”absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent”></div>
+          <div class=”absolute bottom-0 left-0 right-0 p-8 md:p-10”>
+            <p class=”text-brand-400 text-xs font-black uppercase tracking-widest mb-2”>Multi-entity</p>
+            <h3 class=”text-white font-black text-xl md:text-2xl tracking-tight leading-snug”>Every entity, in one vault.</h3>
+            <p class=”text-white/60 text-sm mt-2 max-w-lg”>UK Ltd, personal estate, overseas holding — each with its own jurisdiction, currency, and chart of accounts. Set up in seconds.</p>
+          </div>
+        </div>
+        <div class=”demo-slide absolute inset-0 opacity-0” data-slide=”2”>
+          <img src=”/screenshots/universal-vault.png” alt=”Universal Vault import” class=”w-full h-full object-cover” />
+          <div class=”absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent”></div>
+          <div class=”absolute bottom-0 left-0 right-0 p-8 md:p-10”>
+            <p class=”text-brand-400 text-xs font-black uppercase tracking-widest mb-2”>Import</p>
+            <h3 class=”text-white font-black text-xl md:text-2xl tracking-tight leading-snug”>Drop in a bank statement.</h3>
+            <p class=”text-white/60 text-sm mt-2 max-w-lg”>The categorisation engine reads transaction descriptions and assigns accounts automatically. No manual mapping.</p>
+          </div>
+        </div>
+        <div class=”demo-slide absolute inset-0 opacity-0” data-slide=”3”>
+          <img src=”/screenshots/portfolio-analytics.png” alt=”Portfolio analytics and illiquid revaluations” class=”w-full h-full object-cover” />
+          <div class=”absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent”></div>
+          <div class=”absolute bottom-0 left-0 right-0 p-8 md:p-10”>
+            <p class=”text-brand-400 text-xs font-black uppercase tracking-widest mb-2”>Illiquid assets</p>
+            <h3 class=”text-white font-black text-xl md:text-2xl tracking-tight leading-snug”>Revalue what markets don't price.</h3>
+            <p class=”text-white/60 text-sm mt-2 max-w-lg”>Property, private equity, carried interest — revalue to fair value with IFRS accounting applied automatically.</p>
+          </div>
+        </div>
+        <div class=”demo-slide absolute inset-0 opacity-0” data-slide=”4”>
+          <img src=”/screenshots/wealth-summary.png” alt=”Consolidated wealth summary” class=”w-full h-full object-cover” />
+          <div class=”absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent”></div>
+          <div class=”absolute bottom-0 left-0 right-0 p-8 md:p-10”>
+            <p class=”text-brand-400 text-xs font-black uppercase tracking-widest mb-2”>Consolidated view</p>
+            <h3 class=”text-white font-black text-xl md:text-2xl tracking-tight leading-snug”>One number. Every entity.</h3>
+            <p class=”text-white/60 text-sm mt-2 max-w-lg”>Multi-currency equity roll-forward, reconciled across all entities and tax years. Your complete financial picture.</p>
+          </div>
+        </div>
+        <div class=”demo-slide absolute inset-0 opacity-0” data-slide=”5”>
+          <img src=”/screenshots/integrity-dashboard.png” alt=”Integrity dashboard” class=”w-full h-full object-cover” />
+          <div class=”absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent”></div>
+          <div class=”absolute bottom-0 left-0 right-0 p-8 md:p-10”>
+            <p class=”text-brand-400 text-xs font-black uppercase tracking-widest mb-2”>Trust</p>
+            <h3 class=”text-white font-black text-xl md:text-2xl tracking-tight leading-snug”>Every entry cryptographically chained.</h3>
+            <p class=”text-white/60 text-sm mt-2 max-w-lg”>SHA-256 hash chain — any change to any historical record is immediately detectable. One click to verify your entire history.</p>
+          </div>
+        </div>
+
+        <!-- Navigation dots -->
+        <div class=”absolute bottom-4 right-6 flex items-center gap-2” id=”demo-dots”>
+          <button class=”demo-dot w-2 h-2 rounded-full bg-white transition-opacity” data-dot=”0”></button>
+          <button class=”demo-dot w-2 h-2 rounded-full bg-white/40 transition-opacity” data-dot=”1”></button>
+          <button class=”demo-dot w-2 h-2 rounded-full bg-white/40 transition-opacity” data-dot=”2”></button>
+          <button class=”demo-dot w-2 h-2 rounded-full bg-white/40 transition-opacity” data-dot=”3”></button>
+          <button class=”demo-dot w-2 h-2 rounded-full bg-white/40 transition-opacity” data-dot=”4”></button>
+          <button class=”demo-dot w-2 h-2 rounded-full bg-white/40 transition-opacity” data-dot=”5”></button>
+        </div>
+      </div>
 
       <!-- Three annotated feature cards -->
       <div class=”grid md:grid-cols-3 gap-8”>
@@ -245,7 +301,7 @@ const faqs = [
             <svg class=”w-5 h-5” fill=”none” stroke=”currentColor” stroke-width=”2” viewBox=”0 0 24 24”><path stroke-linecap=”round” stroke-linejoin=”round” d=”M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1”/></svg>
           </div>
           <h3 class=”font-black text-neutral-900 text-lg tracking-tight mb-3”>Tamper-Evident Records</h3>
-          <p class=”text-sm text-neutral-500 leading-relaxed”>Every journal entry is SHA-256 hash-chained on your device. Any change to any historical record is immediately detectable — creating a permanent, court-admissible audit trail without any extra steps.</p>
+          <p class=”text-sm text-neutral-500 leading-relaxed”>Every journal entry is SHA-256 hash-chained on your device. Any change to any historical record is immediately detectable — a permanent, verifiable audit trail.</p>
         </div>
         <div class=”bg-white rounded-2xl p-8 border border-neutral-200 shadow-sm hover:shadow-md transition-shadow”>
           <div class=”w-11 h-11 rounded-xl bg-navy-900 flex items-center justify-center mb-6 text-brand-400”>
@@ -259,13 +315,9 @@ const faqs = [
             <svg class=”w-5 h-5” fill=”none” stroke=”currentColor” stroke-width=”2” viewBox=”0 0 24 24”><path stroke-linecap=”round” stroke-linejoin=”round” d=”M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z”/></svg>
           </div>
           <h3 class=”font-black text-neutral-900 text-lg tracking-tight mb-3”>Illiquid Asset Revaluations</h3>
-          <p class=”text-sm text-neutral-500 leading-relaxed”>Property, private equity, carried interest, alternatives — revalue to fair value with IFRS accounting applied automatically. The correct journal entries are generated for you; balance sheet updates in real time.</p>
+          <p class=”text-sm text-neutral-500 leading-relaxed”>Property, private equity, carried interest, alternatives — revalue to fair value with IFRS accounting applied automatically. Balance sheet and net worth update in real time.</p>
         </div>
       </div>
-
-      {!DEMO_VIDEO_URL && (
-        <p class=”text-center text-xs text-neutral-400 font-medium uppercase tracking-widest mt-10”>Demo video coming soon</p>
-      )}
     </div>
   </section>
 
@@ -984,6 +1036,41 @@ const faqs = [
       }
     });
   }
+</script>
+
+<script is:inline>
+  (function () {
+    var slides = document.querySelectorAll('.demo-slide');
+    var dots   = document.querySelectorAll('.demo-dot');
+    var current = 0;
+    var total   = slides.length;
+    var INTERVAL = 7000;
+    var FADE     = 700; // ms — matches CSS transition below
+
+    function goTo(n) {
+      slides[current].style.opacity = '0';
+      dots[current].style.opacity   = '0.4';
+      current = (n + total) % total;
+      slides[current].style.opacity = '1';
+      dots[current].style.opacity   = '1';
+    }
+
+    // Apply CSS transition to all slides
+    slides.forEach(function (s) {
+      s.style.transition = 'opacity ' + (FADE / 1000) + 's ease-in-out';
+    });
+
+    // Dot click handlers
+    dots.forEach(function (d) {
+      d.addEventListener('click', function () {
+        clearInterval(timer);
+        goTo(parseInt(d.getAttribute('data-dot')));
+        timer = setInterval(function () { goTo(current + 1); }, INTERVAL);
+      });
+    });
+
+    var timer = setInterval(function () { goTo(current + 1); }, INTERVAL);
+  })();
 </script>
 
 </html>
