@@ -227,7 +227,69 @@ const faqs = [
       </div>
 
       <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 aspect-[16/10] mb-16 bg-navy-900" id="demo-reel">
-        <iframe src="/demo_presentation.html" class="w-full h-full border-none pointer-events-none" title="Aethelgard Demo"></iframe>
+
+        <div class="demo-slide absolute inset-0" data-slide="0">
+          <img src="/screenshots/spreadsheet-chaos.png" alt="Spreadsheet chaos" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10">
+            <p class="text-brand-400 text-xs font-black uppercase tracking-widest mb-2">The problem</p>
+            <h3 class="text-white font-black text-xl md:text-2xl tracking-tight leading-snug">Most wealth maps are fragments.</h3>
+            <p class="text-white/60 text-sm mt-2 max-w-lg">Statements, spreadsheets, property deeds, advisor portals — each one a silo. No single source of truth.</p>
+          </div>
+        </div>
+        <div class="demo-slide absolute inset-0 opacity-0" data-slide="1">
+          <img src="/screenshots/entity-management.png" alt="Entity management" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10">
+            <p class="text-brand-400 text-xs font-black uppercase tracking-widest mb-2">Multi-entity</p>
+            <h3 class="text-white font-black text-xl md:text-2xl tracking-tight leading-snug">Every entity, in one vault.</h3>
+            <p class="text-white/60 text-sm mt-2 max-w-lg">UK Ltd, personal estate, overseas holding — each with its own jurisdiction, currency, and chart of accounts. Set up in seconds.</p>
+          </div>
+        </div>
+        <div class="demo-slide absolute inset-0 opacity-0" data-slide="2">
+          <img src="/screenshots/universal-vault.png" alt="Universal Vault import" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10">
+            <p class="text-brand-400 text-xs font-black uppercase tracking-widest mb-2">Import</p>
+            <h3 class="text-white font-black text-xl md:text-2xl tracking-tight leading-snug">Drop in a bank statement.</h3>
+            <p class="text-white/60 text-sm mt-2 max-w-lg">The categorisation engine reads transaction descriptions and assigns accounts automatically. No manual mapping.</p>
+          </div>
+        </div>
+        <div class="demo-slide absolute inset-0 opacity-0" data-slide="3">
+          <img src="/screenshots/portfolio-analytics.png" alt="Portfolio analytics" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10">
+            <p class="text-brand-400 text-xs font-black uppercase tracking-widest mb-2">Illiquid assets</p>
+            <h3 class="text-white font-black text-xl md:text-2xl tracking-tight leading-snug">Revalue what markets don't price.</h3>
+            <p class="text-white/60 text-sm mt-2 max-w-lg">Property, private equity, carried interest — revalue to fair value with IFRS accounting applied automatically.</p>
+          </div>
+        </div>
+        <div class="demo-slide absolute inset-0 opacity-0" data-slide="4">
+          <img src="/screenshots/wealth-summary.png" alt="Consolidated wealth summary" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10">
+            <p class="text-brand-400 text-xs font-black uppercase tracking-widest mb-2">Consolidated view</p>
+            <h3 class="text-white font-black text-xl md:text-2xl tracking-tight leading-snug">One number. Every entity.</h3>
+            <p class="text-white/60 text-sm mt-2 max-w-lg">Multi-currency equity roll-forward, reconciled across all entities and tax years. Your complete financial picture.</p>
+          </div>
+        </div>
+        <div class="demo-slide absolute inset-0 opacity-0" data-slide="5">
+          <img src="/screenshots/integrity-dashboard.png" alt="Integrity dashboard" class="w-full h-full object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-8 md:p-10">
+            <p class="text-brand-400 text-xs font-black uppercase tracking-widest mb-2">Trust</p>
+            <h3 class="text-white font-black text-xl md:text-2xl tracking-tight leading-snug">Every entry cryptographically chained.</h3>
+            <p class="text-white/60 text-sm mt-2 max-w-lg">SHA-256 hash chain — any change to any historical record is immediately detectable. One click to verify your entire history.</p>
+          </div>
+        </div>
+        <div class="absolute bottom-4 right-6 flex items-center gap-2" id="demo-dots">
+          <button class="demo-dot w-2 h-2 rounded-full bg-white" data-dot="0"></button>
+          <button class="demo-dot w-2 h-2 rounded-full bg-white/40" data-dot="1"></button>
+          <button class="demo-dot w-2 h-2 rounded-full bg-white/40" data-dot="2"></button>
+          <button class="demo-dot w-2 h-2 rounded-full bg-white/40" data-dot="3"></button>
+          <button class="demo-dot w-2 h-2 rounded-full bg-white/40" data-dot="4"></button>
+          <button class="demo-dot w-2 h-2 rounded-full bg-white/40" data-dot="5"></button>
+        </div>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
