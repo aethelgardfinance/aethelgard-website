@@ -4,63 +4,165 @@ import '../styles/global.css';
 const steps = [
   {
     number: '01',
-    title: 'First Vault Setup',
+    icon: '🔐',
+    title: 'Create Your Vault',
+    subtitle: 'Your vault is an AES-256 encrypted file on your device. It never leaves your machine.',
     items: [
-      'Open the application to begin setting up your first vault.',
+      'Open the application — you will be taken directly to vault setup on first launch.',
       'Click <strong>Create New Vault</strong>.',
-      'Enter a secure PIN when prompted and confirm it. This PIN unlocks your vault on every launch — store it somewhere safe.',
-      'Once inside, navigate to the <strong>Entities</strong> section.',
-      'Click <strong>Add Entity</strong> and provide the basic details for your first business or personal entity.',
-      'Save the entity to complete your initial setup.',
+      'Choose a secure PIN when prompted and confirm it. This PIN unlocks your vault every time you launch — store it somewhere safe offline.',
+      'Once inside, navigate to the <strong>Entities</strong> section in the sidebar.',
+      'Click <strong>Add Entity</strong> and fill in the basic details for your first entity — company, trust, personal account, or other structure.',
+      'Save the entity to complete initial setup.',
     ],
+    tip: {
+      icon: '⚠️',
+      style: 'warn',
+      text: 'There is no PIN recovery mechanism. If you lose your PIN, the vault cannot be opened. Write it down and store it securely offline — a password manager or physical safe.',
+    },
+    outcome: 'You have an encrypted vault with your first entity. Every transaction you record from here will be automatically SHA-256 hash-chained.',
+    featureCallout: {
+      icon: '🔗',
+      title: 'Tamper-Evident Records — Active from Your First Entry',
+      text: 'The moment you record your first transaction, Aethelgard begins building a cryptographic hash chain. Each entry links to the previous via SHA-256. If any historical record is ever altered, the chain breaks at that point — making tampering immediately visible.',
+    },
   },
   {
     number: '02',
-    title: 'Recording a Transaction',
+    icon: '📒',
+    title: 'Record a Transaction',
+    subtitle: 'Double-entry accounting — every debit has a matching credit, and every entry is balanced.',
     items: [
-      'Navigate to the <strong>Transactions</strong> or <strong>Ledger</strong> tab from the main menu.',
+      'Navigate to the <strong>Transactions</strong> or <strong>Ledger</strong> tab from the main sidebar.',
       'Click <strong>New Transaction</strong> or the <strong>+</strong> button.',
       'Select the date and enter a description.',
-      'Pick the appropriate debit and credit accounts from the dropdowns.',
-      'Enter the transaction amount.',
-      'Click <strong>Save</strong> to record the transaction.',
+      'Choose the <strong>debit account</strong> from the dropdown — this is what increases (e.g. an expense account, or an asset account).',
+      'Choose the <strong>credit account</strong> — this is what decreases or what the debit is funded by (e.g. a bank account).',
+      'Enter the amount. The entry must balance before it can be saved.',
+      'Click <strong>Save</strong> to post the transaction to the ledger.',
     ],
+    tip: {
+      icon: '💡',
+      style: 'info',
+      text: 'You can import bank transactions in bulk via the <strong>Universal Vault</strong> importer — drag in a CSV from Barclays, HSBC, Amex, or other supported banks and the rule engine will categorise entries automatically.',
+    },
+    outcome: 'Your first transaction is recorded and hash-chained. The P&L and Balance Sheet will reflect it immediately.',
   },
   {
     number: '03',
-    title: 'Running a P&L and Balance Sheet',
+    icon: '📊',
+    title: 'Revalue an Illiquid Asset',
+    subtitle: 'Property, private equity, carried interest, and alternatives — update carrying values when appraisals or NAV statements arrive.',
     items: [
-      'Go to the <strong>Reports</strong> section in the navigation panel.',
-      'Select the report you want: <strong>Profit & Loss</strong> or <strong>Balance Sheet</strong>.',
-      'Use the filter bar to select the <strong>Entity</strong> you want to report on.',
-      'Adjust the <strong>Period</strong> filter to set your date range (e.g. Year to Date, Last Quarter).',
-      'The report generates automatically based on your selection.',
+      'Navigate to the <strong>Asset Register</strong> in the sidebar.',
+      'Locate the illiquid holding you want to revalue — a property, a fund stake, or other alternative asset.',
+      'Click <strong>Revalue</strong> on that asset record.',
+      'Enter the new fair value and the effective date (typically your quarter-end or the date of your appraisal).',
+      'Add the basis for the revaluation — e.g. "Savills residential survey, Q1 2026" or "Fund NAV statement, March 2026".',
+      'Click <strong>Preview</strong> to review the auto-generated journal entries before posting.',
+      'Click <strong>Post</strong> to record the revaluation.',
     ],
+    tip: {
+      icon: '📋',
+      style: 'info',
+      text: '<strong>IFRS accounting is applied automatically.</strong> Investment property revaluations flow through Other Comprehensive Income (revaluation reserve), not profit and loss. The correct treatment is selected based on how the asset is classified in your Chart of Accounts.',
+    },
+    outcome: 'The asset\'s carrying value is updated. The Balance Sheet, Wealth Summary, and consolidated net worth all reflect the new value immediately.',
+    featureCallout: {
+      icon: '📊',
+      title: 'Illiquid Asset Revaluations — What This Covers',
+      text: 'Residential and commercial property, private equity fund stakes, carried interest entitlements, wine and art collections, structured notes, and any other asset tracked at fair value rather than cost. Use the revaluation workflow whenever a new appraisal, fund statement, or market event changes the carrying value.',
+    },
   },
   {
     number: '04',
-    title: 'WebDAV Backup Setup',
+    icon: '📈',
+    title: 'Run a P&L and Balance Sheet',
+    subtitle: 'IFRS-grade reports that consolidate across all your entities and currencies.',
     items: [
-      'Go to <strong>Settings</strong> from the main navigation.',
-      'Find the <strong>Backup</strong> or <strong>Sync & Backup</strong> tab.',
-      'Select the option to configure a WebDAV connection.',
-      'Enter your WebDAV server URL, username, and password.',
-      'Save the connection details.',
-      'Click <strong>Backup Now</strong> to trigger a manual encrypted backup.',
+      'Go to the <strong>Reports</strong> section in the sidebar.',
+      'Select the report you want: <strong>Profit & Loss</strong> or <strong>Balance Sheet</strong>.',
+      'Use the <strong>Entity</strong> filter to select a single entity — or choose <strong>All Entities</strong> for a consolidated view.',
+      'Set the <strong>Period</strong> filter to your required date range — Year to Date, Last Quarter, or a custom range.',
+      'The report generates automatically. FX conversion to your reporting currency is applied in real time.',
+      'Use the <strong>Export</strong> button to save as PDF or CSV for advisors, accountants, or your own records.',
     ],
+    tip: {
+      icon: '💡',
+      style: 'info',
+      text: 'The <strong>Wealth Summary</strong> tab in Reporting shows your multi-year equity roll-forward — opening net worth, net movement, and closing value across all entities and tax years. It\'s the single most useful view for understanding the trajectory of consolidated wealth.',
+    },
+    outcome: 'You have a complete, formatted financial report. The same data is available for every entity, consolidated or individual, for any period.',
   },
   {
     number: '05',
-    title: 'Activating a License Key',
+    icon: '☁️',
+    title: 'Set Up WebDAV Backup',
+    subtitle: 'Optional encrypted backup to your own infrastructure — Nextcloud, NAS, or any WebDAV-compatible storage.',
+    items: [
+      'Go to <strong>Settings</strong> from the main navigation.',
+      'Open the <strong>Backup</strong> or <strong>Sync & Backup</strong> tab.',
+      'Click <strong>Configure WebDAV</strong>.',
+      'Enter your WebDAV server URL, username, and password.',
+      'Save the connection and click <strong>Test Connection</strong> to verify.',
+      'Click <strong>Backup Now</strong> to trigger your first encrypted backup.',
+    ],
+    tip: {
+      icon: '🔒',
+      style: 'success',
+      text: 'Your vault is <strong>encrypted before it leaves your machine</strong> — AES-256-GCM with an Argon2id-derived key. Even if your backup destination is compromised, the vault file cannot be read without your PIN.',
+    },
+    outcome: 'Your vault is backed up to infrastructure you control. Aethelgard makes no other network calls — this is the only optional network activity in the entire application.',
+    featureCallout: {
+      icon: '📡',
+      title: 'Fully Offline Operation',
+      text: 'Aethelgard makes zero background network calls. No telemetry, no crash reporting, no analytics, no sync unless you configure it here. If you never set up WebDAV, the app never touches the network. Your financial data stays entirely on your device.',
+    },
+  },
+  {
+    number: '06',
+    icon: '🔑',
+    title: 'Activate Your Licence Key',
+    subtitle: 'Delivered by email after purchase. Validated on-device — no internet required.',
     items: [
       'Navigate to <strong>Settings</strong>.',
-      'Go to the <strong>Vault</strong> tab and scroll to the <strong>License</strong> section.',
-      'Paste your license key into the field and click <strong>Activate</strong>.',
-      'The key is validated instantly on your device — no internet connection required.',
-      'A confirmation message appears and your tier features are unlocked immediately.',
+      'Open the <strong>Vault</strong> tab and scroll to the <strong>Licence</strong> section.',
+      'Paste your licence key into the field and click <strong>Activate</strong>.',
+      'The key is validated instantly on your device — no internet connection required for activation.',
+      'A confirmation message appears and your tier features unlock immediately.',
     ],
+    tip: {
+      icon: '📧',
+      style: 'info',
+      text: 'Your key was delivered to the email address you used at checkout. Check your spam folder if you don\'t see it within a few minutes. Contact <a href="mailto:contact@aethelgard.finance" class="underline underline-offset-2">contact@aethelgard.finance</a> if you need it resent.',
+    },
+    outcome: 'Your licence is active. The 30-day trial period ends and your tier features remain unlocked permanently (Lifetime) or until renewal (Annual).',
   },
 ];
+
+const tipStyles = {
+  warn: {
+    border: 'border-l-4 border-amber-400',
+    bg: 'bg-amber-50',
+    iconBg: 'bg-amber-100',
+    text: 'text-amber-900',
+    label: 'text-amber-700',
+  },
+  info: {
+    border: 'border-l-4 border-blue-400',
+    bg: 'bg-blue-50',
+    iconBg: 'bg-blue-100',
+    text: 'text-blue-900',
+    label: 'text-blue-700',
+  },
+  success: {
+    border: 'border-l-4 border-emerald-400',
+    bg: 'bg-emerald-50',
+    iconBg: 'bg-emerald-100',
+    text: 'text-emerald-900',
+    label: 'text-emerald-700',
+  },
+};
 ---
 
 <!doctype html>
@@ -69,7 +171,7 @@ const steps = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quick Start Guide — Aethelgard</title>
-    <meta name="description" content="Get up and running with Aethelgard in five steps." />
+    <meta name="description" content="Six steps to a working ledger — vault setup, transactions, illiquid asset revaluations, reports, backups, and licence activation." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body class="bg-white text-neutral-900 font-sans antialiased">
@@ -77,72 +179,177 @@ const steps = [
     <!-- Nav -->
     <nav class="sticky top-0 z-50 bg-navy-900 border-b border-white/5">
       <div class="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
-        <a href="/" class="text-white font-black tracking-tight text-lg">
-          Aethelgard
-        </a>
-        <a href="/#pricing" class="text-sm font-semibold text-white/60 hover:text-white transition-colors">
-          Pricing →
-        </a>
+        <a href="/" class="text-white font-black tracking-tight text-lg uppercase italic">Aethelgard</a>
+        <div class="flex items-center gap-6">
+          <a href="/#pricing" class="text-sm font-semibold text-white/50 hover:text-white transition-colors hidden sm:block">Pricing</a>
+          <a href="/#early-access" class="text-sm font-semibold text-brand-400 hover:text-brand-300 transition-colors hidden sm:block">Design Partners</a>
+        </div>
       </div>
     </nav>
 
     <!-- Header -->
-    <header class="bg-navy-900 py-16 px-6">
+    <header class="bg-navy-900 py-16 px-6 border-b border-white/5">
       <div class="max-w-4xl mx-auto">
+        <div class="flex items-center gap-2 text-white/30 text-xs font-bold uppercase tracking-widest mb-4">
+          <a href="/" class="hover:text-white/60 transition-colors">Home</a>
+          <span>/</span>
+          <span class="text-white/60">Documentation</span>
+        </div>
         <p class="section-label mb-3">Documentation</p>
         <h1 class="text-4xl font-black tracking-tighter text-white mb-4">Quick Start Guide</h1>
-        <p class="text-white/50 text-lg max-w-xl">
-          Five workflows to get from first launch to a working ledger.
+        <p class="text-white/50 text-lg max-w-xl mb-10">
+          Six workflows to get from first launch to a working ledger — including illiquid asset revaluations, tamper-evident records, and encrypted backups.
         </p>
+
+        <!-- Three key features -->
+        <div class="grid sm:grid-cols-3 gap-3">
+          <div class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 flex items-start gap-3">
+            <span class="text-xl shrink-0 mt-0.5">🔗</span>
+            <div>
+              <p class="text-white text-xs font-black uppercase tracking-wide">Tamper-Evident</p>
+              <p class="text-white/40 text-xs mt-0.5">SHA-256 hash chain from your first entry</p>
+            </div>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 flex items-start gap-3">
+            <span class="text-xl shrink-0 mt-0.5">📡</span>
+            <div>
+              <p class="text-white text-xs font-black uppercase tracking-wide">Fully Offline</p>
+              <p class="text-white/40 text-xs mt-0.5">No network calls — your device only</p>
+            </div>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 flex items-start gap-3">
+            <span class="text-xl shrink-0 mt-0.5">📊</span>
+            <div>
+              <p class="text-white text-xs font-black uppercase tracking-wide">Illiquid Revaluations</p>
+              <p class="text-white/40 text-xs mt-0.5">Property, PE, alternatives — IFRS-correct</p>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
 
+    <!-- Step navigation (jump links) -->
+    <div class="bg-neutral-50 border-b border-neutral-200 sticky top-14 z-40">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="flex items-center gap-1 overflow-x-auto py-3 scrollbar-none">
+          {steps.map(step => (
+            <a
+              href={`#step-${step.number}`}
+              class="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-neutral-500 hover:text-neutral-900 hover:bg-white transition-colors whitespace-nowrap"
+            >
+              <span class="w-4 h-4 rounded-full bg-neutral-200 text-neutral-600 text-[9px] font-black flex items-center justify-center leading-none">
+                {parseInt(step.number)}
+              </span>
+              {step.title}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+
     <!-- Steps -->
     <main class="max-w-4xl mx-auto px-6 py-16">
-      <div class="space-y-16">
-        {steps.map(step => (
-          <section class="grid md:grid-cols-[80px_1fr] gap-6">
-            <div class="text-5xl font-black text-neutral-100 leading-none pt-1">
-              {step.number}
-            </div>
-            <div>
-              <h2 class="text-2xl font-black tracking-tight text-neutral-900 mb-6">
-                {step.title}
-              </h2>
-              <ol class="space-y-3">
+      <div class="space-y-20">
+        {steps.map(step => {
+          const ts = tipStyles[step.tip?.style ?? 'info'];
+          return (
+            <section id={`step-${step.number}`} class="scroll-mt-28">
+
+              <!-- Step header -->
+              <div class="flex items-start gap-5 mb-8">
+                <div class="shrink-0 w-14 h-14 rounded-2xl bg-navy-900 flex items-center justify-center shadow-sm">
+                  <span class="text-2xl">{step.icon}</span>
+                </div>
+                <div class="flex-1 pt-1">
+                  <div class="flex items-center gap-3 mb-1">
+                    <span class="text-xs font-black text-neutral-300 uppercase tracking-widest">Step {step.number}</span>
+                  </div>
+                  <h2 class="text-2xl font-black tracking-tight text-neutral-900">{step.title}</h2>
+                  <p class="text-sm text-neutral-500 mt-1 leading-relaxed">{step.subtitle}</p>
+                </div>
+              </div>
+
+              <!-- Numbered items -->
+              <ol class="space-y-3 mb-6 ml-19">
                 {step.items.map((item, i) => (
-                  <li class="flex gap-4 text-neutral-600 leading-relaxed">
-                    <span class="shrink-0 w-6 h-6 rounded-full bg-neutral-100 text-neutral-400 text-xs font-bold flex items-center justify-center mt-0.5">
+                  <li class="flex gap-4 text-neutral-700 leading-relaxed">
+                    <span class="shrink-0 w-6 h-6 rounded-full bg-neutral-100 text-neutral-500 text-xs font-bold flex items-center justify-center mt-0.5 border border-neutral-200">
                       {i + 1}
                     </span>
-                    <span set:html={item} />
+                    <span class="text-sm" set:html={item} />
                   </li>
                 ))}
               </ol>
-            </div>
-          </section>
-        ))}
+
+              <!-- Tip / warning callout -->
+              {step.tip && (
+                <div class={`${ts.bg} ${ts.border} rounded-r-xl px-5 py-4 mb-6 ml-19 flex gap-3`}>
+                  <span class="text-lg shrink-0 mt-0.5">{step.tip.icon}</span>
+                  <p class={`text-sm ${ts.text} leading-relaxed`} set:html={step.tip.text} />
+                </div>
+              )}
+
+              <!-- Outcome / what you now have -->
+              <div class="bg-neutral-900 rounded-xl px-5 py-4 ml-19 flex items-start gap-3">
+                <span class="text-emerald-400 font-black text-sm shrink-0 mt-0.5">✓</span>
+                <p class="text-sm text-white/70 leading-relaxed">{step.outcome}</p>
+              </div>
+
+              <!-- Feature callout (where applicable) -->
+              {step.featureCallout && (
+                <div class="mt-6 ml-19 bg-brand-50/50 border border-brand-200/60 rounded-2xl p-5">
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="text-lg">{step.featureCallout.icon}</span>
+                    <p class="text-xs font-black text-brand-700 uppercase tracking-wider">{step.featureCallout.title}</p>
+                  </div>
+                  <p class="text-sm text-neutral-600 leading-relaxed">{step.featureCallout.text}</p>
+                </div>
+              )}
+
+            </section>
+          );
+        })}
+      </div>
+
+      <!-- Integrity verification — standalone callout -->
+      <div class="mt-20 bg-navy-900 rounded-2xl p-8">
+        <div class="flex items-start gap-4">
+          <span class="text-3xl shrink-0">🔗</span>
+          <div>
+            <h3 class="font-black text-white text-lg mb-2">Verify Your Ledger Integrity at Any Time</h3>
+            <p class="text-white/50 text-sm leading-relaxed mb-4">Navigate to <strong class="text-white/80">Settings → Integrity Dashboard</strong> to run a full hash-chain verification across your entire transaction history. Every entry is checked against its predecessor — the result is a complete tamper-evidence certificate for your records.</p>
+            <p class="text-white/40 text-xs leading-relaxed">This is useful before sharing records with advisors, at period-end, or any time you want to confirm the integrity of your financial history. The verification runs entirely on-device.</p>
+          </div>
+        </div>
       </div>
 
       <!-- Bottom CTA -->
-      <div class="mt-20 pt-12 border-t border-neutral-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div class="mt-16 pt-12 border-t border-neutral-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div>
-          <p class="font-bold text-neutral-900 mb-1">Need your license key?</p>
-          <p class="text-sm text-neutral-500">Check the email you used at checkout. It was delivered automatically after purchase.</p>
+          <p class="font-bold text-neutral-900 mb-1">Need your licence key?</p>
+          <p class="text-sm text-neutral-500">Check the email you used at checkout — delivered automatically after purchase within a few minutes.</p>
+          <p class="text-sm text-neutral-400 mt-1">Not finding it? <a href="mailto:contact@aethelgard.finance" class="text-brand-500 hover:text-brand-600 font-semibold transition-colors">contact@aethelgard.finance</a></p>
         </div>
-        <a href="/#pricing" class="btn-primary shrink-0">
-          View pricing
-        </a>
+        <a href="/#pricing" class="btn-primary shrink-0">View pricing</a>
       </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-navy-900 py-8 px-6 mt-16">
+    <footer class="bg-navy-900 py-8 px-6 mt-8">
       <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-white/30 text-xs">
-        <span>© 2026 Aethelgard. All rights reserved.</span>
-        <a href="/" class="hover:text-white/60 transition-colors">← Back to home</a>
+        <span>© {new Date().getFullYear()} Aethelgard. All rights reserved.</span>
+        <div class="flex items-center gap-6">
+          <a href="/" class="hover:text-white/60 transition-colors">← Back to home</a>
+          <a href="/#demo" class="hover:text-white/60 transition-colors">Watch demo</a>
+          <a href="/privacy" class="hover:text-white/60 transition-colors">Privacy</a>
+        </div>
       </div>
     </footer>
+
+    <style>
+      .ml-19 { margin-left: 4.75rem; }
+      @media (max-width: 640px) { .ml-19 { margin-left: 0; } }
+    </style>
 
   </body>
 </html>

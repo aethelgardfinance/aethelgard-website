@@ -16,6 +16,11 @@ const PRICES = {
 const DOWNLOAD_WIN = 'https://github.com/aethelgardfinance/aethelgard-releases/releases';
 const DOWNLOAD_MAC = null; // Set once Mac build is ready
 
+// Demo video — set to your Loom or YouTube embed URL once recorded.
+// Loom:    https://www.loom.com/embed/YOUR_VIDEO_ID?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true
+// YouTube: https://www.youtube.com/embed/YOUR_VIDEO_ID
+const DEMO_VIDEO_URL = null;
+
 const features = [
   {
     icon: '🗺',
@@ -122,9 +127,11 @@ const faqs = [
       </div>
       <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-white/60">
         <a href="#features"     class="hover:text-white transition-colors">Features</a>
+        <a href="#demo"         class="hover:text-white transition-colors">Demo</a>
         <a href="#pricing"      class="hover:text-white transition-colors">Pricing</a>
         <a href="#early-access" class="hover:text-white transition-colors text-brand-400">Early Access</a>
         <a href="#faq"          class="hover:text-white transition-colors">FAQ</a>
+        <a href="/about"        class="hover:text-white transition-colors">About</a>
       </div>
       <a href={DOWNLOAD_WIN} class="btn-primary text-sm py-2 px-4 js-win-download">
         Download
@@ -210,8 +217,62 @@ const faqs = [
     </div>
   </section>
 
+  <!-- ── Demo Video ────────────────────────────────────────────────────────── -->
+  <section id=”demo” class=”py-24 px-6 bg-white border-t border-neutral-100”>
+    <div class=”max-w-5xl mx-auto”>
+      <div class=”text-center mb-12”>
+        <p class=”section-label mb-3”>See It In Action</p>
+        <h2 class=”text-3xl font-black tracking-tighter text-neutral-900”>Watch the demo</h2>
+        <p class=”text-neutral-500 mt-3 max-w-xl mx-auto text-sm”>
+          Multi-entity consolidation, illiquid asset revaluations, and tamper-evident records — in under three minutes.
+        </p>
+      </div>
+
+      <!-- Video embed or placeholder. Set DEMO_VIDEO_URL at the top of this file to activate. -->
+      <div class=”relative rounded-2xl overflow-hidden shadow-xl border border-neutral-200 aspect-video bg-navy-900 flex items-center justify-center mb-10”>
+        {DEMO_VIDEO_URL ? (
+          <iframe
+            src={DEMO_VIDEO_URL}
+            class=”absolute inset-0 w-full h-full”
+            allow=”autoplay; fullscreen; picture-in-picture”
+            allowfullscreen
+            title=”Aethelgard product demo”
+          />
+        ) : (
+          <div class=”text-center”>
+            <div class=”w-20 h-20 rounded-full bg-brand-500/15 border border-brand-500/25 flex items-center justify-center mx-auto mb-4”>
+              <svg class=”w-8 h-8 text-brand-400 ml-1.5” fill=”currentColor” viewBox=”0 0 24 24” aria-hidden=”true”>
+                <path d=”M8 5v14l11-7z”/>
+              </svg>
+            </div>
+            <p class=”text-white/40 text-sm font-medium”>Demo video coming soon</p>
+          </div>
+        )}
+      </div>
+
+      <!-- Three annotated features beneath the video -->
+      <div class=”grid md:grid-cols-3 gap-6”>
+        <div class=”bg-neutral-50 border border-neutral-200 rounded-2xl p-6”>
+          <div class=”w-10 h-10 rounded-xl bg-navy-900 flex items-center justify-center mb-4 text-lg”>🔗</div>
+          <h3 class=”font-black text-neutral-900 text-sm uppercase tracking-wide mb-2”>Tamper-Evident Records</h3>
+          <p class=”text-sm text-neutral-500 leading-relaxed”>Every journal entry is SHA-256 hash-chained on your device. Any change to any historical record is immediately detectable — a permanent, verifiable audit trail.</p>
+        </div>
+        <div class=”bg-neutral-50 border border-neutral-200 rounded-2xl p-6”>
+          <div class=”w-10 h-10 rounded-xl bg-navy-900 flex items-center justify-center mb-4 text-lg”>📡</div>
+          <h3 class=”font-black text-neutral-900 text-sm uppercase tracking-wide mb-2”>Fully Offline</h3>
+          <p class=”text-sm text-neutral-500 leading-relaxed”>No background network calls, ever. Your vault is an AES-256 encrypted file on your machine. WebDAV backups are opt-in and encrypted before leaving the device.</p>
+        </div>
+        <div class=”bg-neutral-50 border border-neutral-200 rounded-2xl p-6”>
+          <div class=”w-10 h-10 rounded-xl bg-navy-900 flex items-center justify-center mb-4 text-lg”>📊</div>
+          <h3 class=”font-black text-neutral-900 text-sm uppercase tracking-wide mb-2”>Illiquid Asset Revaluations</h3>
+          <p class=”text-sm text-neutral-500 leading-relaxed”>Property, private equity, carried interest, and alternatives — revalue to fair value with the correct IFRS accounting applied automatically. Balance sheet and net worth update in real time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- â”€â”€ How local-first works â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
-  <section class="py-20 px-6 bg-navy-900">
+  <section class=”py-20 px-6 bg-navy-900”>
     <div class="max-w-5xl mx-auto">
       <div class="text-center mb-12">
         <p class="section-label mb-3 text-brand-400">How the privacy model works</p>
@@ -728,6 +789,7 @@ const faqs = [
         <a href={DOWNLOAD_WIN}      class="hover:text-white/60 transition-colors">Download</a>
         <a href="#pricing"          class="hover:text-white/60 transition-colors">Pricing</a>
         <a href="#faq"              class="hover:text-white/60 transition-colors">FAQ</a>
+        <a href="/about"            class="hover:text-white/60 transition-colors">About</a>
         <a href="/quick-start"      class="hover:text-white/60 transition-colors">Quick Start</a>
         <a href="/privacy"          class="hover:text-white/60 transition-colors">Privacy</a>
         <a href="/terms"            class="hover:text-white/60 transition-colors">Terms</a>

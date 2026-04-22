@@ -1,0 +1,335 @@
+---
+import '../styles/global.css';
+
+const DOWNLOAD_WIN = 'https://github.com/aethelgardfinance/aethelgard-releases/releases';
+
+const credentials = [
+  { label: 'Qualification', value: 'ACA · Registered Accountant, Koninklijke NBA' },
+  { label: 'Education',     value: 'MSc Economics, Erasmus University Rotterdam — First Class' },
+  { label: 'Experience',    value: '25+ years in finance, wealth management, and private client advisory' },
+  { label: 'Based in',      value: 'London, United Kingdom' },
+];
+
+const toolGaps = [
+  {
+    name: 'Consumer budgeting apps',
+    examples: 'YNAB, Copilot, Emma',
+    verdict: 'Wrong job',
+    body: 'Useful for tracking monthly expenses. Not designed for multi-entity wealth, multi-currency complexity, or IFRS-grade accounting. Not built to last decades.',
+  },
+  {
+    name: 'Cloud accounting tools',
+    examples: 'Xero, QuickBooks, FreeAgent',
+    verdict: 'Wrong scope',
+    body: 'Excellent for SME bookkeeping, invoicing, payroll. Not built for a private individual tracking a holding company, a property portfolio, and an ISA as a unified picture. Cloud-first by design — your complete financial life on someone else\'s server.',
+  },
+  {
+    name: 'Enterprise wealth platforms',
+    examples: 'Addepar, Dynamo, Masttro',
+    verdict: 'Wrong price',
+    body: 'These exist. They cost £50,000–£200,000 per year. Built for institutions, not individuals. They require professional implementation and a dedicated team to maintain.',
+  },
+];
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About — Aethelgard</title>
+    <meta name="description" content="Aethelgard was built by a registered accountant who spent twenty-five years failing to find the right tool for clients managing serious, complex wealth." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content="About Aethelgard" />
+    <meta property="og:description" content="Built by a registered accountant who spent twenty-five years failing to find the right tool." />
+    <meta property="og:url" content="https://aethelgard.finance/about" />
+    <meta property="og:type" content="website" />
+  </head>
+  <body class="bg-white text-neutral-900 font-sans antialiased">
+
+    <!-- Nav -->
+    <nav class="fixed top-0 inset-x-0 z-50 bg-navy-900/95 backdrop-blur-sm border-b border-white/5">
+      <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3">
+          <img src="/favicon.svg" alt="Aethelgard" class="h-7 w-7 rounded-lg shadow-lg" />
+          <span class="font-black text-white tracking-tighter uppercase italic text-lg">Aethelgard</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-white/60">
+          <a href="/#features"      class="hover:text-white transition-colors">Features</a>
+          <a href="/#demo"          class="hover:text-white transition-colors">Demo</a>
+          <a href="/#pricing"       class="hover:text-white transition-colors">Pricing</a>
+          <a href="/about"          class="text-white transition-colors">About</a>
+        </div>
+        <a href={DOWNLOAD_WIN} class="btn-primary text-sm py-2 px-4">
+          Download <span class="text-white/60 font-normal text-xs">Windows</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="bg-navy-900 pt-32 pb-20 px-6">
+      <div class="max-w-4xl mx-auto">
+        <p class="section-label mb-4">About</p>
+        <h1 class="text-5xl font-black tracking-tighter text-white leading-[1.05] mb-6">
+          Built by the person<br class="hidden md:block" />
+          who needed it most.
+        </h1>
+        <p class="text-xl text-white/50 max-w-2xl leading-relaxed">
+          Aethelgard was built by a registered accountant who spent twenty-five years telling clients the right tool didn't exist — and finally decided to build it.
+        </p>
+      </div>
+    </header>
+
+    <!-- Founder card -->
+    <section class="bg-neutral-50 border-b border-neutral-200 py-12 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="bg-white border border-neutral-200 rounded-2xl p-8 shadow-sm flex flex-col md:flex-row items-start md:items-center gap-8">
+          <div class="shrink-0 w-20 h-20 rounded-2xl bg-navy-900 flex items-center justify-center shadow-lg">
+            <span class="text-white font-black text-2xl tracking-tight">CC</span>
+          </div>
+          <div class="flex-1">
+            <h2 class="text-2xl font-black tracking-tight text-neutral-900 mb-1">Cherie Chin-A-Fo</h2>
+            <p class="text-neutral-500 text-sm mb-5">Founder, Aethelgard</p>
+            <div class="grid sm:grid-cols-2 gap-x-10 gap-y-2">
+              {credentials.map(c => (
+                <div class="flex flex-col">
+                  <span class="text-xs font-black uppercase tracking-widest text-neutral-400">{c.label}</span>
+                  <span class="text-sm text-neutral-700 mt-0.5">{c.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Founding story -->
+    <section class="py-20 px-6 bg-white">
+      <div class="max-w-3xl mx-auto">
+        <p class="section-label mb-4">The founding story</p>
+        <h2 class="text-3xl font-black tracking-tighter text-neutral-900 mb-8">
+          There's a conversation I've had dozens of times.
+        </h2>
+
+        <div class="prose-lg space-y-6 text-neutral-600 leading-relaxed">
+          <p>
+            A client arrives — sometimes with folders, sometimes with a number in their head — and when you ask them to walk through everything they own, precisely, there's a long pause. They know they own things. They just don't know — completely, and in one place — <em>what</em> those things are, what they're worth, and how they relate to each other.
+          </p>
+          <p>
+            That's not unusual. It's the normal state for founders and families managing real complexity: companies, property, pensions, investments in multiple currencies, carried interest, assets across jurisdictions that grew over time without a plan.
+          </p>
+          <p>
+            The problem isn't intelligence or effort. The problem is that no tool exists that's right for this use case. So people patch together spreadsheets, outsource the complexity to their accountant, and hope the gaps don't matter.
+          </p>
+          <p class="font-semibold text-neutral-900">They do matter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The gap in the market -->
+    <section class="py-20 px-6 bg-neutral-50 border-t border-neutral-100">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <p class="section-label mb-3">The tool gap</p>
+          <h2 class="text-3xl font-black tracking-tighter text-neutral-900">
+            The right tool didn't exist. Still doesn't — except here.
+          </h2>
+          <p class="text-neutral-500 mt-4 max-w-xl mx-auto">
+            When clients asked what they should use to manage this complexity, there were only three answers. None of them were right.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          {toolGaps.map(tool => (
+            <div class="bg-white border border-neutral-200 rounded-2xl p-6 flex flex-col">
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div>
+                  <h3 class="font-black text-neutral-900 text-base">{tool.name}</h3>
+                  <p class="text-xs text-neutral-400 mt-0.5">{tool.examples}</p>
+                </div>
+                <span class="shrink-0 text-xs font-black uppercase tracking-widest text-red-500 bg-red-50 px-2 py-1 rounded-lg border border-red-100">
+                  {tool.verdict}
+                </span>
+              </div>
+              <p class="text-sm text-neutral-500 leading-relaxed flex-1">{tool.body}</p>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-10 bg-navy-900 rounded-2xl p-8 text-center">
+          <p class="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto">
+            The gap — between consumer budgeting app and institutional platform — is enormous. The people who fall into it are exactly the people who most need a serious tool.
+          </p>
+          <p class="text-brand-400 font-black text-sm uppercase tracking-widest mt-6">Aethelgard fills that gap.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why local-first -->
+    <section class="py-20 px-6 bg-white border-t border-neutral-100">
+      <div class="max-w-3xl mx-auto">
+        <p class="section-label mb-4">The privacy decision</p>
+        <h2 class="text-3xl font-black tracking-tighter text-neutral-900 mb-8">
+          Where data lives was the first architectural decision, not an afterthought.
+        </h2>
+
+        <div class="space-y-6 text-neutral-600 leading-relaxed">
+          <p>
+            Your net worth, your asset structure, your entity relationships — this is among the most sensitive information that exists about you. It tells the full story of your financial life. It reveals your vulnerabilities and your resources.
+          </p>
+          <p>
+            It is exactly the kind of information that should not live on a server you don't control — subject to data breaches, government requests, or simply the commercial decisions of a software company you've never met.
+          </p>
+          <p>
+            Aethelgard runs on your device. The vault is encrypted with AES-256. There is no telemetry. There is no background sync unless you configure it yourself. When we say "your data never leaves your device," we mean it architecturally, not just as a marketing claim.
+          </p>
+        </div>
+
+        <!-- Privacy architecture quick-facts -->
+        <div class="mt-10 grid sm:grid-cols-2 gap-4">
+          {[
+            { icon: '🔐', title: 'AES-256 encrypted vault', body: 'Your data is an encrypted SQLite file on your machine. No one else can read it — including us.' },
+            { icon: '📡', title: 'Zero telemetry', body: 'No usage analytics, no crash reporting, no background calls. The app makes no network requests unless you configure WebDAV backup.' },
+            { icon: '🔗', title: 'SHA-256 hash chain', body: 'Every journal entry is cryptographically linked to the previous. Tampering with any historical record breaks the chain immediately.' },
+            { icon: '☁️', title: 'Your backup, your cloud', body: 'Optionally sync encrypted backups to your own Nextcloud, NAS, or any WebDAV-compatible storage. You control where it goes.' },
+          ].map(item => (
+            <div class="bg-neutral-50 border border-neutral-200 rounded-xl p-5 flex gap-4">
+              <span class="text-xl shrink-0">{item.icon}</span>
+              <div>
+                <p class="font-black text-neutral-900 text-sm mb-1">{item.title}</p>
+                <p class="text-xs text-neutral-500 leading-relaxed">{item.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- The succession angle — pull-quote treatment -->
+    <section class="py-20 px-6 bg-navy-900">
+      <div class="max-w-3xl mx-auto">
+        <p class="section-label mb-6 text-brand-400">The succession problem</p>
+
+        <blockquote class="border-l-4 border-brand-500 pl-8 mb-10">
+          <p class="text-2xl font-black tracking-tight text-white leading-snug mb-4">
+            "At some point — for all of us — someone else will need to understand what we own."
+          </p>
+          <p class="text-white/50 text-sm">That person will arrive at this task at a moment of grief or urgency. They will need to know: what did you own? Where is it? How much is it worth? Who manages it?</p>
+        </blockquote>
+
+        <div class="space-y-5 text-white/60 leading-relaxed">
+          <p>
+            If you can't answer that question yourself clearly, in one place, right now — how will they answer it?
+          </p>
+          <p>
+            The records that people leave their successors are almost universally inadequate. Statements from last year. A spreadsheet that made sense when it was created. Contact names for advisors who may have retired. The systematic, complete mapping of wealth — the conversation that should happen while it can happen — almost never does.
+          </p>
+          <p class="text-white/80 font-semibold">
+            Aethelgard is, at one level, an accounting application. At another level, it is the answer to that conversation.
+          </p>
+          <p>
+            A single, complete, cryptographically verified record of everything you own — structured properly, tamper-evident, in a form that someone else could understand and act on.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- What was built -->
+    <section class="py-20 px-6 bg-neutral-50 border-t border-neutral-100">
+      <div class="max-w-3xl mx-auto">
+        <p class="section-label mb-4">What was built</p>
+        <h2 class="text-3xl font-black tracking-tighter text-neutral-900 mb-8">
+          Professional-grade accounting, built for individuals.
+        </h2>
+
+        <div class="space-y-5 text-neutral-600 leading-relaxed mb-10">
+          <p>
+            Aethelgard is a double-entry accounting application — which means every transaction balances, every change is recorded, and the ledger is fully auditable. It supports multiple entities: companies, trusts, personal accounts, all in one encrypted vault. It handles multiple currencies with IFRS-compliant FX revaluation.
+          </p>
+          <p>
+            The accounting model is correct, not approximate. It was built by a registered accountant and member of Koninklijke NBA, with a first-class postgraduate qualification from Erasmus University Rotterdam. The features — depreciation, accruals, hedge accounting, deferred tax, group consolidation, period locks, illiquid asset revaluations — are implemented as they would be in a professional accounting environment.
+          </p>
+          <p>
+            It runs entirely on your machine. The vault is your file. You can back it up, move it, and own it completely. There is no subscription lock-in for the features themselves — the ledger you build is yours indefinitely.
+          </p>
+        </div>
+
+        <!-- Feature grid -->
+        <div class="grid sm:grid-cols-2 gap-3">
+          {[
+            'Double-entry accounting — every entry balanced',
+            'Multi-entity consolidation (IFRS)',
+            'Multi-currency with FX revaluation',
+            'Fixed assets and depreciation schedules',
+            'Accruals and prepayments',
+            'Hedge accounting (IFRS 9)',
+            'Deferred tax workings',
+            'Illiquid asset revaluations',
+            'Group consolidation and intercompany elimination',
+            'Period locks and reconciliation',
+            'SHA-256 tamper-evident hash chain',
+            'AES-256 encrypted vault on your device',
+          ].map(feature => (
+            <div class="flex items-center gap-3 bg-white border border-neutral-200 rounded-xl px-4 py-3">
+              <span class="text-brand-500 font-black shrink-0">✓</span>
+              <span class="text-sm text-neutral-700">{feature}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 px-6 bg-white border-t border-neutral-100">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-3xl font-black tracking-tighter text-neutral-900 mb-4">
+          Try it for thirty days.
+        </h2>
+        <p class="text-neutral-500 mb-10 leading-relaxed">
+          No account required. No credit card. Full Corporate features from day one. If you manage serious wealth and want clarity without surrendering privacy — this is what it looks like.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href={DOWNLOAD_WIN} class="btn-primary text-base px-8 py-3.5">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+            Start Free Trial — Windows
+          </a>
+          <a href="/#early-access" class="btn-ghost bg-neutral-900 border-neutral-900 text-white text-base px-8 py-3.5 hover:bg-neutral-800">
+            Apply as Design Partner
+          </a>
+        </div>
+        <p class="text-xs text-neutral-400 mt-6 uppercase tracking-widest font-bold">
+          30-day trial · No account · Your data never leaves your device
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 border-t border-white/5 px-6 py-10">
+      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <img src="/favicon.svg" alt="Aethelgard" class="h-6 w-6 rounded-md" />
+          <span class="font-black text-white/80 tracking-tighter uppercase italic">Aethelgard</span>
+        </div>
+        <div class="text-center space-y-1">
+          <p class="text-white/30 text-xs">
+            © {new Date().getFullYear()} Aethelgard · Built for those who value privacy and precision ·
+            <a href="mailto:contact@aethelgard.finance" class="hover:text-white/60 transition-colors ml-1">contact@aethelgard.finance</a>
+          </p>
+          <p class="text-white/20 text-xs">
+            Aethelgard is a product of 2B Connected Ltd · Registered in England &amp; Wales · Company No. 06427186
+          </p>
+        </div>
+        <div class="flex items-center gap-6 text-xs text-white/30 font-medium">
+          <a href={DOWNLOAD_WIN}  class="hover:text-white/60 transition-colors">Download</a>
+          <a href="/#pricing"     class="hover:text-white/60 transition-colors">Pricing</a>
+          <a href="/about"        class="hover:text-white/60 transition-colors">About</a>
+          <a href="/quick-start"  class="hover:text-white/60 transition-colors">Quick Start</a>
+          <a href="/privacy"      class="hover:text-white/60 transition-colors">Privacy</a>
+          <a href="/terms"        class="hover:text-white/60 transition-colors">Terms</a>
+          <a href="/refunds"      class="hover:text-white/60 transition-colors">Refunds</a>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+</html>
