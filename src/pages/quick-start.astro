@@ -4,7 +4,7 @@ import '../styles/global.css';
 const steps = [
   {
     number: '01',
-    icon: '🔐',
+    icon: 'VLT',
     title: 'Create Your Vault',
     subtitle: 'Your vault is an AES-256 encrypted file on your device. It never leaves your machine.',
     items: [
@@ -16,20 +16,20 @@ const steps = [
       'Save the entity to complete initial setup.',
     ],
     tip: {
-      icon: '⚠️',
+      icon: '!',
       style: 'warn',
       text: 'There is no PIN recovery mechanism. If you lose your PIN, the vault cannot be opened. Write it down and store it securely offline — a password manager or physical safe.',
     },
     outcome: 'You have an encrypted vault with your first entity. Every transaction you record from here will be automatically SHA-256 hash-chained.',
     featureCallout: {
-      icon: '🔗',
+      icon: 'SHA',
       title: 'Tamper-Evident Records — Active from Your First Entry',
       text: 'The moment you record your first transaction, Aethelgard begins building a cryptographic hash chain. Each entry links to the previous via SHA-256. If any historical record is ever altered, the chain breaks at that point — making tampering immediately visible.',
     },
   },
   {
     number: '02',
-    icon: '📒',
+    icon: 'TX',
     title: 'Record a Transaction',
     subtitle: 'Double-entry accounting — every debit has a matching credit, and every entry is balanced.',
     items: [
@@ -42,7 +42,7 @@ const steps = [
       'Click <strong>Save</strong> to post the transaction to the ledger.',
     ],
     tip: {
-      icon: '💡',
+      icon: 'i',
       style: 'info',
       text: 'You can import bank transactions in bulk via the <strong>Universal Vault</strong> importer — drag in a CSV from Barclays, HSBC, Amex, or other supported banks and the rule engine will categorise entries automatically.',
     },
@@ -50,7 +50,7 @@ const steps = [
   },
   {
     number: '03',
-    icon: '📊',
+    icon: 'RV',
     title: 'Revalue an Illiquid Asset',
     subtitle: 'Property, private equity, carried interest, and alternatives — update carrying values when appraisals or NAV statements arrive.',
     items: [
@@ -63,20 +63,20 @@ const steps = [
       'Click <strong>Post</strong> to record the revaluation.',
     ],
     tip: {
-      icon: '📋',
+      icon: 'i',
       style: 'info',
       text: '<strong>IFRS accounting is applied automatically.</strong> Investment property revaluations flow through Other Comprehensive Income (revaluation reserve), not profit and loss. The correct treatment is selected based on how the asset is classified in your Chart of Accounts.',
     },
     outcome: 'The asset\'s carrying value is updated. The Balance Sheet, Wealth Summary, and consolidated net worth all reflect the new value immediately.',
     featureCallout: {
-      icon: '📊',
+      icon: 'RV',
       title: 'Illiquid Asset Revaluations — What This Covers',
       text: 'Residential and commercial property, private equity fund stakes, carried interest entitlements, wine and art collections, structured notes, and any other asset tracked at fair value rather than cost. Use the revaluation workflow whenever a new appraisal, fund statement, or market event changes the carrying value.',
     },
   },
   {
     number: '04',
-    icon: '📈',
+    icon: 'RP',
     title: 'Run a P&L and Balance Sheet',
     subtitle: 'IFRS-grade reports that consolidate across all your entities and currencies.',
     items: [
@@ -88,7 +88,7 @@ const steps = [
       'Use the <strong>Export</strong> button to save as PDF or CSV for advisors, accountants, or your own records.',
     ],
     tip: {
-      icon: '💡',
+      icon: 'i',
       style: 'info',
       text: 'The <strong>Wealth Summary</strong> tab in Reporting shows your multi-year equity roll-forward — opening net worth, net movement, and closing value across all entities and tax years. It\'s the single most useful view for understanding the trajectory of consolidated wealth.',
     },
@@ -96,7 +96,7 @@ const steps = [
   },
   {
     number: '05',
-    icon: '☁️',
+    icon: 'BK',
     title: 'Set Up WebDAV Backup',
     subtitle: 'Optional encrypted backup to your own infrastructure — Nextcloud, NAS, or any WebDAV-compatible storage.',
     items: [
@@ -108,20 +108,20 @@ const steps = [
       'Click <strong>Backup Now</strong> to trigger your first encrypted backup.',
     ],
     tip: {
-      icon: '🔒',
+      icon: 'i',
       style: 'success',
       text: 'Your vault is <strong>encrypted before it leaves your machine</strong> — AES-256-GCM with an Argon2id-derived key. Even if your backup destination is compromised, the vault file cannot be read without your PIN.',
     },
     outcome: 'Your vault is backed up to infrastructure you control. Aethelgard makes no other network calls — this is the only optional network activity in the entire application.',
     featureCallout: {
-      icon: '📡',
+      icon: 'OFF',
       title: 'Fully Offline Operation',
       text: 'Aethelgard makes zero background network calls. No telemetry, no crash reporting, no analytics, no sync unless you configure it here. If you never set up WebDAV, the app never touches the network. Your financial data stays entirely on your device.',
     },
   },
   {
     number: '06',
-    icon: '🔑',
+    icon: 'KEY',
     title: 'Activate Your Licence Key',
     subtitle: 'Delivered by email after purchase. Validated on-device — no internet required.',
     items: [
@@ -132,7 +132,7 @@ const steps = [
       'A confirmation message appears and your tier features unlock immediately.',
     ],
     tip: {
-      icon: '📧',
+      icon: '@',
       style: 'info',
       text: 'Your key was delivered to the email address you used at checkout. Check your spam folder if you don\'t see it within a few minutes. Contact <a href="mailto:contact@aethelgard.finance" class="underline underline-offset-2">contact@aethelgard.finance</a> if you need it resent.',
     },
@@ -204,21 +204,27 @@ const tipStyles = {
         <!-- Three key features -->
         <div class="grid sm:grid-cols-3 gap-3">
           <div class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 flex items-start gap-3">
-            <span class="text-xl shrink-0 mt-0.5">🔗</span>
+            <div class="shrink-0 mt-0.5 text-brand-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+            </div>
             <div>
               <p class="text-white text-xs font-black uppercase tracking-wide">Tamper-Evident</p>
               <p class="text-white/40 text-xs mt-0.5">SHA-256 hash chain from your first entry</p>
             </div>
           </div>
           <div class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 flex items-start gap-3">
-            <span class="text-xl shrink-0 mt-0.5">📡</span>
+            <div class="shrink-0 mt-0.5 text-brand-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728M15.536 8.464a5 5 0 010 7.072M12 11a1 1 0 100 2 1 1 0 000-2zM3 3l18 18"/></svg>
+            </div>
             <div>
               <p class="text-white text-xs font-black uppercase tracking-wide">Fully Offline</p>
               <p class="text-white/40 text-xs mt-0.5">No network calls — your device only</p>
             </div>
           </div>
           <div class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 flex items-start gap-3">
-            <span class="text-xl shrink-0 mt-0.5">📊</span>
+            <div class="shrink-0 mt-0.5 text-brand-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </div>
             <div>
               <p class="text-white text-xs font-black uppercase tracking-wide">Illiquid Revaluations</p>
               <p class="text-white/40 text-xs mt-0.5">Property, PE, alternatives — IFRS-correct</p>
@@ -258,7 +264,7 @@ const tipStyles = {
               <!-- Step header -->
               <div class="flex items-start gap-5 mb-8">
                 <div class="shrink-0 w-14 h-14 rounded-2xl bg-navy-900 flex items-center justify-center shadow-sm">
-                  <span class="text-2xl">{step.icon}</span>
+                  <span class="text-[11px] font-black tracking-wider text-brand-400">{step.icon}</span>
                 </div>
                 <div class="flex-1 pt-1">
                   <div class="flex items-center gap-3 mb-1">
@@ -284,7 +290,7 @@ const tipStyles = {
               <!-- Tip / warning callout -->
               {step.tip && (
                 <div class={`${ts.bg} ${ts.border} rounded-r-xl px-5 py-4 mb-6 ml-19 flex gap-3`}>
-                  <span class="text-lg shrink-0 mt-0.5">{step.tip.icon}</span>
+                  <span class={`shrink-0 mt-0.5 w-5 h-5 rounded-full flex items-center justify-center text-xs font-black ${ts.iconBg} ${ts.label}`}>{step.tip.icon}</span>
                   <p class={`text-sm ${ts.text} leading-relaxed`} set:html={step.tip.text} />
                 </div>
               )}
@@ -299,7 +305,7 @@ const tipStyles = {
               {step.featureCallout && (
                 <div class="mt-6 ml-19 bg-brand-50/50 border border-brand-200/60 rounded-2xl p-5">
                   <div class="flex items-center gap-2 mb-2">
-                    <span class="text-lg">{step.featureCallout.icon}</span>
+                    <span class="text-[10px] font-black tracking-wider text-brand-600 bg-brand-100 px-1.5 py-0.5 rounded">{step.featureCallout.icon}</span>
                     <p class="text-xs font-black text-brand-700 uppercase tracking-wider">{step.featureCallout.title}</p>
                   </div>
                   <p class="text-sm text-neutral-600 leading-relaxed">{step.featureCallout.text}</p>
@@ -314,7 +320,9 @@ const tipStyles = {
       <!-- Integrity verification — standalone callout -->
       <div class="mt-20 bg-navy-900 rounded-2xl p-8">
         <div class="flex items-start gap-4">
-          <span class="text-3xl shrink-0">🔗</span>
+          <div class="shrink-0 w-10 h-10 rounded-xl bg-brand-500/15 border border-brand-500/25 flex items-center justify-center text-brand-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+          </div>
           <div>
             <h3 class="font-black text-white text-lg mb-2">Verify Your Ledger Integrity at Any Time</h3>
             <p class="text-white/50 text-sm leading-relaxed mb-4">Navigate to <strong class="text-white/80">Settings → Integrity Dashboard</strong> to run a full hash-chain verification across your entire transaction history. Every entry is checked against its predecessor — the result is a complete tamper-evidence certificate for your records.</p>

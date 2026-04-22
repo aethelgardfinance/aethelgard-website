@@ -187,20 +187,42 @@ const toolGaps = [
 
         <!-- Privacy architecture quick-facts -->
         <div class="mt-10 grid sm:grid-cols-2 gap-4">
-          {[
-            { icon: '🔐', title: 'AES-256 encrypted vault', body: 'Your data is an encrypted SQLite file on your machine. No one else can read it — including us.' },
-            { icon: '📡', title: 'Zero telemetry', body: 'No usage analytics, no crash reporting, no background calls. The app makes no network requests unless you configure WebDAV backup.' },
-            { icon: '🔗', title: 'SHA-256 hash chain', body: 'Every journal entry is cryptographically linked to the previous. Tampering with any historical record breaks the chain immediately.' },
-            { icon: '☁️', title: 'Your backup, your cloud', body: 'Optionally sync encrypted backups to your own Nextcloud, NAS, or any WebDAV-compatible storage. You control where it goes.' },
-          ].map(item => (
-            <div class="bg-neutral-50 border border-neutral-200 rounded-xl p-5 flex gap-4">
-              <span class="text-xl shrink-0">{item.icon}</span>
-              <div>
-                <p class="font-black text-neutral-900 text-sm mb-1">{item.title}</p>
-                <p class="text-xs text-neutral-500 leading-relaxed">{item.body}</p>
-              </div>
+          <div class="bg-neutral-50 border border-neutral-200 rounded-xl p-5 flex gap-4">
+            <div class="shrink-0 w-8 h-8 rounded-lg bg-navy-900 flex items-center justify-center text-brand-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
             </div>
-          ))}
+            <div>
+              <p class="font-black text-neutral-900 text-sm mb-1">AES-256 encrypted vault</p>
+              <p class="text-xs text-neutral-500 leading-relaxed">Your data is an encrypted SQLite file on your machine. No one else can read it — including us.</p>
+            </div>
+          </div>
+          <div class="bg-neutral-50 border border-neutral-200 rounded-xl p-5 flex gap-4">
+            <div class="shrink-0 w-8 h-8 rounded-lg bg-navy-900 flex items-center justify-center text-brand-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728M15.536 8.464a5 5 0 010 7.072M12 11a1 1 0 100 2 1 1 0 000-2zM3 3l18 18"/></svg>
+            </div>
+            <div>
+              <p class="font-black text-neutral-900 text-sm mb-1">Zero telemetry</p>
+              <p class="text-xs text-neutral-500 leading-relaxed">No usage analytics, no crash reporting, no background calls. The app makes no network requests unless you configure WebDAV backup.</p>
+            </div>
+          </div>
+          <div class="bg-neutral-50 border border-neutral-200 rounded-xl p-5 flex gap-4">
+            <div class="shrink-0 w-8 h-8 rounded-lg bg-navy-900 flex items-center justify-center text-brand-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+            </div>
+            <div>
+              <p class="font-black text-neutral-900 text-sm mb-1">SHA-256 hash chain</p>
+              <p class="text-xs text-neutral-500 leading-relaxed">Every journal entry is cryptographically linked to the previous. Tampering with any historical record breaks the chain immediately.</p>
+            </div>
+          </div>
+          <div class="bg-neutral-50 border border-neutral-200 rounded-xl p-5 flex gap-4">
+            <div class="shrink-0 w-8 h-8 rounded-lg bg-navy-900 flex items-center justify-center text-brand-400">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+            </div>
+            <div>
+              <p class="font-black text-neutral-900 text-sm mb-1">Your backup, your cloud</p>
+              <p class="text-xs text-neutral-500 leading-relaxed">Optionally sync encrypted backups to your own Nextcloud, NAS, or any WebDAV-compatible storage. You control where it goes.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
