@@ -1,0 +1,430 @@
+---
+import '../styles/global.css';
+
+// Where the signed installer lives. PDF Studio's source repo is private; this
+// public mirror receives a copy of every signed installer on tag-push, via
+// the release.yml step that calls `gh release create --repo ... pdf-studio-releases`.
+// To toggle visibility back to "coming soon" mode, set RELEASE_URL = null.
+const RELEASE_URL: string | null = 'https://github.com/aethelgardfinance/pdf-studio-releases/releases/latest';
+
+// Pricing.
+const PRICE_STANDALONE_ANNUAL = '£99';
+
+// Paddle.
+// Same merchant token as the main Aethelgard site — both products bill through
+// the same Paddle account. Replace PRICE_PDFSTUDIO_ANNUAL with the real Paddle
+// price ID once the £99/year product is created in the Paddle dashboard.
+const PADDLE_TOKEN = 'live_e7f24b9ae86b393f8e32017ffb8';
+const PRICE_PDFSTUDIO_ANNUAL: string | null = 'pri_01kq7yy722c3dfakctmwe421yk';
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Aethelgard PDF Studio — a finance-grade PDF editor with HNW templates. Free for Aethelgard licence holders, £99/year standalone." />
+  <title>Aethelgard PDF Studio — finance-grade PDF editing</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta property="og:title" content="Aethelgard PDF Studio" />
+  <meta property="og:description" content="A finance-grade PDF editor with HNW templates. Free with Aethelgard." />
+  <meta property="og:url" content="https://aethelgard.finance/pdf-studio" />
+  <meta property="og:type" content="website" />
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+</head>
+
+<body class="bg-white text-neutral-900 antialiased">
+
+  <!-- ── Navigation ────────────────────────────────────────────────────────── -->
+  <nav class="fixed top-0 inset-x-0 z-50 bg-navy-900/95 backdrop-blur-sm border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/favicon.svg" alt="Aethelgard" class="h-7 w-7 rounded-lg shadow-lg" />
+        <span class="font-black text-white tracking-tighter uppercase italic text-lg">Aethelgard</span>
+        <span class="hidden sm:inline text-brand-400 font-bold uppercase text-xs tracking-widest border-l border-white/20 pl-3">PDF Studio</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-white/60">
+        <a href="#features"  class="hover:text-white transition-colors">Features</a>
+        <a href="#templates" class="hover:text-white transition-colors">Templates</a>
+        <a href="#pricing"   class="hover:text-white transition-colors">Pricing</a>
+        <a href="#faq"       class="hover:text-white transition-colors">FAQ</a>
+        <a href="/"          class="hover:text-white transition-colors">Aethelgard →</a>
+      </div>
+      <a href="#pricing" class="btn-primary text-sm py-2 px-4">Get it</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ──────────────────────────────────────────────────────────────── -->
+  <section class="relative bg-navy-900 pt-32 pb-28 px-6 overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px); background-size: 60px 60px;"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-500/10 blur-3xl rounded-full pointer-events-none"></div>
+
+    <div class="relative max-w-4xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 text-brand-400 text-xs font-bold uppercase tracking-widest mb-8">
+        Windows · v0.1
+      </div>
+
+      <h1 class="text-5xl md:text-6xl font-black text-white leading-[1.05] tracking-tighter mb-6">
+        A PDF editor<br class="hidden md:block" />
+        for finance work.
+      </h1>
+
+      <p class="text-xl text-white/60 font-medium leading-relaxed max-w-2xl mx-auto mb-10">
+        Redact bank statements. Sign engagement letters. Generate trustee resolutions, gift letters and intra-family loan agreements — branded, on your own machine, no Adobe required.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-2">
+        <a href="#pricing" class="btn-primary text-base px-8 py-3.5">
+          See pricing
+        </a>
+        <a href="#features" class="btn-ghost text-base px-8 py-3.5">
+          What it does
+        </a>
+      </div>
+
+      <p class="mt-8 text-white/40 text-sm">
+        <span class="text-brand-400 font-bold">Free</span> with any Aethelgard licence —
+        <span class="text-white/60">{PRICE_STANDALONE_ANNUAL}/year</span> standalone.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Why ───────────────────────────────────────────────────────────────── -->
+  <section class="py-24 px-6 bg-white">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="section-label mb-3">Why we built it</p>
+      <h2 class="text-3xl md:text-4xl font-black tracking-tight text-navy-900 mb-6">
+        Adobe charges by the month for things you do once a quarter.
+      </h2>
+      <p class="text-lg text-neutral-600 leading-relaxed">
+        Most accountants and family-office principals don't need a full Acrobat subscription.
+        They need to redact a sort code, place a signature, generate a tidy gift letter for HMRC, and move on.
+        PDF Studio is built for that: small, fast, branded, and gone in three clicks.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Features ──────────────────────────────────────────────────────────── -->
+  <section id="features" class="py-24 px-6 bg-neutral-50 border-y border-neutral-200">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="section-label mb-3">What it does</p>
+        <h2 class="text-3xl md:text-4xl font-black tracking-tight text-navy-900">
+          Real PDF editing — not just viewing.
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-8 rounded-2xl border border-neutral-200">
+          <div class="text-3xl mb-4">▮</div>
+          <h3 class="text-lg font-black text-navy-900 mb-2">True redaction</h3>
+          <p class="text-neutral-600 leading-relaxed">Drag a rectangle and the page is rasterised — text, metadata and search are all gone. Not just a black box on top.</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl border border-neutral-200">
+          <div class="text-3xl mb-4">✎</div>
+          <h3 class="text-lg font-black text-navy-900 mb-2">Sign by hand or upload</h3>
+          <p class="text-neutral-600 leading-relaxed">Draw with a trackpad, or upload a transparent PNG of your signature. Click anywhere on a page to place it.</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl border border-neutral-200">
+          <div class="text-3xl mb-4">📑</div>
+          <h3 class="text-lg font-black text-navy-900 mb-2">HNW templates</h3>
+          <p class="text-neutral-600 leading-relaxed">Six built-in templates designed for wealth work — letters, trustee resolutions, board minutes, gifts, loans and ISA/SIPP transfers.</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl border border-neutral-200">
+          <div class="text-3xl mb-4">🪧</div>
+          <h3 class="text-lg font-black text-navy-900 mb-2">Multi-entity branding</h3>
+          <p class="text-neutral-600 leading-relaxed">Keep separate brand profiles for each company, trust or holding entity. Apply letterhead, watermarks and footers in one click.</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl border border-neutral-200">
+          <div class="text-3xl mb-4">📝</div>
+          <h3 class="text-lg font-black text-navy-900 mb-2">Form filling that flattens</h3>
+          <p class="text-neutral-600 leading-relaxed">Fill AcroForm fields — bank, mortgage, ID forms — then flatten so the recipient sees fixed text, not editable inputs.</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl border border-neutral-200">
+          <div class="text-3xl mb-4">🔒</div>
+          <h3 class="text-lg font-black text-navy-900 mb-2">Local-first, private</h3>
+          <p class="text-neutral-600 leading-relaxed">Files never leave your machine. No cloud account, no telemetry, no upload — same privacy model as the main Aethelgard ledger.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Templates ─────────────────────────────────────────────────────────── -->
+  <section id="templates" class="py-24 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="section-label mb-3">Built-in templates</p>
+        <h2 class="text-3xl md:text-4xl font-black tracking-tight text-navy-900">
+          The documents wealth professionals actually need.
+        </h2>
+        <p class="text-neutral-600 mt-4 max-w-2xl mx-auto">
+          Each template is a structured form — fill in the values, hit Generate, get a fully branded PDF that opens in the editor for sign-off.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="border border-neutral-200 rounded-xl p-6 hover:border-brand-400 transition">
+          <div class="text-xs font-black uppercase tracking-widest text-brand-500 mb-2">Letters & memos</div>
+          <h3 class="font-black text-navy-900 mb-1">Letter / memo</h3>
+          <p class="text-sm text-neutral-600">Branded correspondence with sender block, dated subject line, and signature.</p>
+        </div>
+
+        <div class="border border-neutral-200 rounded-xl p-6 hover:border-brand-400 transition">
+          <div class="text-xs font-black uppercase tracking-widest text-brand-500 mb-2">Trusts & gifts</div>
+          <h3 class="font-black text-navy-900 mb-1">Gift letter (Declaration of Gift)</h3>
+          <p class="text-sm text-neutral-600">Formal gift declaration suitable for HMRC, mortgage providers and lawyers.</p>
+        </div>
+
+        <div class="border border-neutral-200 rounded-xl p-6 hover:border-brand-400 transition">
+          <div class="text-xs font-black uppercase tracking-widest text-brand-500 mb-2">Trusts & gifts</div>
+          <h3 class="font-black text-navy-900 mb-1">Trustee resolution</h3>
+          <p class="text-sm text-neutral-600">Written resolution capturing trustees, recital, operative wording and signatures.</p>
+        </div>
+
+        <div class="border border-neutral-200 rounded-xl p-6 hover:border-brand-400 transition">
+          <div class="text-xs font-black uppercase tracking-widest text-brand-500 mb-2">Trusts & gifts</div>
+          <h3 class="font-black text-navy-900 mb-1">Loan agreement (intra-family)</h3>
+          <p class="text-sm text-neutral-600">Short-form loan agreement — principal, interest, repayment, governing law.</p>
+        </div>
+
+        <div class="border border-neutral-200 rounded-xl p-6 hover:border-brand-400 transition">
+          <div class="text-xs font-black uppercase tracking-widest text-brand-500 mb-2">Companies</div>
+          <h3 class="font-black text-navy-900 mb-1">Board minutes</h3>
+          <p class="text-sm text-neutral-600">Minutes of a directors' meeting — present, apologies, business, chair sign-off.</p>
+        </div>
+
+        <div class="border border-neutral-200 rounded-xl p-6 hover:border-brand-400 transition">
+          <div class="text-xs font-black uppercase tracking-widest text-brand-500 mb-2">Transfers</div>
+          <h3 class="font-black text-navy-900 mb-1">ISA / SIPP transfer request</h3>
+          <p class="text-sm text-neutral-600">Authorisation letter to a current provider — wrapper type, in-specie / cash, special instructions.</p>
+        </div>
+      </div>
+
+      <p class="text-center mt-10 text-sm text-neutral-500">
+        Plus your own — define custom templates with placeholders, save them locally, generate from the gallery alongside built-ins.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Pricing ───────────────────────────────────────────────────────────── -->
+  <section id="pricing" class="py-24 px-6 bg-navy-900">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="section-label text-brand-400 mb-3">Pricing</p>
+        <h2 class="text-3xl md:text-4xl font-black tracking-tight text-white">
+          Free if you already use Aethelgard. {PRICE_STANDALONE_ANNUAL}/year if you don't.
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Free for Aethelgard licence holders -->
+        <div class="bg-navy-800 border border-brand-500/30 rounded-2xl p-8">
+          <div class="text-brand-400 font-black uppercase text-xs tracking-widest mb-3">Already have Aethelgard?</div>
+          <div class="flex items-baseline gap-2 mb-2">
+            <span class="text-5xl font-black text-white">Free</span>
+          </div>
+          <p class="text-white/60 mb-6">Any Aethelgard licence — Personal, Sovereign or Corporate — entitles you to PDF Studio at no extra cost.</p>
+          <ul class="space-y-2 text-white/80 text-sm mb-8">
+            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>All features and templates</span></li>
+            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>Activates with your existing <code class="bg-white/10 px-1.5 py-0.5 rounded text-xs">AETHG-…</code> key</span></li>
+            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>Same privacy model — local-first, no cloud</span></li>
+          </ul>
+          {RELEASE_URL ? (
+            <a href={RELEASE_URL} class="btn-primary w-full justify-center">Download for Windows</a>
+          ) : (
+            <div class="text-center text-white/50 text-sm py-3 border border-white/10 rounded-xl">
+              Public download lands when v0.1 ships — drop your email below to be notified.
+            </div>
+          )}
+        </div>
+
+        <!-- Standalone subscription -->
+        <div class="bg-navy-800 border border-white/10 rounded-2xl p-8">
+          <div class="text-white/40 font-black uppercase text-xs tracking-widest mb-3">Standalone</div>
+          <div class="flex items-baseline gap-2 mb-2">
+            <span class="text-5xl font-black text-white">{PRICE_STANDALONE_ANNUAL}</span>
+            <span class="text-white/50">/year</span>
+          </div>
+          <p class="text-white/60 mb-6">For people who only want the PDF tool. Annual subscription, billed once a year.</p>
+          <ul class="space-y-2 text-white/80 text-sm mb-8">
+            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>Full editor + all six HNW templates</span></li>
+            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>Custom templates with placeholder fields</span></li>
+            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>Single user, single machine</span></li>
+            <li class="flex items-start gap-2"><span class="text-white/30 mt-0.5">·</span><span class="text-white/40">No lifetime tier — annual only</span></li>
+          </ul>
+          {PRICE_PDFSTUDIO_ANNUAL ? (
+            <button id="pdfstudio-buy" class="btn-primary w-full justify-center" data-price-id={PRICE_PDFSTUDIO_ANNUAL}>
+              Buy — {PRICE_STANDALONE_ANNUAL}/year
+            </button>
+          ) : (
+            <button class="btn-ghost w-full justify-center" disabled>
+              Available at launch
+            </button>
+          )}
+        </div>
+      </div>
+
+      <!-- Waitlist form -->
+      <form id="pdfstudio-waitlist" class="mt-12 max-w-md mx-auto">
+        <label class="block text-white/70 text-sm font-semibold mb-2 text-center">Get notified the moment v0.1 lands</label>
+        <div class="flex gap-2">
+          <input type="email" name="email" required placeholder="you@example.com" class="flex-1 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-brand-400" />
+          <button type="submit" class="btn-primary px-6 py-3">Notify me</button>
+        </div>
+        <p id="pdfstudio-waitlist-status" class="text-center text-sm text-white/60 mt-3 min-h-[20px]"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── FAQ ───────────────────────────────────────────────────────────────── -->
+  <section id="faq" class="py-24 px-6 bg-white">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="section-label mb-3">Frequently asked</p>
+        <h2 class="text-3xl md:text-4xl font-black tracking-tight text-navy-900">Questions we get</h2>
+      </div>
+
+      <div class="space-y-4">
+        <details class="group border border-neutral-200 rounded-xl p-6">
+          <summary class="cursor-pointer font-black text-navy-900 flex items-center justify-between">
+            How is "free with Aethelgard" enforced?
+            <span class="text-brand-500 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="mt-3 text-neutral-600 leading-relaxed">When you launch PDF Studio for the first time, paste your Aethelgard licence key (the one that starts with <code class="bg-neutral-100 px-1.5 py-0.5 rounded text-sm">AETHG-</code>). The app validates it offline against the same shared secret that signs Aethelgard keys — no network call, no account required. Standalone subscribers get a different key starting with <code class="bg-neutral-100 px-1.5 py-0.5 rounded text-sm">PDFST-</code> after purchase.</p>
+        </details>
+
+        <details class="group border border-neutral-200 rounded-xl p-6">
+          <summary class="cursor-pointer font-black text-navy-900 flex items-center justify-between">
+            Why does PDF Studio not have a lifetime tier?
+            <span class="text-brand-500 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="mt-3 text-neutral-600 leading-relaxed">Standalone PDF Studio is annual only by design. If you'd rather make a single payment, get an Aethelgard Lifetime licence instead — that includes PDF Studio for free, forever, plus the full wealth ledger.</p>
+        </details>
+
+        <details class="group border border-neutral-200 rounded-xl p-6">
+          <summary class="cursor-pointer font-black text-navy-900 flex items-center justify-between">
+            Does it open the same PDFs Adobe does?
+            <span class="text-brand-500 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="mt-3 text-neutral-600 leading-relaxed">Yes. PDF Studio uses the same engine (pdf-lib + pdf.js) that powers most modern PDF tooling. Anything you'd open in Adobe Acrobat will open here. Encrypted/password-protected PDFs need to be unlocked first — same as elsewhere.</p>
+        </details>
+
+        <details class="group border border-neutral-200 rounded-xl p-6">
+          <summary class="cursor-pointer font-black text-navy-900 flex items-center justify-between">
+            What about Mac?
+            <span class="text-brand-500 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="mt-3 text-neutral-600 leading-relaxed">Windows-only at launch, matching Aethelgard's current platform support. Mac is on the roadmap once both products' Mac builds are ready — drop your email above to be notified.</p>
+        </details>
+
+        <details class="group border border-neutral-200 rounded-xl p-6">
+          <summary class="cursor-pointer font-black text-navy-900 flex items-center justify-between">
+            Where do my files go?
+            <span class="text-brand-500 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="mt-3 text-neutral-600 leading-relaxed">Wherever you save them. PDF Studio is a local desktop app — no cloud, no telemetry, no automatic uploads. The only thing it writes to disk by default is your activated licence key in <code class="bg-neutral-100 px-1.5 py-0.5 rounded text-sm">%APPDATA%\Aethelgard PDF Studio\</code> and your custom brand profiles in browser-style local storage.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────────────────── -->
+  <footer class="bg-navy-900 border-t border-white/5 py-12 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-white/40">
+      <div class="flex items-center gap-3">
+        <img src="/favicon.svg" alt="Aethelgard" class="h-6 w-6 rounded" />
+        <span>© 2026 Aethelgard. All rights reserved.</span>
+      </div>
+      <div class="flex gap-6">
+        <a href="/" class="hover:text-white">Aethelgard</a>
+        <a href="/privacy" class="hover:text-white">Privacy</a>
+        <a href="/terms" class="hover:text-white">Terms</a>
+        <a href="mailto:contact@aethelgard.finance" class="hover:text-white">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script is:inline define:vars={{ PADDLE_TOKEN }}>
+    // ── Paddle init (shared with main site — same merchant) ────────────────
+    let _paddleReady = false;
+    function _initPaddle() {
+      if (_paddleReady) return true;
+      if (typeof Paddle === 'undefined') return false;
+      try {
+        Paddle.Initialize({
+          token: PADDLE_TOKEN,
+          eventCallback: function (ev) {
+            if (ev.name === 'checkout.error') console.error('[Paddle] checkout.error', ev.data);
+          },
+        });
+        _paddleReady = true;
+        return true;
+      } catch (err) {
+        console.error('[Paddle] Initialize failed:', err);
+        return false;
+      }
+    }
+    _initPaddle();
+
+    // ── Buy button — only present when PRICE_PDFSTUDIO_ANNUAL is set ───────
+    (function () {
+      const buy = document.getElementById('pdfstudio-buy');
+      if (!buy) return;
+      const priceId = buy.getAttribute('data-price-id');
+      if (!priceId) return;
+
+      buy.addEventListener('click', () => {
+        if (!_initPaddle()) {
+          alert('Checkout could not load. Please refresh and try again.');
+          return;
+        }
+        Paddle.Checkout.open({
+          items: [{ priceId, quantity: 1 }],
+          settings: {
+            displayMode: 'overlay',
+            theme: 'light',
+            successUrl: 'https://aethelgard.finance/thank-you',
+          },
+        });
+      });
+    })();
+
+    // ── Waitlist form ──────────────────────────────────────────────────────
+    (function () {
+      const form = document.getElementById('pdfstudio-waitlist');
+      const status = document.getElementById('pdfstudio-waitlist-status');
+      if (!form || !status) return;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = new FormData(form).get('email');
+        if (!email) return;
+
+        status.textContent = 'Sending…';
+        status.style.color = 'rgba(255,255,255,0.6)';
+
+        try {
+          const res = await fetch('https://aethelgard-licensing.vercel.app/api/waitlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, type: 'pdf-studio-waitlist' }),
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          status.textContent = 'Thanks — we will email you when v0.1 ships.';
+          status.style.color = '#fbbf24';
+          form.reset();
+        } catch (err) {
+          status.textContent = 'Could not submit. Try emailing contact@aethelgard.finance.';
+          status.style.color = '#f87171';
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
