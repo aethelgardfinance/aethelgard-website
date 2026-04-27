@@ -130,6 +130,7 @@ const faqs = [
         <a href="#demo"         class="hover:text-white transition-colors">Demo</a>
         <a href="#pricing"      class="hover:text-white transition-colors">Pricing</a>
         <a href="#early-access" class="hover:text-white transition-colors text-brand-400">Early Access</a>
+        <a href="/pdf-studio"   class="hover:text-white transition-colors">PDF Studio</a>
         <a href="#faq"          class="hover:text-white transition-colors">FAQ</a>
         <a href="/about"        class="hover:text-white transition-colors">About</a>
       </div>
@@ -875,6 +876,27 @@ const faqs = [
 
   // Attempt immediate init (succeeds if paddle.js loaded synchronously)
   _initPaddle();
+
+  // ── Resume hosted-checkout transactions ────────────────────────────────────
+  // Paddle's hosted payment links redirect to `?_ptxn=txn_...` after capture.
+  // Paddle.js auto-detects this when initialized, but the auto-detect is timing-
+  // dependent. Explicit handler makes the resume reliable.
+  function _resumePaddleTxn() {
+    const params = new URLSearchParams(window.location.search);
+    const ptxn = params.get('_ptxn');
+    if (!ptxn) return;
+    if (!_initPaddle()) {
+      // Paddle.js not loaded yet — retry shortly.
+      setTimeout(_resumePaddleTxn, 250);
+      return;
+    }
+    try {
+      Paddle.Checkout.open({ transactionId: ptxn });
+    } catch (err) {
+      console.error('[Paddle] Failed to resume transaction', err);
+    }
+  }
+  _resumePaddleTxn();
 
   // â"€â"€ Distribution Logic â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
   const LATEST_API = 'https://aethelgard-licensing.vercel.app/api/latest';

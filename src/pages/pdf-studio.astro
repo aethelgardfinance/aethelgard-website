@@ -371,6 +371,25 @@ const PRICE_PDFSTUDIO_ANNUAL: string | null = 'pri_01kq7yy722c3dfakctmwe421yk';
     }
     _initPaddle();
 
+    // ── Resume hosted-checkout transactions ────────────────────────────────
+    // Paddle's hosted payment links redirect to `?_ptxn=txn_...`. Auto-resume
+    // is timing-dependent — explicit handler makes it reliable.
+    function _resumePaddleTxn() {
+      const params = new URLSearchParams(window.location.search);
+      const ptxn = params.get('_ptxn');
+      if (!ptxn) return;
+      if (!_initPaddle()) {
+        setTimeout(_resumePaddleTxn, 250);
+        return;
+      }
+      try {
+        Paddle.Checkout.open({ transactionId: ptxn });
+      } catch (err) {
+        console.error('[Paddle] Failed to resume transaction', err);
+      }
+    }
+    _resumePaddleTxn();
+
     // ── Buy button — only present when PRICE_PDFSTUDIO_ANNUAL is set ───────
     (function () {
       const buy = document.getElementById('pdfstudio-buy');
