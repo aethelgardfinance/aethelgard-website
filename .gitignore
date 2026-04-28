@@ -7,3 +7,9 @@ dist/
 
 
 .vercel
+
+# Astro build cache — per-machine
+.astro/
+
+# Claude Code local data (permissions, memory, sessions) — per-machine, not for sharing
+.claude/

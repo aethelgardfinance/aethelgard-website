@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aethelgard Demo</title>
+    <style>
+        body { margin: 0; padding: 0; background-color: #0a0a0a; overflow: hidden; color: white; font-family: 'Inter', system-ui, sans-serif; }
+        .slide { position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; opacity: 0; transition: opacity 1.5s ease-in-out; display: flex; align-items: center; justify-content: center; background-size: cover; background-position: center; }
+        .slide.active { opacity: 1; z-index: 10; animation: zoom 7s infinite alternate; }
+        .slide.inactive { z-index: 1; }
+        .overlay { position: absolute; bottom: 8%; left: 5%; background: rgba(0,0,0,0.85); padding: 32px 40px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); max-width: 650px; transform: translateY(30px); opacity: 0; transition: all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s; box-shadow: 0 20px 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
+        .slide.active .overlay { transform: translateY(0); opacity: 1; }
+        h1 { margin: 0 0 12px 0; color: #f59e0b; font-size: 2.2em; font-weight: 800; letter-spacing: -0.02em; }
+        p { margin: 0; font-size: 1.25em; line-height: 1.6; color: #e5e5e5; font-weight: 400; }
+        @keyframes zoom { from { transform: scale(1); } to { transform: scale(1.05); } }
+    </style>
+</head>
+<body>
+    <div class="slide active" style="background-image: url('screenshots/spreadsheet_chaos_1776541912350.png')">
+        <div class="overlay">
+            <h1>The Old Way: Chaos</h1>
+            <p>"Most people managing wealth across multiple entities end up here. Spreadsheets. Chaos. No single source of truth."</p>
+        </div>
+    </div>
+    <div class="slide inactive" style="background-image: url('screenshots/aethelgard_entity_management_1776541988105.png')">
+        <div class="overlay">
+            <h1>Multi-Entity Vault</h1>
+            <p>"Aethelgard lets you run as many entities as you need — each with its own jurisdiction, currency, and Chart of Accounts."</p>
+        </div>
+    </div>
+    <div class="slide inactive" style="background-image: url('screenshots/aethelgard_universal_vault_1776541999748.png')">
+        <div class="overlay">
+            <h1>Automated Ingestion</h1>
+            <p>"When your bank statement arrives, just drop it in. The rule engine reads your transaction descriptions and assigns accounts automatically."</p>
+        </div>
+    </div>
+    <div class="slide inactive" style="background-image: url('screenshots/aethelgard_wealth_summary_1776542023868.png')">
+        <div class="overlay">
+            <h1>Everything, Consolidated</h1>
+            <p>"Your equity roll-forward, reconciled life to date. Multi-currency. Multi-entity. One number."</p>
+        </div>
+    </div>
+    <div class="slide inactive" style="background-image: url('screenshots/aethelgard_portfolio_analytics_1776857682480.png')">
+        <div class="overlay">
+            <h1>Unmatched Analytics</h1>
+            <p>"Now for the bit most tools can't do. One view, every entity, every currency, rolled up."</p>
+        </div>
+    </div>
+    <div class="slide inactive" style="background-image: url('screenshots/aethelgard_integrity_dashboard_v2_1776857644412.png')">
+        <div class="overlay">
+            <h1>Trust Built In</h1>
+            <p>"Every transaction is cryptographically chained. Any tamper is instantly visible. Your data never leaves your machine."</p>
+        </div>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let current = 0;
+        setInterval(() => {
+            slides[current].classList.remove('active');
+            slides[current].classList.add('inactive');
+            current = (current + 1) % slides.length;
+            slides[current].classList.remove('inactive');
+            slides[current].classList.add('active');
+        }, 7000); // 7 seconds per slide
+    </script>
+</body>
+</html>
