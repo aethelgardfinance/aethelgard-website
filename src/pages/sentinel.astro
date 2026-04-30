@@ -1,0 +1,444 @@
+---
+import '../styles/global.css';
+
+// Where the signed installer lives. Sentinel's source repo is private; this
+// public mirror receives a copy of every signed installer on tag-push, via
+// the release.yml step that calls `gh release create --repo ... sentinel-releases`.
+// Set RELEASE_URL = null while the installer pipeline is still being built.
+const RELEASE_URL: string | null = null;
+
+// Pricing.
+const PRICE_STANDALONE_ANNUAL = '£299';
+const PRICE_FOUNDING_ANNUAL   = '£199';
+
+// Paddle.
+// Same merchant token as the main Aethelgard site — both products bill through
+// the same Paddle account. PRICE_SENTINEL_ANNUAL is the £299/year product;
+// it lands once the Paddle product is created and the webhook env var
+// PADDLE_SENTINEL_PRICE_ID is wired up. Until then the buy button is
+// disabled and we collect emails on the waitlist instead.
+const PADDLE_TOKEN = 'live_e7f24b9ae86b393f8e32017ffb8';
+const PRICE_SENTINEL_ANNUAL: string | null = null;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Aethelgard Sentinel — regime-aware portfolio decision engine. Macro classifier, scenario stress testing, and heuristic scorecards grounded in named investor frameworks. Free for Aethelgard Sovereign and Corporate licence holders, £299/year standalone." />
+  <title>Aethelgard Sentinel — institutional-grade thinking for sophisticated private capital</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta property="og:title" content="Aethelgard Sentinel" />
+  <meta property="og:description" content="Regime-aware portfolio decision engine. Built for investors who must survive bad decades, not just beat good ones." />
+  <meta property="og:url" content="https://aethelgard.finance/sentinel" />
+  <meta property="og:type" content="website" />
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+</head>
+
+<body class="bg-white text-neutral-900 antialiased">
+
+  <!-- ── Navigation ────────────────────────────────────────────────────────── -->
+  <nav class="fixed top-0 inset-x-0 z-50 bg-navy-900/95 backdrop-blur-sm border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/favicon.svg" alt="Aethelgard" class="h-7 w-7 rounded-lg shadow-lg" />
+        <span class="font-black text-white tracking-tighter uppercase italic text-lg">Aethelgard</span>
+        <span class="hidden sm:inline text-brand-400 font-bold uppercase text-xs tracking-widest border-l border-white/20 pl-3">Sentinel</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-white/60">
+        <a href="#features"   class="hover:text-white transition-colors">Features</a>
+        <a href="#frameworks" class="hover:text-white transition-colors">Frameworks</a>
+        <a href="#pricing"    class="hover:text-white transition-colors">Pricing</a>
+        <a href="#faq"        class="hover:text-white transition-colors">FAQ</a>
+        <a href="/"           class="hover:text-white transition-colors">Aethelgard →</a>
+      </div>
+      <a href="#pricing" class="btn-primary text-sm py-2 px-4">Get notified</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ──────────────────────────────────────────────────────────────── -->
+  <section class="relative bg-navy-900 pt-32 pb-28 px-6 overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px); background-size: 60px 60px;"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-500/10 blur-3xl rounded-full pointer-events-none"></div>
+
+    <div class="relative max-w-4xl mx-auto text-center">
+      <div class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 text-brand-400 text-xs font-bold uppercase tracking-widest mb-8">
+        Windows · v0.1 · founding member
+      </div>
+
+      <h1 class="text-5xl md:text-6xl font-black text-white leading-[1.05] tracking-tighter mb-6">
+        Decisions, not<br class="hidden md:block" />
+        a prettier dashboard.
+      </h1>
+
+      <p class="text-xl text-white/60 font-medium leading-relaxed max-w-2xl mx-auto mb-10">
+        Macro regime classifier. Scenario stress testing. Heuristic scorecards grounded in Buffett-Munger, Graham and Lynch — with a why-line on every rule.
+        Built for investors who must survive bad decades, not just beat good ones.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-2">
+        <a href="#pricing" class="btn-primary text-base px-8 py-3.5">
+          See pricing
+        </a>
+        <a href="#features" class="btn-ghost text-base px-8 py-3.5">
+          What it does
+        </a>
+      </div>
+
+      <p class="mt-8 text-white/40 text-sm">
+        <span class="text-brand-400 font-bold">Free</span> with Aethelgard Sovereign or Corporate —
+        <span class="text-white/60">{PRICE_STANDALONE_ANNUAL}/year</span> standalone.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Why ───────────────────────────────────────────────────────────────── -->
+  <section class="py-24 px-6 bg-white">
+    <div class="max-w-3xl mx-auto text-center">
+      <p class="section-label mb-3">Why we built it</p>
+      <h2 class="text-3xl md:text-4xl font-black tracking-tight text-navy-900 mb-6">
+        Most portfolio tools track. We help you decide.
+      </h2>
+      <p class="text-lg text-neutral-600 leading-relaxed">
+        Trackers tell you what your portfolio did last quarter. Robo-advisors tell you what some opaque model thinks you should buy.
+        Sentinel sits between the two: macro regime awareness, scenario stress testing, and named-framework heuristics — every output cited, every confidence level shown, "do nothing" treated as a first-class recommendation.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Features ──────────────────────────────────────────────────────────── -->
+  <section id="features" class="py-24 px-6 bg-neutral-50 border-y border-neutral-200">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="section-label mb-3">What it does</p>
+        <h2 class="text-3xl md:text-4xl font-black tracking-tight text-navy-900">
+          Today's posture, in four cards.
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-8 rounded-2xl border border-neutral-200">
+          <div class="text-3xl mb-4">⚖</div>
+          <h3 class="text-lg font-black text-navy-900 mb-2">Macro regime classifier</h3>
+          <p class="text-neutral-600 leading-relaxed">Eight named regimes from a five-factor FRED ingest — yield curve, real policy rate, credit spreads, financial conditions, core inflation. Every factor shows the band, the why-line, and the citation date.</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl border border-neutral-200">
+          <div class="text-3xl mb-4">▦</div>
+          <h3 class="text-lg font-black text-navy-900 mb-2">Portfolio cockpit</h3>
+          <p class="text-neutral-600 leading-relaxed">Total market value, allocation by asset class / currency / country / sector, concentration metrics (HHI, effective N), top-10 holdings — all FX-normalised to your base currency.</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl border border-neutral-200">
+          <div class="text-3xl mb-4">⚡</div>
+          <h3 class="text-lg font-black text-navy-900 mb-2">Stress scenarios</h3>
+          <p class="text-neutral-600 leading-relaxed">Three curated historical events — 2008 credit crunch, 1970s inflation shock, 20–30% property correction — with per-asset-class drawdown and the cited source for every scalar applied.</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl border border-neutral-200">
+          <div class="text-3xl mb-4">✓</div>
+          <h3 class="text-lg font-black text-navy-900 mb-2">Heuristic scorecard</h3>
+          <p class="text-neutral-600 leading-relaxed">Per-security grading against Buffett-Munger, Graham and Lynch. Every rule shows threshold, your value, verdict, and a 100-word why this rule exists. Missing inputs are reported as not-scored — never fabricated.</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl border border-neutral-200">
+          <div class="text-3xl mb-4">🔒</div>
+          <h3 class="text-lg font-black text-navy-900 mb-2">Local-first, private</h3>
+          <p class="text-neutral-600 leading-relaxed">Encrypted SQLCipher vault on your own machine. AI features are opt-in and route through a sanitisation layer that strips identifiers — no raw position data ever leaves the device.</p>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl border border-neutral-200">
+          <div class="text-3xl mb-4">⌘</div>
+          <h3 class="text-lg font-black text-navy-900 mb-2">Decision-grade output</h3>
+          <p class="text-neutral-600 leading-relaxed">Every AI summary uses the Known / Likely / Wrong / Do pattern — facts cited, confidence levels shown, dissenting views surfaced, "do nothing" justified when that's the right call.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Frameworks ───────────────────────────────────────────────────────── -->
+  <section id="frameworks" class="py-24 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="section-label mb-3">Encoded frameworks</p>
+        <h2 class="text-3xl md:text-4xl font-black tracking-tight text-navy-900">
+          The principles the great investors actually used.
+        </h2>
+        <p class="text-neutral-600 mt-4 max-w-2xl mx-auto">
+          Sentinel doesn't invent its own scoring. Every rule is named — Buffett-Munger ROIC ≥ 15%, Graham P/E ≤ 15, Lynch PEG ≤ 1 — with the threshold, your value, the verdict, and a plain-English explanation of why the rule exists.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="border border-neutral-200 rounded-xl p-6 hover:border-brand-400 transition">
+          <div class="text-xs font-black uppercase tracking-widest text-brand-500 mb-2">Quality first</div>
+          <h3 class="font-black text-navy-900 mb-1">Buffett-Munger</h3>
+          <p class="text-sm text-neutral-600">ROIC ≥ 15%, ROE ≥ 15%, Debt/Equity ≤ 0.5, FCF positive 5 of 5 years, profitable 9 of 10 years. Quality of the business and balance sheet.</p>
+        </div>
+
+        <div class="border border-neutral-200 rounded-xl p-6 hover:border-brand-400 transition">
+          <div class="text-xs font-black uppercase tracking-widest text-brand-500 mb-2">Margin of safety</div>
+          <h3 class="font-black text-navy-900 mb-1">Graham</h3>
+          <p class="text-sm text-neutral-600">P/E ≤ 15, P/B ≤ 1.5, Current ratio ≥ 2, Long-term debt ≤ Current assets, profitable 10 of 10 years. Pay below intrinsic value with a working-capital cushion.</p>
+        </div>
+
+        <div class="border border-neutral-200 rounded-xl p-6 hover:border-brand-400 transition">
+          <div class="text-xs font-black uppercase tracking-widest text-brand-500 mb-2">Growth at a price</div>
+          <h3 class="font-black text-navy-900 mb-1">Lynch</h3>
+          <p class="text-sm text-neutral-600">PEG ≤ 1, EPS growth ≥ 10%, P/E ≤ 20, Debt/Equity ≤ 0.5. Growth justifies the multiple — but only if the balance sheet survives the recession.</p>
+        </div>
+      </div>
+
+      <p class="text-center mt-10 text-sm text-neutral-500">
+        Plus an eight-factor macro regime classifier and three curated stress scenarios — every score, every drawdown, every recommendation cites its source.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Pricing ───────────────────────────────────────────────────────────── -->
+  <section id="pricing" class="py-24 px-6 bg-navy-900">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="section-label text-brand-400 mb-3">Pricing</p>
+        <h2 class="text-3xl md:text-4xl font-black tracking-tight text-white">
+          Free if you already use Aethelgard. {PRICE_STANDALONE_ANNUAL}/year if you don't.
+        </h2>
+        <p class="text-white/60 mt-4 max-w-2xl mx-auto">
+          Founding-member rate of {PRICE_FOUNDING_ANNUAL}/year locked in for the first 30 standalone subscribers.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Free for Aethelgard Sovereign/Corporate -->
+        <div class="bg-navy-800 border border-brand-500/30 rounded-2xl p-8">
+          <div class="text-brand-400 font-black uppercase text-xs tracking-widest mb-3">Already have Aethelgard?</div>
+          <div class="flex items-baseline gap-2 mb-2">
+            <span class="text-5xl font-black text-white">Free</span>
+          </div>
+          <p class="text-white/60 mb-6">Sovereign or Corporate Aethelgard licence holders — annual or lifetime — get Sentinel at no extra cost. Personal-tier holders need to upgrade to Sovereign first.</p>
+          <ul class="space-y-2 text-white/80 text-sm mb-8">
+            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>All features: regime, cockpit, scenarios, heuristics</span></li>
+            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>Activates with your existing <code class="bg-white/10 px-1.5 py-0.5 rounded text-xs">AETHG-…</code> key</span></li>
+            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>Same privacy model — local-first, no cloud</span></li>
+          </ul>
+          {RELEASE_URL ? (
+            <a href={RELEASE_URL} class="btn-primary w-full justify-center">Download for Windows</a>
+          ) : (
+            <div class="text-center text-white/50 text-sm py-3 border border-white/10 rounded-xl">
+              Public download lands when v0.1 ships — drop your email below to be notified.
+            </div>
+          )}
+        </div>
+
+        <!-- Standalone subscription -->
+        <div class="bg-navy-800 border border-white/10 rounded-2xl p-8">
+          <div class="text-white/40 font-black uppercase text-xs tracking-widest mb-3">Standalone</div>
+          <div class="flex items-baseline gap-2 mb-2">
+            <span class="text-5xl font-black text-white">{PRICE_STANDALONE_ANNUAL}</span>
+            <span class="text-white/50">/year</span>
+          </div>
+          <p class="text-white/60 mb-6">For investors who want the decision engine without the multi-entity ledger. Annual subscription, billed once a year.</p>
+          <ul class="space-y-2 text-white/80 text-sm mb-8">
+            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>Full regime classifier + cockpit + scenarios + heuristics</span></li>
+            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>BYO Anthropic API key for AI summaries (optional, off by default)</span></li>
+            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>Single user, single machine</span></li>
+            <li class="flex items-start gap-2"><span class="text-white/30 mt-0.5">·</span><span class="text-white/40">No lifetime tier — annual only</span></li>
+          </ul>
+          {PRICE_SENTINEL_ANNUAL ? (
+            <button id="sentinel-buy" class="btn-primary w-full justify-center" data-price-id={PRICE_SENTINEL_ANNUAL}>
+              Buy — {PRICE_STANDALONE_ANNUAL}/year
+            </button>
+          ) : (
+            <button class="btn-ghost w-full justify-center" disabled>
+              Available at launch
+            </button>
+          )}
+        </div>
+      </div>
+
+      <!-- Waitlist form -->
+      <form id="sentinel-waitlist" class="mt-12 max-w-md mx-auto">
+        <label class="block text-white/70 text-sm font-semibold mb-2 text-center">Get notified the moment v0.1 lands</label>
+        <div class="flex gap-2">
+          <input type="email" name="email" required placeholder="you@example.com" class="flex-1 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-brand-400" />
+          <button type="submit" class="btn-primary px-6 py-3">Notify me</button>
+        </div>
+        <p id="sentinel-waitlist-status" class="text-center text-sm text-white/60 mt-3 min-h-[20px]"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── FAQ ───────────────────────────────────────────────────────────────── -->
+  <section id="faq" class="py-24 px-6 bg-white">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="section-label mb-3">Frequently asked</p>
+        <h2 class="text-3xl md:text-4xl font-black tracking-tight text-navy-900">Questions we get</h2>
+      </div>
+
+      <div class="space-y-4">
+        <details class="group border border-neutral-200 rounded-xl p-6">
+          <summary class="cursor-pointer font-black text-navy-900 flex items-center justify-between">
+            How is "free with Aethelgard" enforced?
+            <span class="text-brand-500 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="mt-3 text-neutral-600 leading-relaxed">When you launch Sentinel for the first time, paste your Aethelgard licence key (the one that starts with <code class="bg-neutral-100 px-1.5 py-0.5 rounded text-sm">AETHG-</code>). The app validates it offline against the same shared secret that signs Aethelgard keys — no network call, no account required. Personal-tier keys are rejected by Sentinel; standalone subscribers get a different key starting with <code class="bg-neutral-100 px-1.5 py-0.5 rounded text-sm">SENTI-</code> after purchase.</p>
+        </details>
+
+        <details class="group border border-neutral-200 rounded-xl p-6">
+          <summary class="cursor-pointer font-black text-navy-900 flex items-center justify-between">
+            Is this investment advice?
+            <span class="text-brand-500 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="mt-3 text-neutral-600 leading-relaxed">No. Sentinel provides analytics and scenarios, not regulated investment recommendations. The classifier names a regime — it does not tell you what to buy. The heuristic scorecard grades a security against named frameworks — it does not name the security as "buy" or "sell". There is no automated trade execution, ever.</p>
+        </details>
+
+        <details class="group border border-neutral-200 rounded-xl p-6">
+          <summary class="cursor-pointer font-black text-navy-900 flex items-center justify-between">
+            Why no lifetime tier?
+            <span class="text-brand-500 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="mt-3 text-neutral-600 leading-relaxed">Sentinel uses live data from FRED, Yahoo Finance and (optionally) Anthropic — all of which have ongoing operating cost. Annual is the honest pricing. If you'd rather make a single payment, an Aethelgard Sovereign or Corporate Lifetime licence includes Sentinel for free, forever, plus the multi-entity wealth ledger.</p>
+        </details>
+
+        <details class="group border border-neutral-200 rounded-xl p-6">
+          <summary class="cursor-pointer font-black text-navy-900 flex items-center justify-between">
+            What data sources does it use?
+            <span class="text-brand-500 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="mt-3 text-neutral-600 leading-relaxed">FRED (St Louis Fed) for the macro regime factors — free, no rate limits, you supply your own API key from fred.stlouisfed.org. Yahoo Finance for FX and security prices — free, no key needed. SEC EDGAR for fundamentals on US securities (Phase 4). All responses are cached locally with an end-of-day refresh policy, so the app remains useful offline.</p>
+        </details>
+
+        <details class="group border border-neutral-200 rounded-xl p-6">
+          <summary class="cursor-pointer font-black text-navy-900 flex items-center justify-between">
+            Does the AI see my portfolio?
+            <span class="text-brand-500 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="mt-3 text-neutral-600 leading-relaxed">Only if you turn AI on (it's off by default), and only after the on-device sanitiser strips identifiers and aggregates positions. Names, account numbers and ISIN-level data never leave your machine — the sanitiser leak-test suite fails the build if any allow-listed shape leaks an ID. AI is BYO Anthropic key — you pay for inference directly, and you can disable it at any time.</p>
+        </details>
+
+        <details class="group border border-neutral-200 rounded-xl p-6">
+          <summary class="cursor-pointer font-black text-navy-900 flex items-center justify-between">
+            What about Mac?
+            <span class="text-brand-500 group-open:rotate-45 transition-transform">+</span>
+          </summary>
+          <p class="mt-3 text-neutral-600 leading-relaxed">Windows-only at launch, matching Aethelgard's current platform support. Mac is on the roadmap once both products' Mac builds are ready — drop your email above to be notified.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────────────────── -->
+  <footer class="bg-navy-900 border-t border-white/5 py-12 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-white/40">
+      <div class="flex items-center gap-3">
+        <img src="/favicon.svg" alt="Aethelgard" class="h-6 w-6 rounded" />
+        <span>© 2026 Aethelgard. All rights reserved.</span>
+      </div>
+      <div class="flex gap-6">
+        <a href="/" class="hover:text-white">Aethelgard</a>
+        <a href="/pdf-studio" class="hover:text-white">PDF Studio</a>
+        <a href="/privacy" class="hover:text-white">Privacy</a>
+        <a href="/terms" class="hover:text-white">Terms</a>
+        <a href="mailto:contact@aethelgard.finance" class="hover:text-white">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script is:inline define:vars={{ PADDLE_TOKEN }}>
+    // ── Paddle init (shared with main site — same merchant) ────────────────
+    let _paddleReady = false;
+    function _initPaddle() {
+      if (_paddleReady) return true;
+      if (typeof Paddle === 'undefined') return false;
+      try {
+        Paddle.Initialize({
+          token: PADDLE_TOKEN,
+          eventCallback: function (ev) {
+            if (ev.name === 'checkout.error') console.error('[Paddle] checkout.error', ev.data);
+          },
+        });
+        _paddleReady = true;
+        return true;
+      } catch (err) {
+        console.error('[Paddle] Initialize failed:', err);
+        return false;
+      }
+    }
+    _initPaddle();
+
+    // ── Resume hosted-checkout transactions ────────────────────────────────
+    function _resumePaddleTxn() {
+      const params = new URLSearchParams(window.location.search);
+      const ptxn = params.get('_ptxn');
+      if (!ptxn) return;
+      if (!_initPaddle()) {
+        setTimeout(_resumePaddleTxn, 250);
+        return;
+      }
+      try {
+        Paddle.Checkout.open({ transactionId: ptxn });
+      } catch (err) {
+        console.error('[Paddle] Failed to resume transaction', err);
+      }
+    }
+    _resumePaddleTxn();
+
+    // ── Buy button — only present when PRICE_SENTINEL_ANNUAL is set ────────
+    (function () {
+      const buy = document.getElementById('sentinel-buy');
+      if (!buy) return;
+      const priceId = buy.getAttribute('data-price-id');
+      if (!priceId) return;
+
+      buy.addEventListener('click', () => {
+        if (!_initPaddle()) {
+          alert('Checkout could not load. Please refresh and try again.');
+          return;
+        }
+        Paddle.Checkout.open({
+          items: [{ priceId, quantity: 1 }],
+          settings: {
+            displayMode: 'overlay',
+            theme: 'light',
+            successUrl: 'https://aethelgard.finance/thank-you',
+          },
+        });
+      });
+    })();
+
+    // ── Waitlist form ──────────────────────────────────────────────────────
+    (function () {
+      const form = document.getElementById('sentinel-waitlist');
+      const status = document.getElementById('sentinel-waitlist-status');
+      if (!form || !status) return;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = new FormData(form).get('email');
+        if (!email) return;
+
+        status.textContent = 'Sending…';
+        status.style.color = 'rgba(255,255,255,0.6)';
+
+        try {
+          const res = await fetch('https://aethelgard-licensing.vercel.app/api/waitlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, type: 'sentinel-waitlist' }),
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          status.textContent = 'Thanks — we will email you when v0.1 ships.';
+          status.style.color = '#fbbf24';
+          form.reset();
+        } catch (err) {
+          status.textContent = 'Could not submit. Try emailing contact@aethelgard.finance.';
+          status.style.color = '#f87171';
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
