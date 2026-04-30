@@ -18,7 +18,7 @@ const PRICE_FOUNDING_ANNUAL   = '£199';
 // PADDLE_SENTINEL_PRICE_ID is wired up. Until then the buy button is
 // disabled and we collect emails on the waitlist instead.
 const PADDLE_TOKEN = 'live_e7f24b9ae86b393f8e32017ffb8';
-const PRICE_SENTINEL_ANNUAL: string | null = null;
+const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
 ---
 
 <!doctype html>
@@ -53,7 +53,7 @@ const PRICE_SENTINEL_ANNUAL: string | null = null;
         <a href="#faq"        class="hover:text-white transition-colors">FAQ</a>
         <a href="/"           class="hover:text-white transition-colors">Aethelgard →</a>
       </div>
-      <a href="#pricing" class="btn-primary text-sm py-2 px-4">Get notified</a>
+      <a href="#pricing" class="btn-primary text-sm py-2 px-4">Start free trial</a>
     </div>
   </nav>
 
@@ -89,6 +89,7 @@ const PRICE_SENTINEL_ANNUAL: string | null = null;
       <p class="mt-8 text-white/40 text-sm">
         <span class="text-brand-400 font-bold">Free</span> with Aethelgard Sovereign or Corporate —
         <span class="text-white/60">{PRICE_STANDALONE_ANNUAL}/year</span> standalone.
+        <span class="text-white/60">7-day free trial.</span>
       </p>
     </div>
   </section>
@@ -238,8 +239,9 @@ const PRICE_SENTINEL_ANNUAL: string | null = null;
             <span class="text-5xl font-black text-white">{PRICE_STANDALONE_ANNUAL}</span>
             <span class="text-white/50">/year</span>
           </div>
-          <p class="text-white/60 mb-6">For investors who want the decision engine without the multi-entity ledger. Annual subscription, billed once a year.</p>
+          <p class="text-white/60 mb-6">For investors who want the decision engine without the multi-entity ledger. 7-day free trial, then annual subscription billed once a year.</p>
           <ul class="space-y-2 text-white/80 text-sm mb-8">
+            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>7-day free trial — no commitment, cancel anytime in the trial</span></li>
             <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>Full regime classifier + cockpit + scenarios + heuristics</span></li>
             <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>BYO Anthropic API key for AI summaries (optional, off by default)</span></li>
             <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>Single user, single machine</span></li>
@@ -247,7 +249,7 @@ const PRICE_SENTINEL_ANNUAL: string | null = null;
           </ul>
           {PRICE_SENTINEL_ANNUAL ? (
             <button id="sentinel-buy" class="btn-primary w-full justify-center" data-price-id={PRICE_SENTINEL_ANNUAL}>
-              Buy — {PRICE_STANDALONE_ANNUAL}/year
+              Start 7-day free trial
             </button>
           ) : (
             <button class="btn-ghost w-full justify-center" disabled>
