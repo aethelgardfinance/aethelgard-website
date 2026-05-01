@@ -4,8 +4,8 @@ import '../styles/global.css';
 // Where the signed installer lives. Sentinel's source repo is private; this
 // public mirror receives a copy of every signed installer on tag-push, via
 // the release.yml step that calls `gh release create --repo ... sentinel-releases`.
-// Set RELEASE_URL = null while the installer pipeline is still being built.
-const RELEASE_URL: string | null = null;
+// `/releases/latest` always redirects to the newest published release.
+const RELEASE_URL: string | null = 'https://github.com/aethelgardfinance/sentinel-releases/releases/latest';
 
 // Pricing.
 const PRICE_STANDALONE_ANNUAL = '£299';
