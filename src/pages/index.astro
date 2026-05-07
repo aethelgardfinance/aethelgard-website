@@ -1046,21 +1046,45 @@ const faqs = [
   }
 
   const WAITLIST_API = 'https://aethelgard-licensing.vercel.app/api/waitlist';
+  const LOG_FAILURE_API = 'https://aethelgard-licensing.vercel.app/api/log-form-failure';
+
+  // Best-effort beacon so server-side observability captures fetch failures
+  // that never reach the regular endpoint (CORS, network, regional CDN
+  // issues). Explicitly scrubbed of PII — only context + brief error.
+  function reportFailure(context, errorBrief, status) {
+    try {
+      const payload = JSON.stringify({
+        context: String(context).slice(0, 60),
+        errorBrief: String(errorBrief || '').slice(0, 200),
+        status: typeof status === 'number' ? status : null,
+      });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(LOG_FAILURE_API, new Blob([payload], { type: 'application/json' }));
+      } else {
+        fetch(LOG_FAILURE_API, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true,
+        }).catch(() => {});
+      }
+    } catch {}
+  }
 
   async function submitWaitlist(form, type, successMsg) {
     const email = form.querySelector('input[type="email"]').value;
     const btn = form.querySelector('button[type="submit"]');
     btn.disabled = true;
     btn.textContent = 'Submitting…';
+    let lastStatus = 0;
     try {
       const res = await fetch(WAITLIST_API, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, type }),
       });
-      if (!res.ok) throw new Error('Server error');
+      lastStatus = res.status;
+      if (!res.ok) throw new Error('Server error ' + res.status);
       form.outerHTML = '<p class="text-brand-500 font-bold text-lg">' + successMsg.replace('{{email}}', email) + '</p>';
-    } catch {
+    } catch (err) {
+      reportFailure('waitlist:' + type, err && err.message, lastStatus);
       btn.disabled = false;
       btn.textContent = 'Join waitlist';
       alert('Something went wrong. Please email contact@aethelgard.finance directly.');
@@ -1088,16 +1112,19 @@ const faqs = [
       const btn = this.querySelector('button[type="submit"]');
       btn.disabled = true;
       btn.textContent = 'Submitting…';
+      let lastStatus = 0;
       try {
         const res = await fetch(WAITLIST_API, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, name, role, background, type: 'design-partner' }),
         });
-        if (!res.ok) throw new Error('Server error');
+        lastStatus = res.status;
+        if (!res.ok) throw new Error('Server error ' + res.status);
         const firstName = name.split(' ')[0];
         this.outerHTML = '<p class="text-brand-500 font-bold text-lg">Thanks ' + firstName + ' — we\'ll review your application and be in touch at ' + email + ' shortly.</p>';
-      } catch {
+      } catch (err) {
+        reportFailure('design-partner', err && err.message, lastStatus);
         btn.disabled = false;
         btn.textContent = 'Request Access';
         alert('Something went wrong. Please email contact@aethelgard.finance directly.');
