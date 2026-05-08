@@ -125,13 +125,13 @@ const faqs = [
         <img src="/favicon.svg" alt="Aethelgard" class="h-7 w-7 rounded-lg shadow-lg" />
         <span class="font-black text-white tracking-tighter uppercase italic text-lg">Aethelgard</span>
       </div>
-      <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-white/60">
+      <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-white/60">
         <a href="#features"     class="hover:text-white transition-colors">Features</a>
-        <a href="#demo"         class="hover:text-white transition-colors">Demo</a>
         <a href="#pricing"      class="hover:text-white transition-colors">Pricing</a>
         <a href="#early-access" class="hover:text-white transition-colors text-brand-400">Early Access</a>
         <a href="/pdf-studio"   class="hover:text-white transition-colors">PDF Studio</a>
         <a href="/sentinel"     class="hover:text-white transition-colors">Sentinel</a>
+        <a href="/guides"       class="hover:text-white transition-colors">Guides</a>
         <a href="#faq"          class="hover:text-white transition-colors">FAQ</a>
         <a href="/about"        class="hover:text-white transition-colors">About</a>
       </div>
@@ -543,6 +543,7 @@ const faqs = [
       <div class="text-center mb-10">
         <p class="section-label mb-3">Pricing</p>
         <h2 class="text-4xl font-black tracking-tighter text-neutral-900 mb-4">Own it outright. Or start annual.</h2>
+        <p class="text-neutral-600 max-w-xl mx-auto mb-3"><strong class="text-neutral-900">Personal · Sovereign · Corporate</strong> — priced per individual, beneficial owner, or legal entity. Not per asset, AUM, or transaction volume.</p>
         <p class="text-neutral-500 max-w-lg mx-auto">Not ready to buy? <a href={DOWNLOAD_WIN} class="underline underline-offset-2 hover:text-neutral-900 transition-colors">Download and try free for 30 days</a> — no card, no account needed.</p>
       </div>
 
@@ -569,10 +570,10 @@ const faqs = [
       <!-- Pricing cards -->
       <div class="grid md:grid-cols-3 gap-6">
 
-        <!-- Basic -->
+        <!-- Personal (SKU: basic) -->
         <div class="rounded-2xl border border-neutral-200 p-8 flex flex-col">
           <div class="mb-6">
-            <p class="text-xs font-black uppercase tracking-widest text-neutral-400 mb-1">Basic</p>
+            <p class="text-xs font-black uppercase tracking-widest text-neutral-400 mb-1">Personal</p>
             <div id="price-basic-lifetime" class="flex items-end gap-1">
               <span class="text-4xl font-black text-neutral-900">£249</span>
               <span class="text-neutral-400 mb-1 font-medium">one-time</span>
@@ -581,28 +582,27 @@ const faqs = [
               <span class="text-4xl font-black text-neutral-900">£99</span>
               <span class="text-neutral-400 mb-1 font-medium">/ year</span>
             </div>
-            <p class="text-sm text-neutral-500 mt-2">Core ledger for personal finances</p>
+            <p class="text-sm text-neutral-500 mt-2">For one individual's personal wealth.</p>
           </div>
           <ul class="space-y-3 text-sm text-neutral-600 mb-8 flex-1">
-            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Transaction tracking</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Bank, cards, mortgages &amp; spending</li>
             <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> P&amp;L and Balance Sheet</li>
-            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Budgeting &amp; goals</li>
-            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Recurring payments</li>
-            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Encrypted vault backup</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Budgeting, goals &amp; recurring payments</li>
+            <li class="flex gap-2"><span class="text-emerald-500 font-bold">✓</span> Encrypted local vault &amp; backup</li>
           </ul>
           <button onclick="openCheckout('basic')" class="w-full py-3 rounded-xl border-2 border-neutral-200 font-bold text-neutral-700 hover:border-neutral-900 hover:text-neutral-900 transition-colors text-sm cursor-pointer">
-            Buy Basic
+            Buy Personal
           </button>
           <p class="text-center text-xs text-neutral-400 mt-3"><a href={DOWNLOAD_WIN} class="underline underline-offset-2 hover:text-neutral-600 transition-colors">Try free for 30 days</a> before you buy</p>
         </div>
 
-        <!-- Standard — highlighted -->
+        <!-- Sovereign (SKU: standard) — highlighted -->
         <div class="rounded-2xl border-2 border-brand-400 bg-brand-50/30 p-8 flex flex-col relative shadow-lg shadow-brand-500/10">
           <div class="absolute -top-3.5 left-1/2 -translate-x-1/2">
             <span class="bg-brand-500 text-white text-xs font-black uppercase tracking-widest px-3 py-1 rounded-full">Most Popular</span>
           </div>
           <div class="mb-6">
-            <p class="text-xs font-black uppercase tracking-widest text-brand-600 mb-1">Standard</p>
+            <p class="text-xs font-black uppercase tracking-widest text-brand-600 mb-1">Sovereign</p>
             <div id="price-standard-lifetime" class="flex items-end gap-1">
               <span class="text-4xl font-black text-neutral-900">£499</span>
               <span class="text-neutral-400 mb-1 font-medium">one-time</span>
@@ -611,25 +611,25 @@ const faqs = [
               <span class="text-4xl font-black text-neutral-900">£199</span>
               <span class="text-neutral-400 mb-1 font-medium">/ year</span>
             </div>
-            <p class="text-sm text-neutral-500 mt-2">Adds investments alongside your ledger</p>
+            <p class="text-sm text-neutral-500 mt-2">For one ultimate beneficial owner (UBO) — companies, trusts, holdings on one map.</p>
           </div>
           <ul class="space-y-3 text-sm text-neutral-600 mb-8 flex-1">
-            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Everything in Basic</li>
-            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Portfolio &amp; analytics</li>
+            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Everything in Personal</li>
+            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Portfolios &amp; analytics</li>
             <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> FX rates &amp; revaluation</li>
             <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Tax tools (VAT, CGT)</li>
-            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Multi-currency</li>
+            <li class="flex gap-2"><span class="text-brand-500 font-bold">✓</span> Multi-currency, multi-entity</li>
           </ul>
           <button onclick="openCheckout('standard')" class="w-full py-3 rounded-xl bg-brand-500 hover:bg-brand-600 font-bold text-white transition-colors text-sm shadow-md cursor-pointer">
-            Buy Standard
+            Buy Sovereign
           </button>
           <p class="text-center text-xs text-neutral-400 mt-3"><a href={DOWNLOAD_WIN} class="underline underline-offset-2 hover:text-neutral-600 transition-colors">Try free for 30 days</a> before you buy</p>
         </div>
 
-        <!-- Advanced -->
+        <!-- Corporate (SKU: advanced) -->
         <div class="rounded-2xl border border-neutral-200 p-8 flex flex-col bg-navy-900">
           <div class="mb-6">
-            <p class="text-xs font-black uppercase tracking-widest text-white/40 mb-1">Advanced</p>
+            <p class="text-xs font-black uppercase tracking-widest text-white/40 mb-1">Corporate</p>
             <div id="price-advanced-lifetime" class="flex items-end gap-1">
               <span class="text-4xl font-black text-white">£999</span>
               <span class="text-white/40 mb-1 font-medium">one-time</span>
@@ -638,10 +638,10 @@ const faqs = [
               <span class="text-4xl font-black text-white">£399</span>
               <span class="text-white/40 mb-1 font-medium">/ year</span>
             </div>
-            <p class="text-sm text-white/40 mt-2">Full corporate-grade accounting</p>
+            <p class="text-sm text-white/40 mt-2">For one family office or operating company — corporate-grade accounting.</p>
           </div>
           <ul class="space-y-3 text-sm text-white/70 mb-8 flex-1">
-            <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Everything in Standard</li>
+            <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Everything in Sovereign</li>
             <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Fixed assets &amp; depreciation</li>
             <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Accruals &amp; hedge accounting</li>
             <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Deferred tax workings</li>
@@ -649,7 +649,7 @@ const faqs = [
             <li class="flex gap-2"><span class="text-brand-400 font-bold">✓</span> Group consolidation (IFRS)</li>
           </ul>
           <button onclick="openCheckout('advanced')" class="w-full py-3 rounded-xl bg-white hover:bg-neutral-100 font-bold text-navy-900 transition-colors text-sm cursor-pointer">
-            Buy Advanced
+            Buy Corporate
           </button>
           <p class="text-center text-xs text-white/30 mt-3"><a href={DOWNLOAD_WIN} class="underline underline-offset-2 hover:text-white/60 transition-colors">Try free for 30 days</a> before you buy</p>
         </div>
@@ -674,18 +674,18 @@ const faqs = [
           </div>
           <h2 class="text-2xl font-black tracking-tighter text-white mb-3">Set up your clients on Aethelgard</h2>
           <p class="text-white/50 text-sm leading-relaxed mb-4">
-            The Advisor Bundle gives you three independent Advanced Lifetime licenses — one per client vault — delivered together in a single email.
+            The Advisor Bundle gives you three independent Corporate-grade Lifetime licences — one per client vault — delivered together in a single email.
           </p>
           <ul class="space-y-2 text-sm text-white/60">
-            <li class="flex items-center gap-2"><span class="text-brand-400 font-bold">&#10003;</span> 3 × Advanced Lifetime keys — each activates a separate client vault</li>
+            <li class="flex items-center gap-2"><span class="text-brand-400 font-bold">&#10003;</span> 3 × Corporate-grade Lifetime keys — each activates a separate client vault</li>
             <li class="flex items-center gap-2"><span class="text-brand-400 font-bold">&#10003;</span> Full IFRS-grade accounting, consolidation, hedge accounting, deferred tax</li>
             <li class="flex items-center gap-2"><span class="text-brand-400 font-bold">&#10003;</span> Your clients own their data — nothing leaves their device</li>
           </ul>
         </div>
         <div class="shrink-0 text-center md:text-right">
           <p class="text-3xl font-black text-white mb-1">£2,097</p>
-          <p class="text-white/40 text-xs mb-1">one-time · £699 per license</p>
-          <p class="text-amber-400/70 text-xs mb-6">Advisors' bundle restores to £2,997 after Beta</p>
+          <p class="text-white/40 text-xs mb-1">one-time · £699 per licence</p>
+          <p class="text-amber-400/70 text-xs mb-6">Advisor Bundle returns to £2,997 after launch</p>
           <button
             onclick="openAdvisorBundle()"
             class="w-full md:w-auto px-8 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 font-bold text-white transition-colors text-sm cursor-pointer shadow-lg shadow-brand-500/20"
@@ -694,6 +694,19 @@ const faqs = [
           </button>
           <p class="text-white/30 text-xs mt-3">All three keys delivered by email</p>
         </div>
+      </div>
+
+      <!-- Plain-language commercial terms -->
+      <div class="mt-10 pt-6 border-t border-white/10">
+        <p class="text-white/45 text-xs leading-relaxed max-w-3xl">
+          <strong class="text-white/70">Plain-language licensing.</strong>
+          A <strong>Personal</strong> licence is for one individual's own finances.
+          A <strong>Sovereign</strong> licence is for one ultimate beneficial owner and their entities.
+          A <strong>Corporate</strong> licence is for one legal entity (your firm or family office) and its vaults.
+          The <strong>Advisor Bundle</strong> is for one advisory firm using each key for a separate client vault.
+          Licences are priced per individual, beneficial owner, or legal entity — not per asset, AUM, or transaction volume.
+          See <a href="/terms" class="underline underline-offset-2 hover:text-white/80 transition-colors">Terms</a> for the full licence.
+        </p>
       </div>
     </div>
   </section>
@@ -885,6 +898,7 @@ const faqs = [
       <div class="flex items-center gap-6 text-xs text-white/30 font-medium">
         <a href={DOWNLOAD_WIN}      class="hover:text-white/60 transition-colors">Download</a>
         <a href="#pricing"          class="hover:text-white/60 transition-colors">Pricing</a>
+        <a href="/guides"           class="hover:text-white/60 transition-colors">Guides</a>
         <a href="#faq"              class="hover:text-white/60 transition-colors">FAQ</a>
         <a href="/about"            class="hover:text-white/60 transition-colors">About</a>
         <a href="/quick-start"      class="hover:text-white/60 transition-colors">Quick Start</a>

@@ -1,0 +1,163 @@
+---
+import '../styles/global.css';
+
+const { frontmatter } = Astro.props;
+const { title, description, slug } = frontmatter;
+const pageTitle = `${title} — Aethelgard`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={`https://aethelgard.finance/guides/${slug}`} />
+  </head>
+  <body class="bg-white text-neutral-900 font-sans antialiased">
+
+    <!-- Nav -->
+    <nav class="sticky top-0 z-50 bg-navy-900 border-b border-white/5">
+      <div class="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
+        <a href="/" class="text-white font-black tracking-tight text-lg uppercase italic">Aethelgard</a>
+        <div class="flex items-center gap-6">
+          <a href="/guides" class="text-sm font-semibold text-white/50 hover:text-white transition-colors">Guides</a>
+          <a href="/#pricing" class="text-sm font-semibold text-white/50 hover:text-white transition-colors hidden sm:block">Pricing</a>
+          <a href="/#early-access" class="text-sm font-semibold text-brand-400 hover:text-brand-300 transition-colors hidden sm:block">Design Partners</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-navy-900 py-16 px-6 border-b border-white/5">
+      <div class="max-w-3xl mx-auto">
+        <div class="flex items-center gap-2 text-white/30 text-xs font-bold uppercase tracking-widest mb-4">
+          <a href="/" class="hover:text-white/60 transition-colors">Home</a>
+          <span>/</span>
+          <a href="/guides" class="hover:text-white/60 transition-colors">Guides</a>
+        </div>
+        <p class="section-label mb-3">Aethelgard guide</p>
+        <h1 class="text-4xl md:text-5xl font-black tracking-tighter text-white mb-4">{title}</h1>
+        <p class="text-white/60 text-lg max-w-2xl">{description}</p>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <main class="bg-white py-16 px-6">
+      <article class="guide-body max-w-3xl mx-auto text-neutral-800">
+        <slot />
+      </article>
+    </main>
+
+    <!-- Footer CTA -->
+    <section class="bg-neutral-50 border-t border-neutral-200 py-12 px-6">
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-brand-600 mb-3">Try it yourself</p>
+        <h2 class="text-2xl font-black tracking-tighter text-neutral-900 mb-4">Aethelgard runs on your device. Free for 30 days.</h2>
+        <p class="text-neutral-600 mb-6 max-w-xl mx-auto">No card, no account, no cloud sync — just download and try the full Corporate-grade feature set on your own data.</p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a href="/#pricing" class="btn-primary">View pricing</a>
+          <a href="/guides" class="inline-flex items-center gap-2 px-6 py-3 border border-neutral-300 text-neutral-700 font-semibold rounded-xl hover:border-neutral-900 hover:text-neutral-900 transition-colors">More guides</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-white/40 text-sm py-8 px-6 border-t border-white/5">
+      <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p>© 2026 Aethelgard. All rights reserved.</p>
+        <div class="flex items-center gap-6">
+          <a href="/privacy" class="hover:text-white/70 transition-colors">Privacy</a>
+          <a href="/terms" class="hover:text-white/70 transition-colors">Terms</a>
+          <a href="/refunds" class="hover:text-white/70 transition-colors">Refunds</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  .guide-body {
+    font-size: 17px;
+    line-height: 1.75;
+  }
+  .guide-body > p,
+  .guide-body > ul,
+  .guide-body > ol {
+    margin-top: 1.1rem;
+    margin-bottom: 1.1rem;
+  }
+  .guide-body h2 {
+    font-size: 1.875rem;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: #0f0f1a;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  .guide-body h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: #0f0f1a;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .guide-body strong {
+    color: #0f0f1a;
+    font-weight: 700;
+  }
+  .guide-body a {
+    color: #d97706;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(217, 119, 6, 0.3);
+    transition: border-color 0.15s;
+  }
+  .guide-body a:hover {
+    border-bottom-color: #d97706;
+  }
+  .guide-body ul {
+    padding-left: 1.5rem;
+  }
+  .guide-body ul > li {
+    list-style-type: disc;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .guide-body ul > li::marker {
+    color: #f59e0b;
+  }
+  .guide-body ol {
+    padding-left: 1.5rem;
+  }
+  .guide-body ol > li {
+    list-style-type: decimal;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .guide-body ol > li::marker {
+    color: #f59e0b;
+    font-weight: 700;
+  }
+  .guide-body code {
+    background: #fffbeb;
+    color: #92400e;
+    padding: 0.1rem 0.35rem;
+    border-radius: 0.25rem;
+    font-size: 0.92em;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+  .guide-body blockquote {
+    border-left: 4px solid #f59e0b;
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: #525252;
+    font-style: italic;
+  }
+</style>
