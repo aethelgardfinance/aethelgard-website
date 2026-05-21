@@ -46,7 +46,7 @@ const lastUpdated = '16 April 2026';
 
       <section>
         <h2 class="text-2xl font-black tracking-tight text-neutral-900 mb-4">2. Your financial data</h2>
-        <p>All data you enter into Aethelgard — transactions, account balances, entity information, documents — is stored locally on your device in an AES-256 encrypted database. This data is:</p>
+        <p>All data you enter into Aethelgard — transactions, account balances, entity information, documents — is stored locally on your device in a SQLite database. Backups exported from the app are encrypted with AES-256 by default, and optional SQLCipher AES-256 at-rest encryption is available for the live vault file. This data is:</p>
         <ul class="list-disc pl-6 mt-3 space-y-2">
           <li>Never transmitted to our servers</li>
           <li>Never shared with third parties</li>
