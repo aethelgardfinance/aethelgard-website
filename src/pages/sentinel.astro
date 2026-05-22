@@ -8,15 +8,14 @@ import '../styles/global.css';
 const RELEASE_URL: string | null = 'https://github.com/aethelgardfinance/sentinel-releases/releases/latest';
 
 // Pricing.
-const PRICE_STANDALONE_ANNUAL = '£299';
+const PRICE_STANDALONE_ANNUAL = '£499';
 const PRICE_FOUNDING_ANNUAL   = '£199';
 
 // Paddle.
 // Same merchant token as the main Aethelgard site — both products bill through
-// the same Paddle account. PRICE_SENTINEL_ANNUAL is the £299/year product;
-// it lands once the Paddle product is created and the webhook env var
-// PADDLE_SENTINEL_PRICE_ID is wired up. Until then the buy button is
-// disabled and we collect emails on the waitlist instead.
+// the same Paddle account. PRICE_SENTINEL_ANNUAL must point at the £499/year
+// Paddle product (NOT the legacy £299 one) — if these get out of sync the
+// website will say one price and checkout will charge another.
 const PADDLE_TOKEN = 'live_e7f24b9ae86b393f8e32017ffb8';
 const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
 ---
@@ -26,7 +25,7 @@ const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Aethelgard Sentinel — regime-aware portfolio decision engine. Macro classifier, scenario stress testing, and heuristic scorecards grounded in named investor frameworks. Free for Aethelgard Sovereign and Corporate licence holders, £299/year standalone." />
+  <meta name="description" content="Aethelgard Sentinel — regime-aware portfolio decision engine. Macro classifier, scenario stress testing, and heuristic scorecards grounded in named investor frameworks. Free for Aethelgard Sovereign and Corporate licence holders, £499/year standalone." />
   <title>Aethelgard Sentinel — institutional-grade thinking for sophisticated private capital</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta property="og:title" content="Aethelgard Sentinel" />
@@ -64,7 +63,7 @@ const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
 
     <div class="relative max-w-4xl mx-auto text-center">
       <div class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 text-brand-400 text-xs font-bold uppercase tracking-widest mb-8">
-        Windows · v0.1 · founding member
+        Windows · founding member
       </div>
 
       <h1 class="text-5xl md:text-6xl font-black text-white leading-[1.05] tracking-tighter mb-6">
@@ -227,7 +226,7 @@ const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
             <a href={RELEASE_URL} class="btn-primary w-full justify-center">Download for Windows</a>
           ) : (
             <div class="text-center text-white/50 text-sm py-3 border border-white/10 rounded-xl">
-              Public download lands when v0.1 ships — drop your email below to be notified.
+              Public download lands shortly — drop your email below to be notified.
             </div>
           )}
         </div>
@@ -261,7 +260,7 @@ const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
 
       <!-- Waitlist form -->
       <form id="sentinel-waitlist" class="mt-12 max-w-md mx-auto">
-        <label class="block text-white/70 text-sm font-semibold mb-2 text-center">Get notified the moment v0.1 lands</label>
+        <label class="block text-white/70 text-sm font-semibold mb-2 text-center">Get notified the moment public download lands</label>
         <div class="flex gap-2">
           <input type="email" name="email" required placeholder="you@example.com" class="flex-1 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-brand-400" />
           <button type="submit" class="btn-primary px-6 py-3">Notify me</button>
@@ -431,7 +430,7 @@ const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
             body: JSON.stringify({ email, type: 'sentinel-waitlist' }),
           });
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          status.textContent = 'Thanks — we will email you when v0.1 ships.';
+          status.textContent = 'Thanks — we will email you when public download lands.';
           status.style.color = '#fbbf24';
           form.reset();
         } catch (err) {
