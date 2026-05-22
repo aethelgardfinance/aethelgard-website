@@ -1,6 +1,6 @@
 # Voice — Aethelgard's writing fingerprint
 
-**Status: LOCKED 2026-04-28.** Calibrated against six positive references, two anti-references, and one form-negative reference. Updated only when Cherie explicitly corrects.
+**Status: LOCKED 2026-04-28; structural-truth rule added 2026-04-29; absolute-claim rule added 2026-04-29.** Calibrated against six positive references, two anti-references, and one form-negative reference. Updated only when Cherie explicitly corrects.
 
 This file is the operational voice rulebook. Every drafting command must pass it before output.
 
@@ -23,6 +23,8 @@ If a draft can be read aloud in a private banker's office at 11am on a Tuesday w
 - **Neutral on outcomes; convicted on principles.** No market calls, no yield promises, no political commentary. But state architectural and accounting principles flat.
 - **Decade-thinking.** Trader-time is days. Founder-time is years. Aethelgard-time is decades.
 - **Conversation-as-frame.** Cherie writes as if in conversation with the reader, not lecturing them. Anticipate the smart objection; name it; answer it.
+- **Structural truth, not witness claim.** Open by naming the reality of the world, not by claiming to have witnessed it. Reject *"the conversation I have weekly,"* *"a founder told me last week,"* *"I see this all the time."* Replace with structural framings: *"the under-exposed reality of private finance is..."*, *"in private wealth, this is structural — not exceptional"*, *"most multi-entity HNW structures..."*. **Why:** witness claims anchor the post to me; structural claims anchor it to the reader's own knowing — the more powerful posture. They also avoid an implicit client-population claim that would risk the Koninklijke NBA confidentiality line, and avoid claiming a caseload Aethelgard does not yet have at scale. Added 2026-04-29 after Cherie corrected the framing on the FSN draft.
+- **No universal absolute claims about HNW structures or principals.** Reject *"every multi-entity HNW structure has..."*, *"all family principals struggle with..."*, *"no advisor ever asks..."*, *"always the case."* Replace with structural claims about *the architecture that produces the pattern*, not universal claims about *every instance*: *"It is structural, not exceptional,"* *"the architecture produces this,"* *"the reporting we currently use is built to smooth it over, not surface it."* **Why:** universal claims are falsifiable in one tweet (some HNW structures are pristine — single-family offices on Addepar, recently-rebuilt setups, ultra-disciplined founder-operators, integrated wealth offerings at top private banks); structural claims describe the *cause* and remain defensible. Conviction on principles, neutrality on outcomes — universal claims are conviction *on outcomes*. Added 2026-04-29 after Cherie corrected the FSN draft.
 - **Quiet declarative closes.** *"They do matter."* / *"It is the answer to that conversation."*
 
 ---
@@ -43,7 +45,7 @@ And from the BK lecture (form-negative reference): no length-without-purpose, no
 Calibrated from Cherie's existing About and homepage copy:
 
 - **Short sentences are common.** *"It is the answer to that conversation."* *"They do matter."*
-- **Long sentences are reserved for accumulation of evidence**, not for decoration. *"It supports multiple entities: companies, trusts, personal accounts, all in one encrypted vault."*
+- **Long sentences are reserved for accumulation of evidence**, not for decoration. *"It supports multiple entities: companies, trusts, personal accounts, all in one local vault on your machine."*
 - **One-sentence paragraphs at moments of weight.** Use sparingly; their power comes from rarity.
 - **Em-dashes used deliberately** — for emphasis, never as a comma substitute. ≤ 1 per paragraph average.
 - **Italics used for emphasis** — sparingly, for the word that *must* land.
@@ -98,6 +100,8 @@ Every draft passes these gates in order. Skipping a gate is a bug, not a shortcu
 4. **One concept per piece** — if more than one durable idea is present, split.
 5. **Length cap** — is the draft within the format's range in `ops/style-guide.md`? If at the cap, can it be cut shorter?
 6. **Voice rules** — sentence rhythm, word choice, em-dash and italics use, no banned phrases (this file).
+6a. **Structural truth, not witness claim** — opener names a reality of the world, not a thing the writer has personally seen. Reject *"weekly conversations,"* *"a founder told me,"* *"I see this all the time"* in opening positions.
+6b. **No universal absolute claims** — reject *"every,"* *"all,"* *"none ever,"* *"always"* in population claims about HNW structures, founders, or advisors. Replace with structural claims about the *architecture that produces the pattern*. Mathematical / definitional universals are exempt (*"every double-entry transaction balances by definition"* is fine).
 7. **Dovedi check** — no property-guru tells.
 8. **Cramer check** — no financial-entertainment tells.
 9. **BK-form check** — no length-without-purpose, no in-group vocabulary, no discursive circling.

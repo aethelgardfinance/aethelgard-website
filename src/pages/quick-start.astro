@@ -6,7 +6,7 @@ const steps = [
     number: '01',
     icon: 'VLT',
     title: 'Create Your Vault',
-    subtitle: 'Your vault is a local SQLite file on your device. It never leaves your machine — backups are AES-256 encrypted, and live-file encryption is optional.',
+    subtitle: 'Your vault is a local SQLite file on your device. It never leaves your machine — backups are AES-256 encrypted before they sync, and at-rest encryption of the live vault file is on the roadmap.',
     items: [
       'Open the application — you will be taken directly to vault setup on first launch.',
       'Click <strong>Create New Vault</strong>.',
@@ -20,7 +20,7 @@ const steps = [
       style: 'warn',
       text: 'There is no PIN recovery mechanism. If you lose your PIN, the vault cannot be opened. Write it down and store it securely offline — a password manager or physical safe.',
     },
-    outcome: 'You have an encrypted vault with your first entity. Every transaction you record from here will be automatically SHA-256 hash-chained.',
+    outcome: 'You have a vault with your first entity. Every transaction you record from here will be automatically SHA-256 hash-chained, and backups are AES-256-GCM encrypted on your machine before they sync.',
     featureCallout: {
       icon: 'SHA',
       title: 'Tamper-Evident Records — Active from Your First Entry',

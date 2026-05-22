@@ -40,7 +40,7 @@ const features = [
   {
     icon: '🔒',
     title: 'Local-First Privacy',
-    body: 'Your financial map is no one else\'s business. Aethelgard runs purely on your own device with zero telemetry or cloud requirements. Your data is locked behind AES-256 encryption and remains solely under your control.',
+    body: 'Your financial map is no one else\'s business. Aethelgard runs purely on your own device with zero telemetry or cloud requirements. Backups are AES-256-encrypted before they leave your machine, and your data remains solely under your control.',
   },
 ];
 
@@ -59,7 +59,7 @@ const faqs = [
   },
   {
     q: 'How private is my data?',
-    a: 'Extremely private. Aethelgard is a local-first application — there are no mandatory cloud accounts, no telemetry, and no background sync unless you configure it. Your financial history lives only on your machine, protected by AES-256 encryption.',
+    a: 'Extremely private. Aethelgard is a local-first application — there are no mandatory cloud accounts, no telemetry, and no background sync unless you configure it. Your financial history lives only on your machine; backups are AES-256-GCM encrypted before they leave your device. At-rest encryption of the live vault file is on the roadmap — we recommend BitLocker (Windows full-disk encryption) for defence-in-depth in the meantime.',
   },
   {
     q: 'Where is my information stored?',
@@ -331,8 +331,8 @@ const faqs = [
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
           <div class="text-brand-400 mb-4"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg></div>
-          <h3 class="font-black text-white text-sm uppercase tracking-wide mb-2">Encrypted backups, optional at-rest</h3>
-          <p class="text-white/50 text-sm leading-relaxed">Backups are AES-256-GCM encrypted before they leave your machine with an Argon2id-derived key. At-rest encryption of the local vault file (AES-256 via SQLCipher) is optional and controlled by you.</p>
+          <h3 class="font-black text-white text-sm uppercase tracking-wide mb-2">Encrypted backups</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Backups are AES-256-GCM encrypted before they leave your machine with an Argon2id-derived key from your passphrase. At-rest encryption of the local vault file (AES-256 via SQLCipher) is on the roadmap.</p>
         </div>
         <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
           <div class="text-brand-400 mb-4"><svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 010 12.728M15.536 8.464a5 5 0 010 7.072M12 11a1 1 0 100 2 1 1 0 000-2zM3 3l18 18"/></svg></div>

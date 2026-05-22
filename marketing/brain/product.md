@@ -26,7 +26,7 @@ Aethelgard answers it.
 
 A double-entry ledger that supports:
 
-- **Multi-entity** — companies, trusts, personal accounts in one encrypted vault
+- **Multi-entity** — companies, trusts, personal accounts in one local vault, with AES-256-encrypted backups
 - **Multi-currency** with IFRS-compliant FX revaluation
 - **Group consolidation** with intercompany elimination
 - **Fixed assets** and depreciation schedules
@@ -45,9 +45,9 @@ All built as a Registered Accountant (Koninklijke NBA) would expect. **Not appro
 
 These are not implementation details. They are the product.
 
-1. **Local-first, by architectural choice.** Aethelgard runs on the user's device. The vault is an encrypted SQLite file. No cloud. No telemetry. No background sync unless the user configures their own WebDAV target (Nextcloud, NAS, any WebDAV-compatible storage).
+1. **Local-first, by architectural choice.** Aethelgard runs on the user's device. The vault is a local SQLite file. No cloud. No telemetry. No background sync unless the user configures their own WebDAV target (Nextcloud, NAS, any WebDAV-compatible storage).
 
-2. **AES-256 encrypted vault.** Even Aethelgard cannot read it.
+2. **AES-256-encrypted backups.** Backups are AES-256-GCM encrypted on the user's machine before they sync — with an Argon2id-derived key from the user's passphrase. Even Aethelgard cannot read them. At-rest encryption of the live vault file is on the roadmap; we recommend BitLocker (Windows full-disk encryption) for defence-in-depth.
 
 3. **Zero telemetry.** No analytics, no crash reports, no calls home.
 

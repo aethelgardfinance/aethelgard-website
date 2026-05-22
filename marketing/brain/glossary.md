@@ -6,7 +6,7 @@ Used to keep cross-channel language consistent. When in doubt, defer to these de
 
 ## Product terms
 
-- **Vault** — the encrypted SQLite file Aethelgard stores the user's data in. Singular per user.
+- **Vault** — the local SQLite file Aethelgard stores the user's data in. Singular per user. Backups of the vault are AES-256-GCM encrypted on the user's machine before they sync; at-rest encryption of the live vault file via SQLCipher AES-256 is on the development roadmap.
 - **Local-first** — runs on the user's device; no cloud sync unless the user configures their own WebDAV target.
 - **Tamper-evident** — every journal entry is SHA-256 linked to the previous one; modifying historical data breaks the chain.
 - **Period lock** — closing a financial period so prior entries cannot be edited; standard professional practice.
