@@ -6,7 +6,7 @@ The durable WHAT, WHY and HOW of the core product. Update only when the product 
 
 ## What it is, in one sentence
 
-Aethelgard is a **professional-grade, double-entry accounting application** for individuals managing serious wealth — built to run **entirely on the user's machine**, with **AES-256 encryption** and a **SHA-256 tamper-evident hash chain**.
+Aethelgard is a **professional-grade, double-entry accounting application** for individuals managing serious wealth — built to run **entirely on the user's machine**, with **AES-256-encrypted backups (and optional AES-256 at-rest vault encryption)** and a **SHA-256 tamper-evident hash chain**.
 
 ---
 
@@ -47,7 +47,7 @@ These are not implementation details. They are the product.
 
 1. **Local-first, by architectural choice.** Aethelgard runs on the user's device. The vault is a local SQLite file. No cloud. No telemetry. No background sync unless the user configures their own WebDAV target (Nextcloud, NAS, any WebDAV-compatible storage).
 
-2. **AES-256-encrypted backups.** Backups are AES-256-GCM encrypted on the user's machine before they sync — with an Argon2id-derived key from the user's passphrase. Even Aethelgard cannot read them. At-rest encryption of the live vault file is on the roadmap; we recommend BitLocker (Windows full-disk encryption) for defence-in-depth.
+2. **AES-256-encrypted backups, with optional at-rest vault encryption.** Backups are AES-256-GCM encrypted on the user's machine before they sync — with an Argon2id-derived key from the user's passphrase. Even Aethelgard cannot read them. At-rest encryption of the live vault file (AES-256 via SQLCipher) is available too — optional, off by default, switched on by the user in Settings → Vault and unlocked with their PIN at startup, with a one-time recovery code as a backup way in.
 
 3. **Zero telemetry.** No analytics, no crash reports, no calls home.
 

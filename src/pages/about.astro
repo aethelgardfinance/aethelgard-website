@@ -181,7 +181,7 @@ const toolGaps = [
             It is exactly the kind of information that should not live on a server you don't control — subject to data breaches, government requests, or simply the commercial decisions of a software company you've never met.
           </p>
           <p>
-            Aethelgard runs on your device. Backups are encrypted with AES-256-GCM (with an Argon2id-derived key from your passphrase) before they leave your machine. At-rest encryption of the live vault file via SQLCipher AES-256 is on the development roadmap; we recommend running with full-disk encryption (BitLocker) for defence-in-depth in the meantime. There is no telemetry. There is no background sync unless you configure it yourself. When we say "your data never leaves your device," we mean it architecturally, not just as a marketing claim.
+            Aethelgard runs on your device. Backups are encrypted with AES-256-GCM (with an Argon2id-derived key from your passphrase) before they leave your machine. You can also encrypt the live vault file at rest — optional AES-256 (SQLCipher), off by default, switched on by you in Settings → Vault and unlocked with your PIN at startup. There is no telemetry. There is no background sync unless you configure it yourself. When we say "your data never leaves your device," we mean it architecturally, not just as a marketing claim.
           </p>
         </div>
 
@@ -193,7 +193,7 @@ const toolGaps = [
             </div>
             <div>
               <p class="font-black text-neutral-900 text-sm mb-1">AES-256-encrypted backups</p>
-              <p class="text-xs text-neutral-500 leading-relaxed">Backups are AES-256-GCM encrypted on your machine before they sync. At-rest vault encryption is on the roadmap.</p>
+              <p class="text-xs text-neutral-500 leading-relaxed">Backups are AES-256-GCM encrypted on your machine before they sync. Optional AES-256 at-rest encryption of the live vault is available too — off by default, switched on by you.</p>
             </div>
           </div>
           <div class="bg-neutral-50 border border-neutral-200 rounded-xl p-5 flex gap-4">
