@@ -185,7 +185,7 @@ const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
         <div class="bg-white p-8 rounded-2xl border border-neutral-200">
           <div class="text-3xl mb-4">🔒</div>
           <h3 class="text-lg font-black text-navy-900 mb-2">Local-first, private</h3>
-          <p class="text-neutral-600 leading-relaxed">Local SQLite vault on your own machine with AES-256-encrypted backups. AI features are opt-in and route through a sanitisation layer that strips identifiers — no raw position data ever leaves the device.</p>
+          <p class="text-neutral-600 leading-relaxed">Local SQLite vault on your own machine with AES-256-encrypted backups. AI features are opt-in and route through a sanitisation layer that strips identifiers — raw position data never leaves the device; AI calls send only sanitised, anonymised aggregates.</p>
         </div>
 
         <div class="bg-white p-8 rounded-2xl border border-neutral-200">
@@ -282,7 +282,7 @@ const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
           <ul class="space-y-2 text-white/80 text-sm mb-8">
             <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>7-day free trial — no commitment, cancel anytime in the trial</span></li>
             <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>Full regime classifier + cockpit + scenarios + heuristics</span></li>
-            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>BYO Anthropic API key for AI summaries (optional, off by default)</span></li>
+            <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>AI summaries included via managed key — or bring your own Anthropic key (optional, off by default)</span></li>
             <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>Single user, single machine</span></li>
             <li class="flex items-start gap-2"><span class="text-white/30 mt-0.5">·</span><span class="text-white/40">No lifetime tier — annual only</span></li>
           </ul>
@@ -356,7 +356,7 @@ const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
             Does the AI see my portfolio?
             <span class="text-brand-500 group-open:rotate-45 transition-transform">+</span>
           </summary>
-          <p class="mt-3 text-neutral-600 leading-relaxed">Only if you turn AI on (it's off by default), and only after the on-device sanitiser strips identifiers and aggregates positions. Names, account numbers and ISIN-level data never leave your machine — the sanitiser leak-test suite fails the build if any allow-listed shape leaks an ID. AI is BYO Anthropic key — you pay for inference directly, and you can disable it at any time.</p>
+          <p class="mt-3 text-neutral-600 leading-relaxed">Only if you turn AI on (it's off by default), and only after the on-device sanitiser strips identifiers and aggregates positions. Names, account numbers and ISIN-level data never leave your machine — the sanitiser leak-test suite fails the build if any allow-listed shape leaks an ID. Inference runs two ways: the managed key included with your licence (requests route through our proxy to Anthropic, rate-limited per licence; the proxy logs only a hashed licence, model, and token estimate — never content), or bring your own Anthropic key and pay for inference directly. Either way it's off by default and you can disable it at any time — see the <a href="/privacy" class="text-brand-600 hover:text-brand-700 font-medium">privacy policy</a> for exactly what is sent.</p>
         </details>
 
         <details class="group border border-neutral-200 rounded-xl p-6">
