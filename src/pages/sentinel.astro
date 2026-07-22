@@ -266,7 +266,7 @@ const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
             <a href={RELEASE_URL} class="btn-primary w-full justify-center">Download for Windows</a>
           ) : (
             <div class="text-center text-white/50 text-sm py-3 border border-white/10 rounded-xl">
-              Public download lands shortly — drop your email below to be notified.
+              Download available soon.
             </div>
           )}
         </div>
@@ -297,16 +297,6 @@ const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
           )}
         </div>
       </div>
-
-      <!-- Waitlist form -->
-      <form id="sentinel-waitlist" class="mt-12 max-w-md mx-auto">
-        <label class="block text-white/70 text-sm font-semibold mb-2 text-center">Get notified the moment public download lands</label>
-        <div class="flex gap-2">
-          <input type="email" name="email" required placeholder="you@example.com" class="flex-1 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 focus:outline-none focus:border-brand-400" />
-          <button type="submit" class="btn-primary px-6 py-3">Notify me</button>
-        </div>
-        <p id="sentinel-waitlist-status" class="text-center text-sm text-white/60 mt-3 min-h-[20px]"></p>
-      </form>
     </div>
   </section>
 
@@ -364,7 +354,7 @@ const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
             What about Mac?
             <span class="text-brand-500 group-open:rotate-45 transition-transform">+</span>
           </summary>
-          <p class="mt-3 text-neutral-600 leading-relaxed">Windows-only at launch, matching Aethelgard's current platform support. Mac is on the roadmap once both products' Mac builds are ready — drop your email above to be notified.</p>
+          <p class="mt-3 text-neutral-600 leading-relaxed">Windows-only for now, matching Aethelgard's current platform support. Mac is on the roadmap once both products' Mac builds are ready.</p>
         </details>
       </div>
     </div>
@@ -446,37 +436,6 @@ const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
             successUrl: 'https://aethelgard.finance/thank-you',
           },
         });
-      });
-    })();
-
-    // ── Waitlist form ──────────────────────────────────────────────────────
-    (function () {
-      const form = document.getElementById('sentinel-waitlist');
-      const status = document.getElementById('sentinel-waitlist-status');
-      if (!form || !status) return;
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const email = new FormData(form).get('email');
-        if (!email) return;
-
-        status.textContent = 'Sending…';
-        status.style.color = 'rgba(255,255,255,0.6)';
-
-        try {
-          const res = await fetch('https://aethelgard-licensing.vercel.app/api/waitlist', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, type: 'sentinel-waitlist' }),
-          });
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          status.textContent = 'Thanks — we will email you when public download lands.';
-          status.style.color = '#fbbf24';
-          form.reset();
-        } catch (err) {
-          status.textContent = 'Could not submit. Try emailing contact@aethelgard.finance.';
-          status.style.color = '#f87171';
-        }
       });
     })();
   </script>
