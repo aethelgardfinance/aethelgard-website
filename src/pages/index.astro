@@ -183,6 +183,13 @@ const faqs = [
           </a>
         </div>
       </div>
+      {MAC_READY && (
+      <p class="mb-4">
+        <a id="other-platform-dl" href={DOWNLOAD_MAC} class="text-xs text-white/40 hover:text-white/70 underline underline-offset-4 transition-colors">
+          Also available for macOS
+        </a>
+      </p>
+      )}
       <p id="version-tag" class="text-[10px] text-white/20 font-bold mb-8 uppercase tracking-widest opacity-0 transition-opacity">
         Latest Version: <span id="version-number">...</span>
       </p>
@@ -932,7 +939,7 @@ const faqs = [
 
 </body>
 
-<script is:inline define:vars={{ PRICES, DOWNLOAD_MAC, MAC_READY }}>
+<script is:inline define:vars={{ PRICES, DOWNLOAD_MAC, DOWNLOAD_WIN, MAC_READY }}>
   // â"€â"€ Paddle initialisation â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
   // paddle.js is loaded as an external script and may not be ready when this
   // inline script first runs. _initPaddle() is called eagerly here and again
@@ -997,6 +1004,9 @@ const faqs = [
     if (ctaText) ctaText.innerText = 'Start Free Trial — macOS';
     const ctaIcon = document.getElementById('cta-icon');
     if (ctaIcon) ctaIcon.innerHTML = '<path d="' + APPLE_LOGO_PATH + '"/>';
+    // Mac visitor's primary download is macOS — so the cross-platform link offers Windows.
+    const other = document.getElementById('other-platform-dl');
+    if (other) { other.href = DOWNLOAD_WIN; other.textContent = 'Also available for Windows'; }
   }
 
   async function initDistribution() {
