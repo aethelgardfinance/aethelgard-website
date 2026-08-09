@@ -14,7 +14,12 @@ const PRICES = {
 
 // GitHub releases — update to point at latest release once published.
 const DOWNLOAD_WIN = 'https://github.com/aethelgardfinance/aethelgard-releases/releases';
-const DOWNLOAD_MAC = null; // Set once Mac build is ready
+// Mac download. Set to the releases-latest page (the .dmg is listed there) once
+// the unified Windows+macOS release is PUBLISHED. Flipping this from null to the
+// URL turns on every Mac affordance below (hero badge, CTA, nav/footer buttons,
+// FAQ) at build time — merge this only AFTER the release is live.
+const DOWNLOAD_MAC = 'https://github.com/aethelgardfinance/aethelgard-releases/releases/latest';
+const MAC_READY = DOWNLOAD_MAC !== null;
 
 // Demo video — set to your Loom or YouTube embed URL once recorded.
 // Loom:    https://www.loom.com/embed/YOUR_VIDEO_ID?hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true
@@ -75,7 +80,9 @@ const faqs = [
   },
   {
     q: 'Does Aethelgard work on Mac?',
-    a: 'A Mac version is on the roadmap. Windows users can download the current release today. Join the mailing list to be notified when the Mac build is ready.',
+    a: MAC_READY
+      ? 'Yes. Aethelgard runs natively on macOS — a universal build for both Apple Silicon and Intel Macs. Download it free and try for 30 days, same as Windows.'
+      : 'A Mac version is on the roadmap. Windows users can download the current release today. Join the mailing list to be notified when the Mac build is ready.',
   },
 ];
 ---
@@ -137,7 +144,7 @@ const faqs = [
       </div>
       <a href={DOWNLOAD_WIN} class="btn-primary text-sm py-2 px-4 js-win-download">
         Download
-        <span class="text-white/60 font-normal text-xs">Windows</span>
+        <span class="text-white/60 font-normal text-xs js-dl-os">Windows</span>
       </a>
     </div>
   </nav>
@@ -151,7 +158,7 @@ const faqs = [
 
     <div class="relative max-w-4xl mx-auto text-center">
       <div class="inline-flex items-center gap-2 bg-brand-500/10 border border-brand-500/20 rounded-full px-4 py-1.5 text-brand-400 text-xs font-bold uppercase tracking-widest mb-8">
-        Windows · Mac on the roadmap
+        {MAC_READY ? 'Windows · macOS' : 'Windows · Mac on the roadmap'}
       </div>
 
       <h1 class="text-5xl md:text-6xl font-black text-white leading-[1.05] tracking-tighter mb-6">
@@ -166,7 +173,7 @@ const faqs = [
 
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-2">
         <a href={DOWNLOAD_WIN} id="primary-cta" class="btn-primary text-base px-8 py-3.5">
-          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+          <svg id="cta-icon" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
           <span id="cta-text">Start Free Trial — Windows</span>
         </a>
         <div id="mac-waitlist-trigger" class="hidden">
@@ -365,7 +372,9 @@ const faqs = [
         {[
           { label: '30-day trial', desc: 'No credit card. No account. Full Corporate features from day one.' },
           { label: 'Design partner access', desc: 'Direct access to the founder, input into the roadmap, founder pricing.' },
-          { label: 'Windows · Mac on roadmap', desc: 'Windows installer available now. Mac build on the roadmap — join the waitlist to be notified.' },
+          MAC_READY
+            ? { label: 'Windows · macOS', desc: 'Native installers for both Windows and macOS — a universal Mac build for Apple Silicon and Intel.' }
+            : { label: 'Windows · Mac on roadmap', desc: 'Windows installer available now. Mac build on the roadmap — join the waitlist to be notified.' },
         ].map(item => (
           <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6 text-center">
             <p class="font-black text-neutral-900 mb-2">{item.label}</p>
@@ -810,7 +819,7 @@ const faqs = [
           Request Access
         </button>
       </form>
-      <p class="text-[10px] text-neutral-400 mt-4 uppercase tracking-widest font-bold">No spam · No obligation · Windows available now · Mac on the roadmap</p>
+      <p class="text-[10px] text-neutral-400 mt-4 uppercase tracking-widest font-bold">No spam · No obligation · {MAC_READY ? 'Windows & macOS available now' : 'Windows available now · Mac on the roadmap'}</p>
     </div>
   </section>
 
@@ -842,7 +851,8 @@ const faqs = [
     </div>
   </section>
 
-  <!-- â"€â"€ Mac Waitlist â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ -->
+  <!-- â"€â"€ Mac Waitlist (hidden once the Mac build ships — MAC_READY) â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€ -->
+  {!MAC_READY && (
   <section id="mac-waitlist" class="py-24 px-6 bg-white border-t border-neutral-100">
     <div class="max-w-2xl mx-auto text-center">
       <div class="h-12 w-12 bg-neutral-100 rounded-2xl flex items-center justify-center text-neutral-900 mx-auto mb-6">
@@ -868,6 +878,7 @@ const faqs = [
       <p class="text-[10px] text-neutral-400 mt-4 uppercase tracking-widest font-bold">Privacy guaranteed · No spam ever</p>
     </div>
   </section>
+  )}
   <section class="py-24 px-6 bg-navy-900">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="text-4xl font-black tracking-tighter text-white mb-4">
@@ -878,7 +889,7 @@ const faqs = [
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a href={DOWNLOAD_WIN} class="btn-primary text-base px-8 py-3.5 js-win-download">
-          Download for Windows
+          Download for <span class="js-dl-os">Windows</span>
         </a>
         <a href="#pricing" class="btn-ghost text-base px-8 py-3.5">
           View pricing
@@ -921,7 +932,7 @@ const faqs = [
 
 </body>
 
-<script is:inline define:vars={{ PRICES }}>
+<script is:inline define:vars={{ PRICES, DOWNLOAD_MAC, MAC_READY }}>
   // â"€â"€ Paddle initialisation â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
   // paddle.js is loaded as an external script and may not be ready when this
   // inline script first runs. _initPaddle() is called eagerly here and again
@@ -973,6 +984,21 @@ const faqs = [
   // â"€â"€ Distribution Logic â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€â"€
   const LATEST_API = 'https://aethelgard-licensing.vercel.app/api/latest';
 
+  // Apple logo path — swapped into the hero CTA icon for Mac visitors.
+  const APPLE_LOGO_PATH = 'M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701';
+
+  function applyMacDownload() {
+    // Point every download affordance at the Mac release and relabel it.
+    document.querySelectorAll('#primary-cta, .js-win-download').forEach(el => {
+      el.href = DOWNLOAD_MAC;
+    });
+    document.querySelectorAll('.js-dl-os').forEach(el => { el.innerText = 'macOS'; });
+    const ctaText = document.getElementById('cta-text');
+    if (ctaText) ctaText.innerText = 'Start Free Trial — macOS';
+    const ctaIcon = document.getElementById('cta-icon');
+    if (ctaIcon) ctaIcon.innerHTML = '<path d="' + APPLE_LOGO_PATH + '"/>';
+  }
+
   async function initDistribution() {
     const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
     const cta = document.getElementById('primary-cta');
@@ -980,9 +1006,15 @@ const faqs = [
     const macTrigger = document.getElementById('mac-waitlist-trigger');
 
     if (isMac) {
-      ctaText.innerText = 'Mac on the roadmap — Join Waitlist';
-      cta.classList.add('opacity-50', 'pointer-events-none');
-      macTrigger.classList.remove('hidden');
+      if (MAC_READY) {
+        // Mac build is live — give Mac visitors a real download.
+        applyMacDownload();
+      } else {
+        // No Mac build yet — disable the CTA and surface the waitlist.
+        ctaText.innerText = 'Mac on the roadmap — Join Waitlist';
+        cta.classList.add('opacity-50', 'pointer-events-none');
+        macTrigger.classList.remove('hidden');
+      }
     }
 
     try {
@@ -990,8 +1022,10 @@ const faqs = [
       if (!response.ok) throw new Error('API error ' + response.status);
       const data = await response.json();
 
+      // The /api/latest endpoint serves the Windows installer URL. Mac buttons
+      // stay pointed at the releases-latest page (set above); only rewrite the
+      // Windows buttons to the direct installer link.
       if (!isMac) {
-        // Update all Windows download buttons on the page
         document.querySelectorAll('#primary-cta, .js-win-download').forEach(el => {
           el.href = data.download_url;
         });
@@ -1006,7 +1040,8 @@ const faqs = [
       }
     } catch (err) {
       console.warn('Failed to fetch latest version info', err);
-      // Button already points at DOWNLOAD_WIN fallback from server-rendered href
+      // Buttons already point at their server-rendered fallback href
+      // (Windows → releases page, Mac → releases-latest via applyMacDownload).
     }
   }
 
