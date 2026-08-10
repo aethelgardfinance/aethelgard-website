@@ -1,0 +1,305 @@
+---
+import '../styles/global.css';
+
+const DOWNLOAD_WIN = 'https://github.com/aethelgardfinance/aethelgard-releases/releases';
+
+const AREAS = [
+  'Setup / Licence / Install',
+  'App won’t launch / crashes on open',
+  'Dashboard',
+  'AI Assistant',
+  'Portfolio / Investments',
+  'Analytics',
+  'Journal / Record Transaction',
+  'Transactions / Money History',
+  'Import Statements',
+  'Reports',
+  'Pivot Analysis',
+  'Income & Invoices',
+  'Tax Tools',
+  'FX Rates',
+  'Reconciliation',
+  'Import History',
+  'Documents / Report Builder',
+  'Planning (Briefing / Net Worth / FI / Goals / Recurring / Budget)',
+  'Specialist (Fixed Assets / Accruals / Hedges / Deferred Tax / Consolidation / IHT)',
+  'Entities & Accounts',
+  'Data Health',
+  'Cloud Backup / Data & Backups',
+  'Learning / Help',
+  'Something else',
+];
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Report an issue with Aethelgard. Tell us what went wrong so we can fix it — and never send real financial data." />
+  <title>Report an issue — Aethelgard</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta property="og:title" content="Report an issue — Aethelgard" />
+  <meta property="og:description" content="Tell us what went wrong so we can fix it. Never send real financial data." />
+  <meta property="og:url" content="https://aethelgard.finance/report-issue" />
+  <meta property="og:type" content="website" />
+</head>
+
+<body class="bg-white text-neutral-900 antialiased">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 inset-x-0 z-50 bg-navy-900/95 backdrop-blur-sm border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/favicon.svg" alt="Aethelgard" class="h-7 w-7 rounded-lg shadow-lg" />
+        <span class="font-black text-white tracking-tighter uppercase italic text-lg">Aethelgard</span>
+      </a>
+      <a href={DOWNLOAD_WIN} class="btn-primary text-sm py-2 px-4">
+        Download
+        <span class="text-white/60 font-normal text-xs">Windows</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Report form -->
+  <section class="pt-32 pb-24 px-6 bg-white min-h-screen">
+    <div class="max-w-2xl mx-auto">
+      <div class="text-center mb-10">
+        <p class="section-label mb-3">Report an issue</p>
+        <h1 class="text-4xl font-black tracking-tighter text-neutral-900 mb-4">Something not right?</h1>
+        <p class="text-neutral-500 leading-relaxed">
+          Thank you for testing Aethelgard. Tell us what went wrong and we'll fix it. If a number looks
+          wrong, a screen behaves oddly, or something confuses you &mdash; that's worth reporting.
+          <br class="hidden sm:block" />
+          <span class="text-neutral-400 text-sm">If you can open the app, the built-in
+          <strong>Help &rarr; Report an Issue</strong> tab fills in your version and setup for you.
+          This page is here for when you can't.</span>
+        </p>
+      </div>
+
+      <!-- Privacy notice -->
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl px-6 py-5 mb-8">
+        <p class="text-sm font-bold text-amber-800 uppercase tracking-wider mb-2">Never send real financial data</p>
+        <p class="text-sm text-amber-900/80 leading-relaxed">
+          Aethelgard is private by design. Do <strong>not</strong> send your vault file, PIN, licence key,
+          real account numbers, balances or names. If you paste example statement rows, replace every real
+          value with a placeholder &mdash; keep only the structure (columns, dates, and +/&minus; signs) so we
+          can still reproduce the problem.
+        </p>
+      </div>
+
+      <form id="report-issue-form" class="flex flex-col gap-4 text-left">
+        <div class="flex flex-col gap-1">
+          <label class="text-xs font-bold text-neutral-600 uppercase tracking-wider" for="ri-title">Short title</label>
+          <input type="text" id="ri-title" name="title" placeholder="e.g. Barclays CSV lands rent on the wrong account" required maxlength="140"
+            class="px-5 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500" />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="flex flex-col gap-1">
+            <label class="text-xs font-bold text-neutral-600 uppercase tracking-wider" for="ri-severity">Severity</label>
+            <select id="ri-severity" name="severity" required
+              class="px-5 py-3 rounded-xl border border-neutral-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500">
+              <option value="Critical">Critical &mdash; data loss, crash, or a wrong figure</option>
+              <option value="High" selected>High &mdash; a core feature is broken or incorrect</option>
+              <option value="Medium">Medium &mdash; works but behaves oddly</option>
+              <option value="Low">Low &mdash; cosmetic or a suggestion</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-xs font-bold text-neutral-600 uppercase tracking-wider" for="ri-area">Area of the app</label>
+            <select id="ri-area" name="area" required
+              class="px-5 py-3 rounded-xl border border-neutral-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500">
+              {AREAS.map((a) => <option value={a}>{a}</option>)}
+            </select>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <span class="text-xs font-bold text-neutral-600 uppercase tracking-wider">Does it happen&hellip;</span>
+          <div class="flex flex-wrap gap-6 mt-1">
+            <label class="flex items-center gap-2 cursor-pointer text-sm font-semibold text-neutral-700">
+              <input type="radio" name="frequency" value="Every time" class="accent-brand-500" checked /> Every time
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer text-sm font-semibold text-neutral-700">
+              <input type="radio" name="frequency" value="Sometimes" class="accent-brand-500" /> Sometimes
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer text-sm font-semibold text-neutral-700">
+              <input type="radio" name="frequency" value="Happened once" class="accent-brand-500" /> Happened once
+            </label>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label class="text-xs font-bold text-neutral-600 uppercase tracking-wider" for="ri-email">Your email</label>
+          <input type="email" id="ri-email" name="email" placeholder="your@email.com" required maxlength="254"
+            class="px-5 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500" />
+          <p class="text-[11px] text-neutral-400">So we can follow up and let you know when it's fixed.</p>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label class="text-xs font-bold text-neutral-600 uppercase tracking-wider" for="ri-steps">Steps to reproduce <span class="text-neutral-400 normal-case font-normal">(optional)</span></label>
+          <textarea id="ri-steps" name="steps" rows="3" maxlength="4000"
+            placeholder="1. …&#10;2. …&#10;3. …"
+            class="px-5 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 resize-y"></textarea>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label class="text-xs font-bold text-neutral-600 uppercase tracking-wider" for="ri-expected">What you expected to happen <span class="text-neutral-400 normal-case font-normal">(optional)</span></label>
+          <textarea id="ri-expected" name="expected" rows="2" maxlength="4000"
+            class="px-5 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 resize-y"></textarea>
+        </div>
+
+        <div class="flex flex-col gap-1">
+          <label class="text-xs font-bold text-neutral-600 uppercase tracking-wider" for="ri-actual">What actually happened</label>
+          <textarea id="ri-actual" name="actual" rows="3" required maxlength="4000"
+            placeholder="Include the wrong number or the exact error message. For a wrong figure, tell us what it shows AND what it should be."
+            class="px-5 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 resize-y"></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="flex flex-col gap-1">
+            <label class="text-xs font-bold text-neutral-600 uppercase tracking-wider" for="ri-version">App version <span class="text-neutral-400 normal-case font-normal">(if known)</span></label>
+            <input type="text" id="ri-version" name="appVersion" placeholder="e.g. v1.47.1" maxlength="20"
+              class="px-5 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500" />
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-xs font-bold text-neutral-600 uppercase tracking-wider" for="ri-os">Operating system <span class="text-neutral-400 normal-case font-normal">(optional)</span></label>
+            <input type="text" id="ri-os" name="os" placeholder="e.g. Windows 11, macOS 14" maxlength="80"
+              class="px-5 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500" />
+          </div>
+        </div>
+
+        <label class="flex items-start gap-3 cursor-pointer mt-2">
+          <input type="checkbox" id="ri-attest" name="attest" required class="accent-amber-500 mt-1 shrink-0" />
+          <span class="text-sm text-neutral-600 leading-snug">I confirm this report contains <strong>no real financial data</strong> — no vault file, PIN, licence key, real account numbers, balances or names.</span>
+        </label>
+
+        <button type="submit" class="btn-primary py-3 px-8 justify-center mt-2">
+          Send report
+        </button>
+      </form>
+      <p class="text-[10px] text-neutral-400 mt-4 uppercase tracking-widest font-bold text-center">Private by design · No real data · One issue per report</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-navy-900 border-t border-white/5 px-6 py-10">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/favicon.svg" alt="Aethelgard" class="h-6 w-6 rounded-md" />
+        <span class="font-black text-white/80 tracking-tighter uppercase italic">Aethelgard</span>
+      </a>
+      <p class="text-white/30 text-xs text-center">
+        &copy; {new Date().getFullYear()} Aethelgard · A product of Aethelgard Finance Ltd ·
+        <a href="mailto:contact@aethelgard.finance" class="hover:text-white/60 transition-colors ml-1">contact@aethelgard.finance</a>
+      </p>
+      <div class="flex items-center gap-6 text-xs text-white/30 font-medium">
+        <a href="/" class="hover:text-white/60 transition-colors">Home</a>
+        <a href="/guides" class="hover:text-white/60 transition-colors">Guides</a>
+        <a href="/privacy" class="hover:text-white/60 transition-colors">Privacy</a>
+        <a href="/terms" class="hover:text-white/60 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+<script is:inline>
+  const FEEDBACK_API = 'https://aethelgard-licensing.vercel.app/api/feedback';
+  const LOG_FAILURE_API = 'https://aethelgard-licensing.vercel.app/api/log-form-failure';
+
+  // Best-effort observability beacon — scrubbed of PII, only context + brief error.
+  function reportFailure(context, errorBrief, status) {
+    try {
+      const payload = JSON.stringify({
+        context: String(context).slice(0, 60),
+        errorBrief: String(errorBrief || '').slice(0, 200),
+        status: typeof status === 'number' ? status : null,
+      });
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(LOG_FAILURE_API, new Blob([payload], { type: 'application/json' }));
+      } else {
+        fetch(LOG_FAILURE_API, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true,
+        }).catch(() => {});
+      }
+    } catch {}
+  }
+
+  // Prefill non-sensitive context if the desktop app deep-links here.
+  const params = new URLSearchParams(window.location.search);
+  const ctxVersion = (params.get('v') || '').slice(0, 20);
+  if (ctxVersion) {
+    const v = document.getElementById('ri-version');
+    if (v && !v.value) v.value = ctxVersion;
+  }
+  const ctxArea = params.get('area');
+  if (ctxArea) {
+    const areaSel = document.getElementById('ri-area');
+    if (areaSel) {
+      for (const opt of areaSel.options) {
+        if (opt.value === ctxArea) { areaSel.value = ctxArea; break; }
+      }
+    }
+  }
+
+  // Best-effort OS/browser hint from the user agent, only if the tester leaves it blank.
+  function detectOS() {
+    var ua = (navigator.userAgent || '');
+    if (/Windows NT 10/i.test(ua)) return 'Windows 10/11';
+    if (/Windows/i.test(ua)) return 'Windows';
+    if (/Mac OS X/i.test(ua) || /Macintosh/i.test(ua)) return 'macOS';
+    if (/Linux/i.test(ua)) return 'Linux';
+    return '';
+  }
+
+  const form = document.getElementById('report-issue-form');
+  if (form) {
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const attest = this.querySelector('input[name="attest"]');
+      if (!attest || !attest.checked) {
+        alert('Please confirm the report contains no real financial data.');
+        return;
+      }
+      const title = this.querySelector('input[name="title"]').value.trim();
+      const severity = this.querySelector('select[name="severity"]').value;
+      const area = this.querySelector('select[name="area"]').value;
+      const freqEl = this.querySelector('input[name="frequency"]:checked');
+      const frequency = freqEl ? freqEl.value : '';
+      const email = this.querySelector('input[name="email"]').value.trim();
+      const steps = this.querySelector('textarea[name="steps"]').value.trim();
+      const expected = this.querySelector('textarea[name="expected"]').value.trim();
+      const actual = this.querySelector('textarea[name="actual"]').value.trim();
+      const appVersion = this.querySelector('input[name="appVersion"]').value.trim();
+      const os = this.querySelector('input[name="os"]').value.trim() || detectOS();
+      const btn = this.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      let lastStatus = 0;
+      try {
+        const res = await fetch(FEEDBACK_API, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            type: 'feedback',
+            title, severity, area, frequency, email,
+            steps, expected, actual,
+            appVersion: appVersion || undefined,
+            os: os || undefined,
+          }),
+        });
+        lastStatus = res.status;
+        if (!res.ok) throw new Error('Server error ' + res.status);
+        this.outerHTML = '<p class="text-brand-500 font-bold text-lg text-center">Thank you — your report is in. We\'ll follow up at ' + email.replace(/[<>&]/g, '') + '.</p>';
+      } catch (err) {
+        reportFailure('feedback', err && err.message, lastStatus);
+        btn.disabled = false;
+        btn.textContent = 'Send report';
+        alert('Something went wrong. Please email contact@aethelgard.finance directly.');
+      }
+    });
+  }
+</script>
+</html>
