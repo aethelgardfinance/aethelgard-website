@@ -263,7 +263,10 @@ const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
             <li class="flex items-start gap-2"><span class="text-brand-400 mt-0.5">✓</span><span>Same privacy model — local-first, no cloud</span></li>
           </ul>
           {RELEASE_URL ? (
-            <a href={RELEASE_URL} class="btn-primary w-full justify-center">Download for Windows</a>
+            <div class="space-y-2">
+              <a id="dl-win" href={RELEASE_URL} class="btn-primary w-full justify-center">Download for Windows</a>
+              <a id="dl-mac" href={RELEASE_URL} class="btn-ghost w-full justify-center hidden">Download for Mac</a>
+            </div>
           ) : (
             <div class="text-center text-white/50 text-sm py-3 border border-white/10 rounded-xl">
               Download available soon.
@@ -437,6 +440,36 @@ const PRICE_SENTINEL_ANNUAL: string | null = 'pri_01kqg3nhnckm0bxcc618yy20hp';
           },
         });
       });
+    })();
+  </script>
+
+  <!-- Resolve the real Windows .exe / macOS .dmg from the latest release.
+       Falls back to the releases page (the server-rendered href) on any error.
+       The Mac button stays hidden until a .dmg actually exists (i.e. once
+       the first macOS Sentinel release ships). -->
+  <script is:inline>
+    (function () {
+      var RELEASES_REPO = 'aethelgardfinance/sentinel-releases';
+      var win = document.getElementById('dl-win');
+      var mac = document.getElementById('dl-mac');
+      if (!win && !mac) return;
+      fetch('https://api.github.com/repos/' + RELEASES_REPO + '/releases/latest', {
+        headers: { Accept: 'application/vnd.github+json' }
+      })
+        .then(function (r) { if (!r.ok) throw new Error('gh ' + r.status); return r.json(); })
+        .then(function (data) {
+          var assets = (data && data.assets) || [];
+          var exe = assets.find(function (a) { return /setup\.exe$/i.test(a.name); })
+                 || assets.find(function (a) { return /\.exe$/i.test(a.name); });
+          var dmg = assets.find(function (a) { return /\.dmg$/i.test(a.name); });
+          if (win && exe) win.href = exe.browser_download_url;
+          if (mac && dmg) { mac.href = dmg.browser_download_url; mac.classList.remove('hidden'); }
+          if (mac && dmg && navigator.platform.toUpperCase().indexOf('MAC') >= 0) {
+            mac.classList.remove('btn-ghost'); mac.classList.add('btn-primary');
+            if (win) { win.classList.remove('btn-primary'); win.classList.add('btn-ghost'); }
+          }
+        })
+        .catch(function () { /* leave buttons pointing at the releases page */ });
     })();
   </script>
 
