@@ -173,6 +173,14 @@ const DOWNLOAD_WIN = 'https://github.com/aethelgardfinance/aethelgard-releases/r
     const country = document.getElementById('rb-country');
     if (country && !country.value) country.value = ctxJur;
   }
+  // Institution name, passed from the roadmap page's demand board so a "+1"
+  // lands on a form that is already filled in. Assigned as a value, never as
+  // markup, and trimmed to the field's own maxlength.
+  const ctxBank = params.get('bank');
+  if (ctxBank) {
+    const bankField = document.getElementById('rb-bank');
+    if (bankField && !bankField.value) bankField.value = ctxBank.slice(0, 100);
+  }
   const ctxTier = (params.get('tier') || '').slice(0, 50);
   const ctxVersion = (params.get('v') || '').slice(0, 20);
 

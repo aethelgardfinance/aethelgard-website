@@ -1,0 +1,421 @@
+---
+import '../styles/global.css';
+
+const DOWNLOAD_WIN = 'https://github.com/aethelgardfinance/aethelgard-releases/releases';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE DATA
+//
+// Everything below is a plain inline array, matching supported-banks.astro.
+// There is deliberately no data layer, no CMS and no API call: this page is
+// static, costs nothing to run, and is edited by hand when something ships.
+//
+// House rule: nothing goes in `building` or `considering` unless it is real.
+// An invented roadmap is worse than a short one.
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── Bank & broker demand board ──────────────────────────────────────────────
+
+/** Institutions Aethelgard reads directly today. Mirrors /supported-banks. */
+const banksSupported = [
+  { name: 'HSBC', country: 'United Kingdom' },
+  { name: 'Barclays', country: 'United Kingdom' },
+  { name: 'Barclaycard', country: 'United Kingdom' },
+  { name: 'Santander UK', country: 'United Kingdom' },
+  { name: 'Starling Bank', country: 'United Kingdom' },
+  { name: 'American Express', country: 'United Kingdom' },
+  { name: 'IG', country: 'United Kingdom' },
+  { name: 'Wise', country: 'International' },
+  { name: 'Chase', country: 'United States' },
+  { name: 'Bank of America', country: 'United States' },
+  { name: 'Interactive Brokers', country: 'United States' },
+  { name: 'Charles Schwab', country: 'United States' },
+  { name: 'Degiro', country: 'Netherlands' },
+  { name: 'ING', country: 'Netherlands' },
+  { name: 'ABN AMRO', country: 'Netherlands' },
+  { name: 'Rabobank', country: 'Netherlands' },
+  { name: 'BBVA', country: 'Spain' },
+  { name: 'CaixaBank', country: 'Spain' },
+  { name: 'Santander', country: 'Spain' },
+  { name: 'BBVA México', country: 'Mexico' },
+  { name: 'Banamex', country: 'Mexico' },
+  { name: 'Millennium BCP', country: 'Portugal' },
+  { name: 'DSB', country: 'Suriname' },
+];
+
+/**
+ * Adapters currently being written. Move an entry into `banksSupported` when
+ * the release that carries it is published — not when the PR merges.
+ */
+const banksBuilding: { name: string; country: string }[] = [];
+
+/**
+ * Banks people have asked for, most-requested first.
+ *
+ * POPULATE THIS BY HAND FROM THE REAL QUEUE — do not guess and do not pad it.
+ * The submissions live behind an admin-only endpoint:
+ *
+ *   GET https://aethelgard-licensing.vercel.app/api/bank-requests
+ *   Authorization: Bearer $BANK_REQUESTS_ADMIN_TOKEN
+ *
+ * Copy across the institution name and country ONLY. Never the requester's
+ * email, their sample, or anything else from the submission — this page is
+ * public and the queue holds personal data.
+ *
+ * Decided 2026-09-02: by hand, NOT automated. A public aggregate endpoint
+ * returning {bank, country, count} was considered and deferred — a live counter
+ * reading "requested 1x" advertises low volume, which is the same reason the
+ * community forum was held back. Revisit when the queue is large enough that
+ * the number is an asset rather than a liability.
+ */
+const banksRequested: { name: string; country: string }[] = [];
+
+// ── Product roadmap ─────────────────────────────────────────────────────────
+
+/** Already in the product. Newest first. */
+const shipped = [
+  {
+    title: 'Multi-entity income allocations',
+    detail: 'Year-end allocation runs that reduce the source entity rather than gross it up, with share-of-gross or share-of-remainder rules.',
+  },
+  {
+    title: 'macOS',
+    detail: 'A native universal build for Apple Silicon and Intel, alongside Windows, with automatic updates on both.',
+  },
+  {
+    title: 'Multi-framework groups',
+    detail: 'Entities in different jurisdictions, kept under different accounting frameworks, consolidating into one group.',
+  },
+  {
+    title: 'Reliance-grade consolidation & hedge accounting',
+    detail: 'Investment offset and goodwill, the equity method for associates, eliminations and cumulative translation at every tier.',
+  },
+  {
+    title: 'Deferred tax and estate planning',
+    detail: 'A deferred-tax engine over the ledger, plus the UK trust regime and succession modelling.',
+  },
+  {
+    title: 'Property on the balance sheet',
+    detail: 'Investment property carried as an asset from its purchase price, with revaluations, not just a register entry beside a mortgage.',
+  },
+  {
+    title: 'UK capital gains matching',
+    detail: 'Same-day, 30-day and Section 104 pooling on disposals, with cost of sales translated at the sale-date rate.',
+  },
+  {
+    title: 'Cash flow statement',
+    detail: 'A statement built from classified ledger movement, including the credit-card and short-term-borrowing treatment.',
+  },
+  {
+    title: 'Data Health Centre',
+    detail: 'Diagnostics that find historic mis-postings in your own vault and let you repair them yourself, in-app.',
+  },
+  {
+    title: 'AI Copilot',
+    detail: 'Bring your own key or run a local model. It proposes; you approve. It cannot post to your books on its own.',
+  },
+];
+
+/** Genuinely in flight. Keep this list honest and short. */
+const building = [
+  {
+    title: 'More bank and broker adapters',
+    detail: 'Driven by the demand board above. Most-requested and licence-holder requests are built first.',
+  },
+  {
+    title: 'Consolidation completeness',
+    detail: 'Closing the remaining gaps in group reporting, reusing the deferred-tax engine.',
+  },
+];
+
+/**
+ * Under consideration. Explicitly not promises.
+ *
+ * Kept deliberately short. Three candidates were cut before this page went up:
+ *
+ *  - a public community forum — decided against for now, so publishing it only
+ *    invites "when?" from customers;
+ *  - a referral programme — likely to ship soon, and better announced as news
+ *    than pre-announced as an invitation people ask to join early;
+ *  - a tax and residency profile — a real gap, but it is also the headline
+ *    feature of a competitor, and its shape is still undecided.
+ *
+ * Add an entry back when it is something worth being asked about.
+ */
+const considering = [
+  {
+    title: 'Ledger-state alerts',
+    detail: 'The checks only a general ledger can run — unreconciled at month-end, a period unlocked after close, gains nearing the annual exemption.',
+  },
+];
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="What Aethelgard has shipped, what is being built, and which banks people have asked for. Add your bank to the list." />
+  <title>Roadmap &amp; bank demand — Aethelgard</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta property="og:title" content="Roadmap & bank demand — Aethelgard" />
+  <meta property="og:description" content="What's shipped, what's being built, and which banks people have asked for. Add yours to the list." />
+  <meta property="og:url" content="https://aethelgard.finance/roadmap" />
+  <meta property="og:type" content="website" />
+</head>
+
+<body class="bg-white text-neutral-900 antialiased">
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 inset-x-0 z-50 bg-navy-900/95 backdrop-blur-sm border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/favicon.svg" alt="Aethelgard" class="h-7 w-7 rounded-lg shadow-lg" />
+        <span class="font-black text-white tracking-tighter uppercase italic text-lg">Aethelgard</span>
+      </a>
+      <a href={DOWNLOAD_WIN} class="btn-primary text-sm py-2 px-4">
+        Download
+        <span class="text-white/60 font-normal text-xs">Windows</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section class="pt-32 pb-12 px-6 bg-navy-900">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="section-label mb-3">Roadmap</p>
+      <h1 class="text-4xl md:text-5xl font-black tracking-tighter text-white mb-5">What we're building next</h1>
+      <p class="text-white/60 text-lg leading-relaxed max-w-2xl mx-auto">
+        Aethelgard is built in the open with the people who use it. Below is what has shipped,
+        what is being worked on now, and which banks have been asked for.
+      </p>
+      <p class="text-white/30 text-xs uppercase tracking-widest font-bold mt-6">
+        No delivery dates &middot; Nothing here is a promise &middot; Order changes with demand
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Bank & broker demand board ──────────────────────────────────────── -->
+  <section id="banks" class="py-16 px-6 bg-white border-b border-neutral-100">
+    <div class="max-w-5xl mx-auto">
+      <div class="mb-10">
+        <p class="section-label mb-3">Demand board</p>
+        <h2 class="text-3xl font-black tracking-tighter text-neutral-900 mb-3">Where your bank stands</h2>
+        <p class="text-neutral-500 leading-relaxed max-w-2xl">
+          Aethelgard reads the institutions below directly. It also imports the universal
+          <strong class="text-neutral-700">OFX</strong>, <strong class="text-neutral-700">QIF</strong> and
+          <strong class="text-neutral-700">CSV</strong> formats, so an unnamed bank is still a supported bank &mdash;
+          a named adapter simply means you don't have to map the columns yourself.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- Supported -->
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+          <div class="flex items-baseline justify-between mb-1">
+            <p class="text-xs font-black text-brand-500 uppercase tracking-widest">Supported now</p>
+            <span class="text-xs font-black text-neutral-400 tabular-nums">{banksSupported.length}</span>
+          </div>
+          <p class="text-[11px] text-neutral-400 mb-4">Read directly, no column mapping.</p>
+          <ul class="space-y-2">
+            {banksSupported.map(bank => (
+              <li class="flex items-baseline gap-2 text-sm">
+                <span class="text-brand-500 shrink-0">&#10003;</span>
+                <span class="font-semibold text-neutral-800">{bank.name}</span>
+                <span class="text-[11px] text-neutral-400 ml-auto shrink-0">{bank.country}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Being built -->
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+          <div class="flex items-baseline justify-between mb-1">
+            <p class="text-xs font-black text-amber-500 uppercase tracking-widest">Being built</p>
+            <span class="text-xs font-black text-neutral-400 tabular-nums">{banksBuilding.length}</span>
+          </div>
+          <p class="text-[11px] text-neutral-400 mb-4">In progress, shipping in a future update.</p>
+          {banksBuilding.length === 0 ? (
+            <p class="text-sm text-neutral-400 leading-relaxed">
+              Nothing in the workshop this week. The next adapter comes off the requested list.
+            </p>
+          ) : (
+            <ul class="space-y-2">
+              {banksBuilding.map(bank => (
+                <li class="flex items-baseline gap-2 text-sm">
+                  <span class="text-amber-500 shrink-0">&#9679;</span>
+                  <span class="font-semibold text-neutral-800">{bank.name}</span>
+                  <span class="text-[11px] text-neutral-400 ml-auto shrink-0">{bank.country}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <!-- Requested -->
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+          <div class="flex items-baseline justify-between mb-1">
+            <p class="text-xs font-black text-neutral-400 uppercase tracking-widest">Requested</p>
+            <span class="text-xs font-black text-neutral-400 tabular-nums">{banksRequested.length}</span>
+          </div>
+          <p class="text-[11px] text-neutral-400 mb-4">Asked for by users, most-requested first.</p>
+          {banksRequested.length === 0 ? (
+            <div class="text-sm text-neutral-400 leading-relaxed">
+              <p class="mb-4">No open requests right now &mdash; ask for yours and it goes straight to the top of the queue.</p>
+              <a href="/request-bank" class="text-brand-500 font-bold hover:text-brand-600 transition-colors">
+                Request a bank &rarr;
+              </a>
+            </div>
+          ) : (
+            <ul class="space-y-2">
+              {banksRequested.map(bank => (
+                <li class="flex items-baseline gap-2 text-sm">
+                  <span class="text-neutral-300 shrink-0">&#9675;</span>
+                  <span class="font-semibold text-neutral-800">{bank.name}</span>
+                  <a
+                    href={`/request-bank?bank=${encodeURIComponent(bank.name)}`}
+                    class="text-[11px] font-bold text-brand-500 hover:text-brand-600 transition-colors ml-auto shrink-0"
+                  >
+                    +1
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+
+      <!-- How prioritisation works -->
+      <div class="mt-8 bg-navy-900 rounded-2xl px-8 py-7">
+        <p class="text-xs font-black text-brand-400 uppercase tracking-widest mb-3">How the queue is ordered</p>
+        <div class="grid sm:grid-cols-3 gap-6 text-sm text-white/60 leading-relaxed">
+          <p><strong class="text-white/90">Demand first.</strong> The same institution asked for more than once moves up the list.</p>
+          <p><strong class="text-white/90">Licence holders weighted.</strong> A request from a paying customer counts for more than an anonymous one.</p>
+          <p><strong class="text-white/90">A sample gets it built.</strong> A request with a redacted format sample attached can be started immediately.</p>
+        </div>
+        <p class="text-white/30 text-[11px] mt-5 leading-relaxed">
+          Send only column headers and made-up rows &mdash; never a real balance, account number or name.
+          Every adapter ships to everyone in a normal update, not just to the person who asked.
+        </p>
+      </div>
+
+      <div class="mt-8 flex flex-wrap items-center gap-4">
+        <a href="/request-bank" class="btn-primary text-sm">Request your bank</a>
+        <a href="/supported-banks" class="text-sm font-bold text-neutral-500 hover:text-neutral-800 transition-colors">
+          See the full import list &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Product roadmap ─────────────────────────────────────────────────── -->
+  <section id="product" class="py-16 px-6 bg-white">
+    <div class="max-w-5xl mx-auto">
+      <div class="mb-10">
+        <p class="section-label mb-3">Product</p>
+        <h2 class="text-3xl font-black tracking-tighter text-neutral-900 mb-3">The accounting engine</h2>
+        <p class="text-neutral-500 leading-relaxed max-w-2xl">
+          Aethelgard is a double-entry ledger first and a wealth tracker second. Most of what follows
+          is engine work &mdash; the part that decides whether a number is defensible.
+        </p>
+      </div>
+
+      <!-- Being built -->
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="h-2 w-2 rounded-full bg-amber-500"></span>
+          <h3 class="text-xs font-black text-amber-600 uppercase tracking-widest">Being built</h3>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {building.map(item => (
+            <div class="border border-amber-200 bg-amber-50/50 rounded-2xl p-6">
+              <p class="font-black text-neutral-900 mb-2">{item.title}</p>
+              <p class="text-sm text-neutral-500 leading-relaxed">{item.detail}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Considering -->
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-5">
+          <span class="h-2 w-2 rounded-full bg-neutral-300"></span>
+          <h3 class="text-xs font-black text-neutral-400 uppercase tracking-widest">Considering</h3>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {considering.map(item => (
+            <div class="border border-neutral-200 rounded-2xl p-6">
+              <p class="font-black text-neutral-900 mb-2">{item.title}</p>
+              <p class="text-sm text-neutral-500 leading-relaxed">{item.detail}</p>
+            </div>
+          ))}
+        </div>
+        <p class="text-xs text-neutral-400 mt-4 leading-relaxed">
+          Considering means exactly that. These are being weighed, not scheduled, and some will be dropped.
+        </p>
+      </div>
+
+      <!-- Shipped -->
+      <div>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="h-2 w-2 rounded-full bg-brand-500"></span>
+          <h3 class="text-xs font-black text-brand-500 uppercase tracking-widest">Already shipped</h3>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {shipped.map(item => (
+            <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+              <div class="flex items-start gap-2 mb-2">
+                <span class="text-brand-500 mt-0.5 shrink-0">&#10003;</span>
+                <p class="font-black text-neutral-900">{item.title}</p>
+              </div>
+              <p class="text-sm text-neutral-500 leading-relaxed pl-6">{item.detail}</p>
+            </div>
+          ))}
+        </div>
+        <p class="text-xs text-neutral-400 mt-4 leading-relaxed">
+          Every release is written up in full in the
+          <a href="https://github.com/aethelgardfinance/aethelgard-releases/releases" class="text-brand-500 font-bold hover:text-brand-600 transition-colors">release notes</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 px-6 bg-navy-900">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-4xl font-black tracking-tighter text-white mb-4">Something missing?</h2>
+      <p class="text-white/50 text-lg mb-8 leading-relaxed">
+        The order of this list is set by the people using the product. Ask for a bank, or tell us
+        what the ledger should do that it doesn't.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="/request-bank" class="btn-primary text-base px-8 py-3.5">Request a bank</a>
+        <a href="/report-issue" class="btn-ghost text-base px-8 py-3.5">Suggest a feature</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-navy-900 border-t border-white/5 px-6 py-10">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/favicon.svg" alt="Aethelgard" class="h-6 w-6 rounded-md" />
+        <span class="font-black text-white/80 tracking-tighter uppercase italic">Aethelgard</span>
+      </a>
+      <p class="text-white/30 text-xs text-center">
+        &copy; {new Date().getFullYear()} Aethelgard &middot; A product of Aethelgard Finance Ltd &middot;
+        <a href="mailto:contact@aethelgard.finance" class="hover:text-white/60 transition-colors ml-1">contact@aethelgard.finance</a>
+      </p>
+      <div class="flex items-center gap-6 text-xs text-white/30 font-medium">
+        <a href="/" class="hover:text-white/60 transition-colors">Home</a>
+        <a href="/guides" class="hover:text-white/60 transition-colors">Guides</a>
+        <a href="/supported-banks" class="hover:text-white/60 transition-colors">Supported banks</a>
+        <a href="/privacy" class="hover:text-white/60 transition-colors">Privacy</a>
+        <a href="/terms" class="hover:text-white/60 transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
