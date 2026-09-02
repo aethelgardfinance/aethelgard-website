@@ -52,7 +52,7 @@ const banksBuilding: { name: string; country: string }[] = [];
 /**
  * Banks people have asked for, most-requested first.
  *
- * POPULATE THIS FROM THE REAL QUEUE — do not guess and do not pad it.
+ * POPULATE THIS BY HAND FROM THE REAL QUEUE — do not guess and do not pad it.
  * The submissions live behind an admin-only endpoint:
  *
  *   GET https://aethelgard-licensing.vercel.app/api/bank-requests
@@ -61,6 +61,12 @@ const banksBuilding: { name: string; country: string }[] = [];
  * Copy across the institution name and country ONLY. Never the requester's
  * email, their sample, or anything else from the submission — this page is
  * public and the queue holds personal data.
+ *
+ * Decided 2026-09-02: by hand, NOT automated. A public aggregate endpoint
+ * returning {bank, country, count} was considered and deferred — a live counter
+ * reading "requested 1x" advertises low volume, which is the same reason the
+ * community forum was held back. Revisit when the queue is large enough that
+ * the number is an asset rather than a liability.
  */
 const banksRequested: { name: string; country: string }[] = [];
 
@@ -122,23 +128,24 @@ const building = [
   },
 ];
 
-/** Under consideration. Explicitly not promises. */
+/**
+ * Under consideration. Explicitly not promises.
+ *
+ * Kept deliberately short. Three candidates were cut before this page went up:
+ *
+ *  - a public community forum — decided against for now, so publishing it only
+ *    invites "when?" from customers;
+ *  - a referral programme — likely to ship soon, and better announced as news
+ *    than pre-announced as an invitation people ask to join early;
+ *  - a tax and residency profile — a real gap, but it is also the headline
+ *    feature of a competitor, and its shape is still undecided.
+ *
+ * Add an entry back when it is something worth being asked about.
+ */
 const considering = [
-  {
-    title: 'A public community forum',
-    detail: 'Free to read, licence-holders to post. Held back deliberately until there are enough users that it would not be a quiet room.',
-  },
-  {
-    title: 'A tax and residency profile',
-    detail: 'Telling Aethelgard your residency and circumstances once, so it stops having to assume.',
-  },
   {
     title: 'Ledger-state alerts',
     detail: 'The checks only a general ledger can run — unreconciled at month-end, a period unlocked after close, gains nearing the annual exemption.',
-  },
-  {
-    title: 'A referral programme',
-    detail: 'For the people already recommending it.',
   },
 ];
 ---
