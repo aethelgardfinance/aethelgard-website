@@ -2,9 +2,8 @@
 import '../styles/global.css';
 import Footer from '../components/Footer.astro';
 
-const steps = [
+const rawSteps = [
   {
-    number: '01',
     icon: 'VLT',
     title: 'Create Your Vault',
     subtitle: 'Your vault is a local SQLite file on your device. It never leaves your machine — backups are AES-256 encrypted before they sync, and you can optionally encrypt the live vault file at rest (AES-256 via SQLCipher), off by default and switched on in Settings → Vault.',
@@ -29,7 +28,24 @@ const steps = [
     },
   },
   {
-    number: '02',
+    icon: 'IMP',
+    title: 'Import a Bank or Broker Statement',
+    subtitle: 'The fastest way to a populated ledger. Drag in a statement and the rule engine proposes the categories — you approve them before anything posts.',
+    items: [
+      'Navigate to the <strong>Universal Vault</strong> importer in the sidebar.',
+      'Select the entity you are importing into from the dropdown at the top.',
+      'Drag in a CSV, OFX, QIF or PDF statement — Barclays, HSBC, Santander, Starling, Amex, IG, Wise and others are read directly, and the OFX/QIF/CSV formats cover almost any other institution.',
+      'Review the <strong>suggested accounts</strong> against each row. The rule engine learns from what you correct, so later imports need less work.',
+      'Adjust anything it has read wrongly, then click <strong>Post</strong> to commit the batch to the ledger.',
+    ],
+    tip: {
+      icon: 'i',
+      style: 'info',
+      text: 'Nothing posts until you approve it, and an import can be rolled back as a batch from <strong>Import History</strong> if a statement goes in wrongly.',
+    },
+    outcome: 'A month of transactions is in the ledger, categorised and hash-chained, in about the time it takes to type one by hand.',
+  },
+  {
     icon: 'TX',
     title: 'Record a Transaction',
     subtitle: 'Double-entry accounting — every debit has a matching credit, and every entry is balanced.',
@@ -50,7 +66,6 @@ const steps = [
     outcome: 'Your first transaction is recorded and hash-chained. The P&L and Balance Sheet will reflect it immediately.',
   },
   {
-    number: '03',
     icon: 'RV',
     title: 'Revalue an Illiquid Asset',
     subtitle: 'Property, private equity, carried interest, and alternatives — update carrying values when appraisals or NAV statements arrive.',
@@ -76,7 +91,6 @@ const steps = [
     },
   },
   {
-    number: '04',
     icon: 'RP',
     title: 'Run a P&L and Balance Sheet',
     subtitle: 'IFRS-aligned reports that consolidate across all your entities and currencies.',
@@ -96,7 +110,6 @@ const steps = [
     outcome: 'You have a complete, formatted financial report. The same data is available for every entity, consolidated or individual, for any period.',
   },
   {
-    number: '05',
     icon: 'BK',
     title: 'Set Up WebDAV Backup',
     subtitle: 'Optional encrypted backup to your own infrastructure — Nextcloud, NAS, or any WebDAV-compatible storage.',
@@ -121,7 +134,6 @@ const steps = [
     },
   },
   {
-    number: '06',
     icon: 'KEY',
     title: 'Activate Your Licence Key',
     subtitle: 'Delivered by email after purchase. Validated on-device — no internet required.',
@@ -140,6 +152,10 @@ const steps = [
     outcome: 'Your licence is active. The 30-day trial period ends and your tier features remain unlocked permanently (Lifetime) or until renewal (Annual).',
   },
 ];
+
+// Numbered from position, so a step can be inserted without renumbering the
+// rest by hand — which is how the anchors and the contents list drift apart.
+const steps = rawSteps.map((s, i) => ({ ...s, number: String(i + 1).padStart(2, '0') }));
 
 const tipStyles = {
   warn: {
