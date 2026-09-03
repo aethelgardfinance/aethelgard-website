@@ -1,0 +1,119 @@
+---
+/**
+ * The site footer — one component, every page.
+ *
+ * Before this there were sixteen hand-rolled footers and no two were the same.
+ * The legal pages (privacy, terms, refunds), the thank-you and cancelled pages
+ * and the guides hub carried three links between them and no route back to the
+ * product at all, so a reader who landed on the privacy policy from a search
+ * result hit a dead end. Only the home page linked the roadmap; only Sentinel
+ * linked PDF Studio, and PDF Studio did not link back.
+ *
+ * Anchor links are written as "/#pricing", not "#pricing", so they resolve from
+ * every page rather than only the home page.
+ */
+
+const DOWNLOAD_WIN = 'https://github.com/aethelgardfinance/aethelgard-releases/releases';
+
+const columns: { title: string; links: { label: string; href: string }[] }[] = [
+  {
+    title: 'Aethelgard',
+    links: [
+      { label: 'Download', href: DOWNLOAD_WIN },
+      { label: 'Pricing', href: '/#pricing' },
+      { label: 'Roadmap', href: '/roadmap' },
+      { label: 'Supported banks', href: '/supported-banks' },
+      { label: 'Request a bank', href: '/request-bank' },
+    ],
+  },
+  {
+    title: 'The suite',
+    links: [
+      { label: 'Sentinel', href: '/sentinel' },
+      { label: 'PDF Studio', href: '/pdf-studio' },
+    ],
+  },
+  {
+    title: 'Help',
+    links: [
+      { label: 'Quick start', href: '/quick-start' },
+      { label: 'Guides', href: '/guides' },
+      { label: 'Report an issue', href: '/report-issue' },
+      { label: 'FAQ', href: '/#faq' },
+    ],
+  },
+  {
+    title: 'Company',
+    links: [
+      { label: 'About', href: '/about' },
+      { label: 'Privacy', href: '/privacy' },
+      { label: 'Terms', href: '/terms' },
+      { label: 'Refunds', href: '/refunds' },
+    ],
+  },
+];
+
+// Marks the reader's current page so the footer says where they are rather than
+// offering a link back to where they already stand.
+const here = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isCurrent = (href: string) => href.replace(/\/$/, '') === here;
+---
+
+<footer class="bg-navy-900 border-t border-white/5 px-6 pt-14 pb-10">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 md:gap-6 mb-12">
+      <div class="col-span-2 md:col-span-1">
+        <a href="/" class="flex items-center gap-3 mb-4">
+          <img src="/favicon.svg" alt="" width="24" height="24" class="h-6 w-6 rounded-md" />
+          <span class="font-black text-white/80 tracking-tighter uppercase italic">Aethelgard</span>
+        </a>
+        <p class="text-white/30 text-xs leading-relaxed max-w-[22ch]">
+          A double-entry ledger for people who need the numbers to hold up.
+        </p>
+      </div>
+
+      {columns.map(col => (
+        <nav aria-label={col.title}>
+          <p class="text-white/50 text-[11px] font-black uppercase tracking-widest mb-3">{col.title}</p>
+          <ul class="space-y-2">
+            {col.links.map(link => (
+              <li>
+                <a
+                  href={link.href}
+                  aria-current={isCurrent(link.href) ? 'page' : undefined}
+                  class:list={[
+                    'text-xs transition-colors',
+                    isCurrent(link.href)
+                      ? 'text-white/70 font-semibold'
+                      : 'text-white/30 hover:text-white/70',
+                  ]}
+                >{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))}
+    </div>
+
+    <div class="border-t border-white/5 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+      <p class="text-white/30 text-xs">
+        &copy; {new Date().getFullYear()} Aethelgard &middot; Built for those who value privacy and precision
+      </p>
+      <a
+        href="mailto:contact@aethelgard.finance"
+        class="text-white/30 hover:text-white/70 text-xs transition-colors"
+      >contact@aethelgard.finance</a>
+    </div>
+
+    <!--
+      Companies Act 2006 s.82 / SI 2008/495: a UK company must give its
+      registered name, number and place of registration on its website. It was
+      previously on the home page only.
+    -->
+    <p class="text-white/20 text-[11px] mt-4">
+      Aethelgard is a product of Aethelgard Finance Ltd &middot; Registered in England &amp; Wales &middot; Company No. 17173295
+    </p>
+
+  </div>
+</footer>

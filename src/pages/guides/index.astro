@@ -1,5 +1,6 @@
 ---
 import '../../styles/global.css';
+import Footer from '../../components/Footer.astro';
 
 const guides = [
   {
@@ -112,16 +113,6 @@ const guides = [
       </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-navy-900 text-white/40 text-sm py-8 px-6 border-t border-white/5">
-      <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p>© 2026 Aethelgard. All rights reserved.</p>
-        <div class="flex items-center gap-6">
-          <a href="/privacy" class="hover:text-white/70 transition-colors">Privacy</a>
-          <a href="/terms" class="hover:text-white/70 transition-colors">Terms</a>
-          <a href="/refunds" class="hover:text-white/70 transition-colors">Refunds</a>
-        </div>
-      </div>
-    </footer>
+    <Footer />
   </body>
 </html>
