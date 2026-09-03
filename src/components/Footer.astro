@@ -68,7 +68,7 @@ const isCurrent = (href: string) => href.replace(/\/$/, '') === here;
           <img src="/favicon.svg" alt="" width="24" height="24" class="h-6 w-6 rounded-md" />
           <span class="font-black text-white/80 tracking-tighter uppercase italic">Aethelgard</span>
         </a>
-        <p class="text-white/30 text-xs leading-relaxed max-w-[22ch]">
+        <p class="text-white/30 text-xs leading-relaxed max-w-[30ch]">
           A double-entry ledger for people who need the numbers to hold up.
         </p>
       </div>
@@ -96,24 +96,25 @@ const isCurrent = (href: string) => href.replace(/\/$/, '') === here;
       ))}
     </div>
 
-    <div class="border-t border-white/5 pt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-      <p class="text-white/30 text-xs">
-        &copy; {new Date().getFullYear()} Aethelgard &middot; Built for those who value privacy and precision
-      </p>
+    <div class="border-t border-white/5 pt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+      <div class="space-y-1.5">
+        <p class="text-white/30 text-xs">
+          &copy; {new Date().getFullYear()} Aethelgard &middot; Built for those who value privacy and precision
+        </p>
+        <!--
+          Companies Act 2006 s.82 / SI 2008/495: a UK company must give its
+          registered name, number and place of registration on its website.
+          It was previously on the home page only.
+        -->
+        <p class="text-white/20 text-[11px]">
+          Aethelgard is a product of Aethelgard Finance Ltd &middot; Registered in England &amp; Wales &middot; Company No. 17173295
+        </p>
+      </div>
       <a
         href="mailto:contact@aethelgard.finance"
-        class="text-white/30 hover:text-white/70 text-xs transition-colors"
+        class="text-white/30 hover:text-white/70 text-xs transition-colors shrink-0"
       >contact@aethelgard.finance</a>
     </div>
-
-    <!--
-      Companies Act 2006 s.82 / SI 2008/495: a UK company must give its
-      registered name, number and place of registration on its website. It was
-      previously on the home page only.
-    -->
-    <p class="text-white/20 text-[11px] mt-4">
-      Aethelgard is a product of Aethelgard Finance Ltd &middot; Registered in England &amp; Wales &middot; Company No. 17173295
-    </p>
 
   </div>
 </footer>
