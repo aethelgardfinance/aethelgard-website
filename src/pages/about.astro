@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Footer from '../components/Footer.astro';
 
 const DOWNLOAD_WIN = 'https://github.com/aethelgardfinance/aethelgard-releases/releases';
 
@@ -325,33 +326,7 @@ const toolGaps = [
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-navy-900 border-t border-white/5 px-6 py-10">
-      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <div class="flex items-center gap-3">
-          <img src="/favicon.svg" alt="Aethelgard" class="h-6 w-6 rounded-md" />
-          <span class="font-black text-white/80 tracking-tighter uppercase italic">Aethelgard</span>
-        </div>
-        <div class="text-center space-y-1">
-          <p class="text-white/30 text-xs">
-            © {new Date().getFullYear()} Aethelgard · Built for those who value privacy and precision ·
-            <a href="mailto:contact@aethelgard.finance" class="hover:text-white/60 transition-colors ml-1">contact@aethelgard.finance</a>
-          </p>
-          <p class="text-white/20 text-xs">
-            Aethelgard is a product of Aethelgard Finance Ltd · Registered in England &amp; Wales · Company No. 17173295
-          </p>
-        </div>
-        <div class="flex items-center gap-6 text-xs text-white/30 font-medium">
-          <a href={DOWNLOAD_WIN}  class="hover:text-white/60 transition-colors">Download</a>
-          <a href="/#pricing"     class="hover:text-white/60 transition-colors">Pricing</a>
-          <a href="/about"        class="hover:text-white/60 transition-colors">About</a>
-          <a href="/quick-start"  class="hover:text-white/60 transition-colors">Quick Start</a>
-          <a href="/privacy"      class="hover:text-white/60 transition-colors">Privacy</a>
-          <a href="/terms"        class="hover:text-white/60 transition-colors">Terms</a>
-          <a href="/refunds"      class="hover:text-white/60 transition-colors">Refunds</a>
-        </div>
-      </div>
-    </footer>
+    <Footer />
 
   </body>
 </html>
